@@ -1,0 +1,58 @@
+============================
+EA999 / SW-2
+SEQUENCE OF EXAMPLES
+============================
+
+1)  COUNT_DOWN.VHD 
+	- warmup from week-1
+	- counter with control inputs & parameters (via generic)
+	- Q: which other value, would you also declare as generic?
+
+	
+2)  ALARM_LEVEL_DISPLAY_WO_DEFAULT.VHD 
+	- priority in combinational processes
+	- Q: what would you improve/change in this code?
+
+	
+3)  ALARM_LEVEL_DISPLAY.VHD
+	- default statements inside processes 
+	  (possible with sequential statements)
+	- identify most common assignments
+	- Q: what happens with missing default 
+	     (or incomplete assignment in comb-logic)
+
+		 
+3)  HEX2SEVSEG_W_CONTROL.VHD
+	- comb logic with nested IF/THEN & CASE/WHEN
+	- Q: draw & fill out truth table
+	- Q: how could change block to use only once NOT()
+
+	
+4)  SHIFTREG_P2S.VHD
+	- example of shiftregister circuit
+	- Comment: applications of shiftregisters
+	- Exercise: pseudo-random-register (PRG)
+	- Q: implement PRG with sequence length of (2^4)-1
+	- Q: implement PRG with sequence length of (2^128)-1
+	- Q: how would you initialise your PRG?
+
+	
+5)  SYNC_N_EDGEDETECTOR.VHD
+	- why synchronise external inputs /or/ inputs different clock domains
+	- avoid metastability
+	- Q: Draw the RTL-diagram (RTL analysis) / timing diagram =>as homework
+
+	
+6)  FSM_EXAMPLE.VHD
+	- example for enumerated datatype declaration
+	  and fsm implementation syntax with CASE/WHEN
+	- Q: draw bubble diagram
+
+	
+7)  FSM_EXERCISE.VHD
+	- example of 2 RTL structures in a single file
+	- Q: draw bubble- and RTL-diagram
+	- Q: understand functioning. 
+	For example, what is max interval between take_1 and take_2 to be
+	able to achieve state count_down?
+
