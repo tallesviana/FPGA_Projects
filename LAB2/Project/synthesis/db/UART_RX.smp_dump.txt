@@ -1,0 +1,8 @@
+
+State Machine - |UART_RX|uart_rx_fsm:inst9|state
+Name state.check_save state.stop_bit state.data_bits state.start_bit state.idle 
+state.idle 0 0 0 0 0 
+state.start_bit 0 0 0 1 1 
+state.data_bits 0 0 1 0 1 
+state.stop_bit 0 1 0 0 1 
+state.check_save 1 0 0 0 1 

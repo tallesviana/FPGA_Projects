@@ -52,7 +52,7 @@ BEGIN
     -------------------------------------------
     -- Process for combinatorial logic
     ------------------------------------------- 
-	sevseg_comb: PROCESS (ALL)	
+	sevseg_comb: PROCESS (blank_n_i, lamp_test_n_i, ripple_blank_n_i, hexa_i)	
 	BEGIN
 	-- Default statement for ripple_blank output= inactive
 	ripple_blank_n_o <= '1';

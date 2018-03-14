@@ -1,0 +1,165 @@
+|lab1_start
+HEX0[0] <= hex2sevseg:inst3.seg_o[0]
+HEX0[1] <= hex2sevseg:inst3.seg_o[1]
+HEX0[2] <= hex2sevseg:inst3.seg_o[2]
+HEX0[3] <= hex2sevseg:inst3.seg_o[3]
+HEX0[4] <= hex2sevseg:inst3.seg_o[4]
+HEX0[5] <= hex2sevseg:inst3.seg_o[5]
+HEX0[6] <= hex2sevseg:inst3.seg_o[6]
+KEY[0] => inst4[3].ACLR
+KEY[0] => inst4[2].ACLR
+KEY[0] => inst4[1].ACLR
+KEY[0] => inst4[0].ACLR
+KEY[0] => modulo_divider:inst2.reset_n
+CLOCK_50 => modulo_divider:inst2.clk
+
+
+|lab1_start|hex2sevseg:inst3
+hexa_i[0] => Mux0.IN19
+hexa_i[0] => Mux1.IN19
+hexa_i[0] => Mux2.IN19
+hexa_i[0] => Mux3.IN19
+hexa_i[0] => Mux4.IN19
+hexa_i[0] => Mux5.IN19
+hexa_i[0] => Mux6.IN19
+hexa_i[1] => Mux0.IN18
+hexa_i[1] => Mux1.IN18
+hexa_i[1] => Mux2.IN18
+hexa_i[1] => Mux3.IN18
+hexa_i[1] => Mux4.IN18
+hexa_i[1] => Mux5.IN18
+hexa_i[1] => Mux6.IN18
+hexa_i[2] => Mux0.IN17
+hexa_i[2] => Mux1.IN17
+hexa_i[2] => Mux2.IN17
+hexa_i[2] => Mux3.IN17
+hexa_i[2] => Mux4.IN17
+hexa_i[2] => Mux5.IN17
+hexa_i[2] => Mux6.IN17
+hexa_i[3] => Mux0.IN16
+hexa_i[3] => Mux1.IN16
+hexa_i[3] => Mux2.IN16
+hexa_i[3] => Mux3.IN16
+hexa_i[3] => Mux4.IN16
+hexa_i[3] => Mux5.IN16
+hexa_i[3] => Mux6.IN16
+seg_o[0] <= Mux6.DB_MAX_OUTPUT_PORT_TYPE
+seg_o[1] <= Mux5.DB_MAX_OUTPUT_PORT_TYPE
+seg_o[2] <= Mux4.DB_MAX_OUTPUT_PORT_TYPE
+seg_o[3] <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+seg_o[4] <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+seg_o[5] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+seg_o[6] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab1_start|modulo_divider:inst2
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+clk => count[3].CLK
+clk => count[4].CLK
+clk => count[5].CLK
+clk => count[6].CLK
+clk => count[7].CLK
+clk => count[8].CLK
+clk => count[9].CLK
+clk => count[10].CLK
+clk => count[11].CLK
+clk => count[12].CLK
+clk => count[13].CLK
+clk => count[14].CLK
+clk => count[15].CLK
+clk => count[16].CLK
+clk => count[17].CLK
+clk => count[18].CLK
+clk => count[19].CLK
+clk => count[20].CLK
+clk => count[21].CLK
+clk => count[22].CLK
+clk => count[23].CLK
+clk => count[24].CLK
+reset_n => count[0].ACLR
+reset_n => count[1].ACLR
+reset_n => count[2].ACLR
+reset_n => count[3].ACLR
+reset_n => count[4].ACLR
+reset_n => count[5].ACLR
+reset_n => count[6].ACLR
+reset_n => count[7].ACLR
+reset_n => count[8].ACLR
+reset_n => count[9].ACLR
+reset_n => count[10].ACLR
+reset_n => count[11].ACLR
+reset_n => count[12].ACLR
+reset_n => count[13].ACLR
+reset_n => count[14].ACLR
+reset_n => count[15].ACLR
+reset_n => count[16].ACLR
+reset_n => count[17].ACLR
+reset_n => count[18].ACLR
+reset_n => count[19].ACLR
+reset_n => count[20].ACLR
+reset_n => count[21].ACLR
+reset_n => count[22].ACLR
+reset_n => count[23].ACLR
+reset_n => count[24].ACLR
+clk_div <= count[24].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab1_start|full_adder:inst
+cin => lpm_add_sub:LPM_ADD_SUB_component.cin
+dataa[0] => lpm_add_sub:LPM_ADD_SUB_component.dataa[0]
+dataa[1] => lpm_add_sub:LPM_ADD_SUB_component.dataa[1]
+dataa[2] => lpm_add_sub:LPM_ADD_SUB_component.dataa[2]
+dataa[3] => lpm_add_sub:LPM_ADD_SUB_component.dataa[3]
+datab[0] => lpm_add_sub:LPM_ADD_SUB_component.datab[0]
+datab[1] => lpm_add_sub:LPM_ADD_SUB_component.datab[1]
+datab[2] => lpm_add_sub:LPM_ADD_SUB_component.datab[2]
+datab[3] => lpm_add_sub:LPM_ADD_SUB_component.datab[3]
+cout <= lpm_add_sub:LPM_ADD_SUB_component.cout
+result[0] <= lpm_add_sub:LPM_ADD_SUB_component.result[0]
+result[1] <= lpm_add_sub:LPM_ADD_SUB_component.result[1]
+result[2] <= lpm_add_sub:LPM_ADD_SUB_component.result[2]
+result[3] <= lpm_add_sub:LPM_ADD_SUB_component.result[3]
+
+
+|lab1_start|full_adder:inst|lpm_add_sub:LPM_ADD_SUB_component
+dataa[0] => add_sub_tdi:auto_generated.dataa[0]
+dataa[1] => add_sub_tdi:auto_generated.dataa[1]
+dataa[2] => add_sub_tdi:auto_generated.dataa[2]
+dataa[3] => add_sub_tdi:auto_generated.dataa[3]
+datab[0] => add_sub_tdi:auto_generated.datab[0]
+datab[1] => add_sub_tdi:auto_generated.datab[1]
+datab[2] => add_sub_tdi:auto_generated.datab[2]
+datab[3] => add_sub_tdi:auto_generated.datab[3]
+cin => add_sub_tdi:auto_generated.cin
+add_sub => ~NO_FANOUT~
+clock => ~NO_FANOUT~
+aclr => ~NO_FANOUT~
+clken => ~NO_FANOUT~
+result[0] <= add_sub_tdi:auto_generated.result[0]
+result[1] <= add_sub_tdi:auto_generated.result[1]
+result[2] <= add_sub_tdi:auto_generated.result[2]
+result[3] <= add_sub_tdi:auto_generated.result[3]
+cout <= add_sub_tdi:auto_generated.cout
+overflow <= <GND>
+
+
+|lab1_start|full_adder:inst|lpm_add_sub:LPM_ADD_SUB_component|add_sub_tdi:auto_generated
+cin => op_1.IN10
+cin => op_1.IN11
+cout <= op_1.DB_MAX_OUTPUT_PORT_TYPE
+dataa[0] => op_1.IN8
+dataa[1] => op_1.IN6
+dataa[2] => op_1.IN4
+dataa[3] => op_1.IN2
+datab[0] => op_1.IN9
+datab[1] => op_1.IN7
+datab[2] => op_1.IN5
+datab[3] => op_1.IN3
+result[0] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
+result[1] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
+result[2] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
+result[3] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
+
+

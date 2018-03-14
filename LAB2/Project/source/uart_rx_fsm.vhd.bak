@@ -12,9 +12,9 @@ ENTITY uart_rx_fsm IS
         clock, reset_n: in std_logic;
         data_rx_i   : in std_logic;
         trigger_i   : in std_logic;
-        tick_i : in std_logic;
+        baud_tick_i : in std_logic;
         isrunning_o : out std_logic;
-        isstart_bit_o   : out std_logic;
+        isstart_bit_o   : out std_logic
         complete_o  : out std_logic
     );
 END uart_rx_fsm;
@@ -29,7 +29,7 @@ BEGIN
     -------------------------------------------
     -- Process for combinational logic
     -------------------------------------------
-    comb_logic: PROCESS (state, count, trigger_i, data_rx_i, tick_i)
+    comb_logic: PROCESS (ALL)
     BEGIN
     -- default
     next_state <= state;
@@ -45,7 +45,7 @@ BEGIN
 
         -- CHECK START BIT
         WHEN start_bit =>
-            IF tick_i = '1' THEN
+            IF rising_edge(baud_tick_i) THEN
                IF data_rx_i = '0' THEN
                    next_state <= data_bits;
                    next_count <= to_unsigned(8, 4);
@@ -56,8 +56,8 @@ BEGIN
         
         -- RECEIVING 8 BITS OF DATA
         WHEN data_bits =>
-            IF tick_i = '1' THEN
-                IF count = 0 THEN
+            IF rising_edge(baud_tick_i) THEN
+                IF count = '0' THEN
                     next_state <= stop_bit;
                 ELSE
                     next_count <= count - 1;
@@ -66,7 +66,7 @@ BEGIN
 
         -- CHECK STOP BIT
         WHEN stop_bit =>
-            IF tick_i = '1' THEN
+            IF rising_edge(baud_tick_i) THEN
                 IF data_rx_i = '1' THEN
                     next_state <= check_save;
                 ELSE
@@ -76,7 +76,7 @@ BEGIN
 
         -- OTHER VALUES
         WHEN OTHERS =>
-            next_state <= idle;
+            state <= idle;
             next_count <= to_unsigned(0,4);
         END CASE;
     END PROCESS comb_logic;
@@ -98,7 +98,7 @@ BEGIN
     --------------------------------------------------
     -- PROCESS FOR COMB-OUTPUT LOGIC
     --------------------------------------------------
-    fsm_output : PROCESS (state)
+    fsm_output : PROCESS (s_state, d, n)
     BEGIN
   
   	    CASE state IS

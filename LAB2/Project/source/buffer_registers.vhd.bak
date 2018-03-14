@@ -28,10 +28,10 @@ BEGIN
     --------------------------------
     -- SHIFT-REGISTERS
     --------------------------------
-    comb_logic: PROCESS(tick_i, reg, store_i)
+    comb_logic: PROCESS(tick, reg, isrunning)
     BEGIN
         IF store_i = '0' THEN
-            IF rising_edge(tick_i) THEN
+            IF rising_edge(tick) THEN
                 next_reg <= data_rx_i & reg(9 downto 1);   -- Towards LSB
             END IF;
         ELSE
@@ -54,10 +54,10 @@ BEGIN
     --------------------
     -- FF
     --------------------
-    flip_flops: PROCESS(clock, reset_n)
+    flip_flops: PROCESS(clock, set_n)
     BEGIN
         IF reset_n = '0' THEN
-            buf <= "11111010";     -- Show blank in the seven seg
+            buf <= (OTHERS => '0');     -- Show blank in the seven seg
             reg <= (OTHERS => '1');
         ELSIF rising_edge(clock) THEN
             buf <= next_buf;

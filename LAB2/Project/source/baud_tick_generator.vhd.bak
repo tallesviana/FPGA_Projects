@@ -24,7 +24,7 @@ END baud_tick_generator;
 -- Architecture
 ARCHITECTURE rtl OF baud_tick_generator IS
     SIGNAL tick, next_tick : std_logic;
-    SIGNAL clks_por_bit, next_clks_por_bit    : integer range 0 to clocks_por_bit-1 := 0;
+    SIGNAL clks_por_bit, next_clks_por_bit    : integer range 0 to clocks_por_bit-1 := 0
 
 BEGIN
     ---------------------------------
@@ -34,8 +34,8 @@ BEGIN
     comb_logic: PROCESS(run_i, start_bit_i, tick, clks_por_bit)
     BEGIN
     -- default
-        next_tick <= '0'; 
-        next_clks_por_bit <= clks_por_bit;
+        next_tick = '0'; 
+
         IF run_i = '1'THEN      -- If we are getting data
             IF start_bit_i = '1' THEN
                 IF clks_por_bit < (clocks_por_bit-1)/2 THEN     -- T/2 para start bit
@@ -53,13 +53,12 @@ BEGIN
                 END IF;
             END IF;
         END IF;
-    END PROCESS;
+
     ---------------------------
     -- Flip-Flop
     --------------------------
     flip_flops: PROCESS(clock, reset_n)
     BEGIN
-	 
         IF reset_n = '0' THEN
             tick <= '0';
             clks_por_bit <= 0;
@@ -67,7 +66,6 @@ BEGIN
            tick <= next_tick;
            clks_por_bit <= next_clks_por_bit;
         END IF;
-		  
     END PROCESS;
 
     -------------------------
