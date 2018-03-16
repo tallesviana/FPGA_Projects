@@ -57,7 +57,7 @@ BEGIN
     flip_flops: PROCESS(clock, reset_n)
     BEGIN
         IF reset_n = '0' THEN
-            buf <= "11111010";     -- Show blank in the seven seg
+            buf <= (OTHERS => '0');     -- Show blank in the seven seg
             reg <= (OTHERS => '1');
         ELSIF rising_edge(clock) THEN
             buf <= next_buf;

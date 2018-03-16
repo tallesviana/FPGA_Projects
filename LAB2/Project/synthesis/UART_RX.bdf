@@ -57,7 +57,7 @@ applicable agreement for further details.
 	(input)
 	(rect -8 184 160 200)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "SW[9]" (rect 5 0 36 12)(font "Arial" ))
+	(text "GPIO_1[1]" (rect 5 0 57 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -106,9 +106,9 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 824 80 1000 96)
+	(rect 1136 288 1312 304)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "LEDG[7]" (rect 90 0 132 12)(font "Arial" ))
+	(text "LEDR[0]" (rect 90 0 132 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -119,24 +119,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1000 96 1056 112))
-)
-(pin
-	(output)
-	(rect -104 256 72 272)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "LEDR[9]" (rect 90 0 132 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-	(annotation_block (location)(rect 72 272 120 288))
 )
 (symbol
 	(rect 192 160 368 272)
@@ -435,41 +417,6 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect -104 424 56 504)
-	(text "modulo_divider" (rect 5 0 79 12)(font "Arial" ))
-	(text "inst12" (rect 8 64 37 76)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "reset_n" (rect 0 0 36 12)(font "Arial" ))
-		(text "reset_n" (rect 21 43 57 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 160 32)
-		(output)
-		(text "clk_div" (rect 0 0 35 12)(font "Arial" ))
-		(text "clk_div" (rect 110 27 145 39)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32))
-	)
-	(parameter
-		"width"
-		"27"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 144 64))
-	)
-	(annotation_block (parameter)(rect 56 392 238 420))
-)
-(symbol
 	(rect 816 160 976 272)
 	(text "baud_tick_generator" (rect 5 0 104 12)(font "Arial" ))
 	(text "inst2" (rect 8 96 31 108)(font "Arial" ))
@@ -510,13 +457,13 @@ applicable agreement for further details.
 	)
 	(parameter
 		"clocks_por_bit"
-		"100000000"
+		"1600"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 144 96))
 	)
-	(annotation_block (parameter)(rect 976 128 1204 156))
+	(annotation_block (parameter)(rect 976 128 1181 156))
 )
 (connector
 	(pt 168 208)
@@ -553,10 +500,6 @@ applicable agreement for further details.
 (connector
 	(pt 368 192)
 	(pt 384 192)
-)
-(connector
-	(pt 384 192)
-	(pt 504 192)
 )
 (connector
 	(pt 496 560)
@@ -627,39 +570,6 @@ applicable agreement for further details.
 	(pt 496 528)
 )
 (connector
-	(pt 1080 568)
-	(pt 1152 568)
-	(bus)
-)
-(connector
-	(text "data_o[7..0]" (rect 706 480 765 492)(font "Arial" ))
-	(pt 696 496)
-	(pt 784 496)
-	(bus)
-)
-(connector
-	(text "data_o[7..4]" (rect 788 448 847 460)(font "Arial" ))
-	(pt 784 464)
-	(pt 848 464)
-	(bus)
-)
-(connector
-	(text "data_o[3..0]" (rect 792 584 851 596)(font "Arial" ))
-	(pt 848 600)
-	(pt 784 600)
-	(bus)
-)
-(connector
-	(pt 784 464)
-	(pt 784 496)
-	(bus)
-)
-(connector
-	(pt 784 496)
-	(pt 784 600)
-	(bus)
-)
-(connector
 	(pt 752 416)
 	(pt 848 416)
 )
@@ -692,14 +602,6 @@ applicable agreement for further details.
 	(pt 752 432)
 )
 (connector
-	(pt 752 432)
-	(pt 752 552)
-)
-(connector
-	(pt 840 496)
-	(pt 840 448)
-)
-(connector
 	(pt 840 448)
 	(pt 848 448)
 )
@@ -720,10 +622,6 @@ applicable agreement for further details.
 	(pt 480 336)
 )
 (connector
-	(pt 504 224)
-	(pt 368 224)
-)
-(connector
 	(pt 688 224)
 	(pt 712 224)
 )
@@ -732,89 +630,111 @@ applicable agreement for further details.
 	(pt 432 368)
 )
 (connector
-	(pt -120 368)
-	(pt -104 368)
-)
-(connector
-	(pt 192 192)
-	(pt 160 192)
-)
-(connector
 	(pt 176 400)
 	(pt 440 400)
 )
 (connector
-	(pt -104 368)
+	(text "t_serial_data" (rect 422 176 484 188)(font "Arial" ))
+	(pt 384 192)
+	(pt 504 192)
+)
+(connector
+	(text "t_fall" (rect 436 208 460 220)(font "Arial" ))
+	(pt 504 224)
+	(pt 368 224)
+)
+(connector
+	(text "t_clock" (rect -43 352 -8 364)(font "Arial" ))
+	(pt -120 368)
 	(pt 168 368)
 )
 (connector
-	(pt -104 368)
-	(pt -104 456)
-)
-(connector
-	(pt -104 472)
-	(pt -112 472)
-)
-(connector
-	(pt -112 472)
-	(pt -112 400)
-)
-(connector
+	(text "t_reset" (rect -38 384 -4 396)(font "Arial" ))
 	(pt -120 400)
-	(pt -112 400)
-)
-(connector
-	(pt -112 400)
 	(pt 176 400)
 )
 (connector
-	(pt 56 456)
-	(pt 80 456)
+	(text "t_isstart" (rect 763 192 803 204)(font "Arial" ))
+	(pt 688 208)
+	(pt 816 208)
 )
 (connector
-	(pt 80 296)
-	(pt 80 456)
+	(text "t_tick" (rect 998 176 1025 188)(font "Arial" ))
+	(pt 976 192)
+	(pt 1016 192)
 )
 (connector
-	(pt -104 296)
-	(pt 80 296)
+	(text "t_serial_data_in" (rect 175 176 251 188)(font "Arial" ))
+	(pt 192 192)
+	(pt 160 192)
 )
 (connector
-	(pt -104 264)
-	(pt -104 296)
-)
-(connector
+	(text "t_seg_hi[6..0]" (rect 1091 416 1158 428)(font "Arial" ))
 	(pt 1080 432)
 	(pt 1136 432)
 	(bus)
 )
 (connector
-	(pt 824 88)
-	(pt 736 88)
+	(text "t_seg_lo[6..0]" (rect 1109 552 1176 564)(font "Arial" ))
+	(pt 1080 568)
+	(pt 1152 568)
+	(bus)
 )
 (connector
-	(pt 736 88)
-	(pt 736 192)
-)
-(connector
+	(text "t_isrunning" (rect 709 176 762 188)(font "Arial" ))
 	(pt 688 192)
-	(pt 736 192)
-)
-(connector
-	(pt 736 192)
 	(pt 816 192)
 )
 (connector
-	(pt 976 192)
-	(pt 1016 192)
+	(text "t_vcc" (rect 736 512 748 540)(font "Arial" )(vertical))
+	(pt 752 432)
+	(pt 752 552)
+)
+(connector
+	(text "t_gnd" (rect 823 456 835 483)(font "Arial" )(vertical))
+	(pt 840 496)
+	(pt 840 448)
+)
+(connector
+	(pt 784 464)
+	(pt 784 496)
+	(bus)
+)
+(connector
+	(pt 784 496)
+	(pt 784 600)
+	(bus)
+)
+(connector
+	(text "d[7..0]" (rect 706 480 737 492)(font "Arial" ))
+	(pt 696 496)
+	(pt 784 496)
+	(bus)
+)
+(connector
+	(text "d[7..4]" (rect 809 448 840 460)(font "Arial" ))
+	(pt 848 464)
+	(pt 784 464)
+	(bus)
+)
+(connector
+	(text "d[3..0]" (rect 792 584 823 596)(font "Arial" ))
+	(pt 848 600)
+	(pt 784 600)
+	(bus)
+)
+(connector
+	(pt 1136 296)
+	(pt 712 296)
 )
 (connector
 	(pt 712 224)
-	(pt 712 448)
+	(pt 712 296)
 )
 (connector
-	(pt 688 208)
-	(pt 816 208)
+	(text "t_complete" (rect 696 386 708 440)(font "Arial" )(vertical))
+	(pt 712 296)
+	(pt 712 448)
 )
 (junction (pt 168 368))
 (junction (pt 176 400))
@@ -822,11 +742,9 @@ applicable agreement for further details.
 (junction (pt 440 400))
 (junction (pt 432 368))
 (junction (pt 480 336))
-(junction (pt 784 496))
 (junction (pt 752 416))
 (junction (pt 752 552))
 (junction (pt 752 568))
 (junction (pt 752 432))
-(junction (pt -104 368))
-(junction (pt -112 400))
-(junction (pt 736 192))
+(junction (pt 784 496))
+(junction (pt 712 296))

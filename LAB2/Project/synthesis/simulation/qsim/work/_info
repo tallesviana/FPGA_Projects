@@ -1,0 +1,85 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\ea999\Documents\118723\EA999_1s2018\LAB2\Project\synthesis\simulation\qsim
+vUART_RX
+Z1 I3Bo]PNQ0;hfFMYeJL=i;32
+Z2 VPBZ1I38SFIH2UkHR=`>fQ3
+Z3 dC:\Users\ea999\Documents\118723\EA999_1s2018\LAB2\Project\synthesis\simulation\qsim
+Z4 w1521209007
+Z5 8UART_RX.vo
+Z6 FUART_RX.vo
+L0 31
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 o-work work -O0
+Z9 n@u@a@r@t_@r@x
+!i10b 1
+Z10 !s100 VLN]H5?68fK<O^dS<zz=E1
+!s85 0
+Z11 !s108 1521209009.295000
+Z12 !s107 UART_RX.vo|
+Z13 !s90 -work|work|UART_RX.vo|
+!s101 -O0
+vUART_RX_vlg_check_tst
+!i10b 1
+!s100 0EWkn_ImC@UL1@;JfkLaE3
+I8m1NKWlLd3JnNeXBXVPZS2
+Vl_:M:Rhfh;Mj1zUb6]NWd2
+R3
+Z14 w1521209006
+Z15 8UART_RX.vt
+Z16 FUART_RX.vt
+L0 61
+R7
+r1
+!s85 0
+31
+Z17 !s108 1521209009.608000
+Z18 !s107 UART_RX.vt|
+Z19 !s90 -work|work|UART_RX.vt|
+!s101 -O0
+R8
+n@u@a@r@t_@r@x_vlg_check_tst
+vUART_RX_vlg_sample_tst
+!i10b 1
+!s100 LS[^Lgf?T3i@7jnOb]Eca3
+IQKH>nKShf;PZ_gh4XA4gM3
+ViX_Ma^3;9DX8BaJRUO1DX2
+R3
+R14
+R15
+R16
+L0 29
+R7
+r1
+!s85 0
+31
+R17
+R18
+R19
+!s101 -O0
+R8
+n@u@a@r@t_@r@x_vlg_sample_tst
+vUART_RX_vlg_vec_tst
+!i10b 1
+!s100 h8QO5gg22UkaJ37I;L[7T3
+I4DNGz3_kVPzNo?R@REfMa0
+V3j@j@6L[?o_C3`1j6eQ9U0
+R3
+R14
+R15
+R16
+L0 430
+R7
+r1
+!s85 0
+31
+R17
+R18
+R19
+!s101 -O0
+R8
+n@u@a@r@t_@r@x_vlg_vec_tst

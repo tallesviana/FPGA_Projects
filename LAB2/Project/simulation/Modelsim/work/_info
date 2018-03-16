@@ -1,0 +1,256 @@
+m255
+K3
+13
+cModel Technology
+dC:\altera\13.0sp1\modelsim_ase\win32aloem
+Ebaud_tick_generator
+Z0 w1521058190
+Z1 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dC:\Users\ea999\Documents\118723\EA999_1s2018\LAB2\Project\simulation\Modelsim
+Z5 8../../source/baud_tick_generator.vhd
+Z6 F../../source/baud_tick_generator.vhd
+l0
+L13
+V5Z@mXDAl`lW0PNn5AGYcH0
+Z7 OV;C;10.1d;51
+33
+Z8 !s108 1521212502.928000
+Z9 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/baud_tick_generator.vhd|
+Z10 !s107 ../../source/baud_tick_generator.vhd|
+Z11 o-2008 -explicit -work work -O0
+Z12 tExplicit 1
+!s100 G0gA^bei_6ndNEDXA6V<@0
+!i10b 1
+Artl
+R1
+R2
+R3
+DEx4 work 19 baud_tick_generator 0 22 5Z@mXDAl`lW0PNn5AGYcH0
+l29
+L25
+VU;lF=[ekoFAnOig^@kC^M3
+R7
+33
+R8
+R9
+R10
+R11
+R12
+!s100 i8aL];kfRmVL4j00dm40H2
+!i10b 1
+Ebuffer_registers
+Z13 w1521200258
+R1
+R2
+R3
+R4
+Z14 8../../source/buffer_registers.vhd
+Z15 F../../source/buffer_registers.vhd
+l0
+L13
+V7[H81Y?k^GhbPdj;jQmzh3
+R7
+33
+Z16 !s108 1521212503.334000
+Z17 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/buffer_registers.vhd|
+Z18 !s107 ../../source/buffer_registers.vhd|
+R11
+R12
+!s100 f^EH]YkMS5:H[ia7>oHYH3
+!i10b 1
+Artl
+R1
+R2
+R3
+DEx4 work 16 buffer_registers 0 22 7[H81Y?k^GhbPdj;jQmzh3
+l27
+L23
+V0z;[=a6naQT@BD;nHW52A3
+R7
+33
+R16
+R17
+R18
+R11
+R12
+!s100 7QIlUZAB:]BneTjcYd7c]1
+!i10b 1
+Ehex2sevseg_w_control
+Z19 w1521056057
+R2
+R3
+R4
+Z20 8../../source/hex2sevseg_w_control.vhd
+Z21 F../../source/hex2sevseg_w_control.vhd
+l0
+L15
+VHSfk?AK@Jk>^6?b5UIA:L0
+R7
+33
+Z22 !s108 1521212503.631000
+Z23 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/hex2sevseg_w_control.vhd|
+Z24 !s107 ../../source/hex2sevseg_w_control.vhd|
+R11
+R12
+!s100 fEbVheCgO;1Z5l<Wg;@V>2
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 20 hex2sevseg_w_control 0 22 HSfk?AK@Jk>^6?b5UIA:L0
+l50
+L27
+V<EPR?Qog<53=2PmoQ@W]J3
+R7
+33
+R22
+R23
+R24
+R11
+R12
+!s100 ae3zz7XO@RMG4`Te:[b2;0
+!i10b 1
+Esync_n_edgedetector
+Z25 w1521054890
+R2
+R3
+R4
+Z26 8../../source/sync_n_edgeDetector.vhd
+Z27 F../../source/sync_n_edgeDetector.vhd
+l0
+L14
+VEPX1hU[gT1;S2Oi9]T<_Q3
+R7
+33
+Z28 !s108 1521212503.881000
+Z29 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/sync_n_edgeDetector.vhd|
+Z30 !s107 ../../source/sync_n_edgeDetector.vhd|
+R11
+R12
+!s100 3d@zZIV]hX:`H1e>USM`02
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 19 sync_n_edgedetector 0 22 EPX1hU[gT1;S2Oi9]T<_Q3
+l29
+L25
+VbPFY83eECUlHBSA4;Q0=D1
+R7
+33
+R28
+R29
+R30
+R11
+R12
+!s100 jR8XZXXQPW<o7NiDZld1B1
+!i10b 1
+Etestbench_uart_rx_only_top
+Z31 w1521209712
+R2
+R3
+R4
+Z32 8../../source/testbench_uart_rx_only_top.vhd
+Z33 F../../source/testbench_uart_rx_only_top.vhd
+l0
+L14
+V[8R[FDPn;;lRW5X7BS]Lh0
+R7
+33
+Z34 !s108 1521212502.397000
+Z35 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/testbench_uart_rx_only_top.vhd|
+Z36 !s107 ../../source/testbench_uart_rx_only_top.vhd|
+R11
+R12
+!s100 BCEAEe`zA7AEaF9M6MK2E1
+!i10b 1
+Astruct
+R2
+R3
+DEx4 work 26 testbench_uart_rx_only_top 0 22 [8R[FDPn;;lRW5X7BS]Lh0
+l54
+L20
+V34HPz;F[oRGJMJ4jQ2VoD3
+R7
+33
+R34
+R35
+R36
+R11
+R12
+!s100 BTLM[@Rg2WCnCJc26HBei2
+!i10b 1
+Euart_rx_fsm
+Z37 w1521057905
+R1
+R2
+R3
+R4
+Z38 8../../source/uart_rx_fsm.vhd
+Z39 F../../source/uart_rx_fsm.vhd
+l0
+L10
+V>b^6CeTNd6UR:[Veig[bG3
+!s100 h3@CZa:4WzieIdn@hjO>_0
+R7
+33
+!i10b 1
+Z40 !s108 1521212504.131000
+Z41 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/uart_rx_fsm.vhd|
+Z42 !s107 ../../source/uart_rx_fsm.vhd|
+R11
+R12
+Artl
+R1
+R2
+R3
+DEx4 work 11 uart_rx_fsm 0 22 >b^6CeTNd6UR:[Veig[bG3
+l28
+L22
+V6zTjGLXXEbI]?ZK21TMdP3
+!s100 eU6>Pc_O57;6e374]=Onh3
+R7
+33
+!i10b 1
+R40
+R41
+R42
+R11
+R12
+Euart_rx_only_top
+Z43 w1521208667
+R2
+R3
+R4
+Z44 8../../source/uart_rx_only_top.vhd
+Z45 F../../source/uart_rx_only_top.vhd
+l0
+L24
+VkJX58fXzOl34C9P]@DQJd2
+R7
+33
+Z46 !s108 1521212502.678000
+Z47 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/uart_rx_only_top.vhd|
+Z48 !s107 ../../source/uart_rx_only_top.vhd|
+R11
+R12
+!s100 5o>0S_ZS@6`Ab7LY8W`9Q1
+!i10b 1
+Abdf_type
+R2
+R3
+DEx4 work 16 uart_rx_only_top 0 22 kJX58fXzOl34C9P]@DQJd2
+l107
+L36
+Vjei:Z2jJNUQKF>IbakeiS2
+R7
+33
+R46
+R47
+R48
+R11
+R12
+!s100 0I0cfMhOdJ`BB_ITALX9;1
+!i10b 1

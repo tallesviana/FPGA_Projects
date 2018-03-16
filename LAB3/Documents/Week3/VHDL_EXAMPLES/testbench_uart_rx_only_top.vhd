@@ -46,8 +46,8 @@ END COMPONENT;
 	CONSTANT clk_50M_halfp 	: time := 10 ns;  		-- Half-Period of Clock 50MHz
 	CONSTANT baud_31k250_per : time := 32 us;		-- One-Period of Baud Rate 31.25KHz
 	
-	SIGNAL tb_reg0_hi	: std_logic_vector(3 downto 0); -- to check DUT-internal signal
-	SIGNAL tb_reg0_lo	: std_logic_vector(3 downto 0);
+	SIGNAL tb_reg0_hi	: std_logic_vector(7 downto 0); -- to check DUT-internal signal
+	--SIGNAL tb_reg0_lo	: std_logic_vector(3 downto 0);
 
 	SIGNAL tb_test_vector : std_logic_vector(9 downto 0); -- (stop-bit)+(data-byte)+(start-bit) to shift in serial_in
 	
@@ -77,8 +77,8 @@ BEGIN
 	-- VHDL-2008 Syntax allowing to bind 
 	--           internal signals to a debug signal in the testbench
 	-------------------------------------------
-	tb_reg0_hi <= <<signal DUT.hexa_hi : std_logic_vector(3 downto 0) >>;
-	tb_reg0_lo <= <<signal DUT.hexa_lo : std_logic_vector(3 downto 0) >>;
+	tb_reg0_hi <= <<signal DUT.d : std_logic_vector(7 downto 0) >>;
+	--tb_reg0_lo <= <<signal DUT.hexa_lo : std_logic_vector(3 downto 0) >>;
 	
 	
   -- Stimuli Process
@@ -114,8 +114,8 @@ BEGIN
 		-- STEP 2
 		report "Wait few clock_50M periods and check parallel output";
 		wait for 20 * clk_50M_halfp;
-		assert (tb_reg0_hi = x"1") report "Reg_0 Lower Nibble Wrong" severity note;
-		assert (tb_reg0_lo = x"2") report "Reg_0 Lower Nibble Wrong" severity note;
+		assert (tb_reg0_hi = x"12") report "Reg_0 Lower Nibble Wrong" severity note;
+		--assert (tb_reg0_lo = x"2") report "Reg_0 Lower Nibble Wrong" severity note;
 		wait for 20 * clk_50M_halfp;
 		
 		-- stop simulation
