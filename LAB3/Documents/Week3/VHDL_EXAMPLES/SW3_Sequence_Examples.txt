@@ -1,0 +1,41 @@
+============================
+EA999 / SW-3
+SEQUENCE OF EXAMPLES
+============================
+
+1)  SIMPLE_DFF_CIRC.VHD 
+	- recall from week-1 to use in testbench example
+
+	
+2)  TESTBENCH_SIMPLE_DFF_CIRC.VHD 
+	Example for testbench. Check for new elements:
+	- COMPONENT DECLARATION		(needed for hierarchical VHDL)
+	- INSTATIATION				(needed for hierarchical VHDL)
+	- CLOCK_GEN PROCESS			(typical for testbench)
+	- STIMULI PROCESS			(typical for testbench)
+	- WAIT-FOR/-UNTIL STATEMENT	(non synthesisable VHDL)
+	- ASSERT/REPORT/SEVERITY	(non synthesisable VHDL)
+	
+	Vocabulary:
+	- DUT: device under test
+	- Behavioural VHDL : non synthesisable code
+	
+	- Q: draw corresponding timing diagram
+
+	
+	
+3)  COMPILE.DO
+	Script to start the ModelSim simulation. Attention:
+	- relative paths to source files
+	- vsim command calls testbench entity name
+	- requires waveform file wave*.do
+	
+	
+		 
+4)  TESTBENCH_UART_RX_ONLY_TOP.VHD
+	Check for new elements:
+	- Syntax for internal probes (TB has access to signals within hierarchy)
+	- REPORT STATEMENT		(non synthesisable VHDL)
+	- FOR/LOOP STATEMENT
+
+
