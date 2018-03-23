@@ -28,7 +28,7 @@ BEGIN
     --------------------------------
     -- SHIFT-REGISTERS
     --------------------------------
-    comb_logic: PROCESS(tick_i, reg, store_i)
+    comb_logic: PROCESS(data_rx_i, tick_i, reg, store_i)
     BEGIN
         IF store_i = '0' THEN
             IF tick_i = '1' THEN

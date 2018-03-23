@@ -1,5 +1,5 @@
 
-State Machine - |UART_RX|uart_rx_fsm:inst9|state
+State Machine - |uart_rx_only_top|uart_rx_fsm:b2v_inst9|state
 Name state.check_save state.stop_bit state.data_bits state.start_bit state.idle 
 state.idle 0 0 0 0 0 
 state.start_bit 0 0 0 1 1 

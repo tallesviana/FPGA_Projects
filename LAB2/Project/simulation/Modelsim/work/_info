@@ -4,7 +4,7 @@ K3
 cModel Technology
 dC:\Users\ea999\Documents\EA999\UART\modelsim\synthesis
 Ebaud_tick_generator
-Z0 w1521758152
+Z0 w1521058190
 Z1 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
 Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
 Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
@@ -16,7 +16,7 @@ L13
 V5Z@mXDAl`lW0PNn5AGYcH0
 Z7 OV;C;10.1d;51
 33
-Z8 !s108 1521765152.733000
+Z8 !s108 1521804569.956000
 Z9 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/baud_tick_generator.vhd|
 Z10 !s107 ../../source/baud_tick_generator.vhd|
 Z11 o-2008 -explicit -work work -O0
@@ -41,7 +41,7 @@ R12
 !s100 i8aL];kfRmVL4j00dm40H2
 !i10b 1
 Ebuffer_registers
-Z13 w1521763152
+Z13 w1521803754
 R1
 R2
 R3
@@ -53,7 +53,7 @@ L13
 V7[H81Y?k^GhbPdj;jQmzh3
 R7
 33
-Z16 !s108 1521765152.936000
+Z16 !s108 1521804570.315000
 Z17 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/buffer_registers.vhd|
 Z18 !s107 ../../source/buffer_registers.vhd|
 R11
@@ -78,7 +78,7 @@ R12
 !s100 N3fP2>kKj^EAIkN?CITY`1
 !i10b 1
 Ehex2sevseg_w_control
-Z19 w1521758152
+Z19 w1521056057
 R2
 R3
 R4
@@ -89,7 +89,7 @@ L15
 VHSfk?AK@Jk>^6?b5UIA:L0
 R7
 33
-Z22 !s108 1521765153.155000
+Z22 !s108 1521804570.596000
 Z23 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/hex2sevseg_w_control.vhd|
 Z24 !s107 ../../source/hex2sevseg_w_control.vhd|
 R11
@@ -113,20 +113,20 @@ R12
 !s100 ae3zz7XO@RMG4`Te:[b2;0
 !i10b 1
 Esync_n_edgedetector
-R19
+Z25 w1521054890
 R2
 R3
 R4
-Z25 8../../source/sync_n_edgeDetector.vhd
-Z26 F../../source/sync_n_edgeDetector.vhd
+Z26 8../../source/sync_n_edgeDetector.vhd
+Z27 F../../source/sync_n_edgeDetector.vhd
 l0
 L14
 VEPX1hU[gT1;S2Oi9]T<_Q3
 R7
 33
-Z27 !s108 1521765153.342000
-Z28 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/sync_n_edgeDetector.vhd|
-Z29 !s107 ../../source/sync_n_edgeDetector.vhd|
+Z28 !s108 1521804570.956000
+Z29 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/sync_n_edgeDetector.vhd|
+Z30 !s107 ../../source/sync_n_edgeDetector.vhd|
 R11
 R12
 !s100 3d@zZIV]hX:`H1e>USM`02
@@ -141,14 +141,14 @@ VbPFY83eECUlHBSA4;Q0=D1
 !s100 jR8XZXXQPW<o7NiDZld1B1
 R7
 33
-R27
 R28
 R29
+R30
 R11
 R12
 !i10b 1
 Etestbench_uart_rx_only_top
-Z30 w1521765081
+R13
 R2
 R3
 R4
@@ -159,7 +159,7 @@ L15
 V[8R[FDPn;;lRW5X7BS]Lh0
 R7
 33
-Z33 !s108 1521765152.342000
+Z33 !s108 1521804569.221000
 Z34 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/testbench_uart_rx_only_top.vhd|
 Z35 !s107 ../../source/testbench_uart_rx_only_top.vhd|
 R11
@@ -183,13 +183,13 @@ R12
 !s100 YEf0g[no?2chHDJV=P[n@3
 !i10b 1
 Euart_rx_fsm
-Z36 w1521761958
+R13
 R1
 R2
 R3
 R4
-Z37 8../../source/uart_rx_fsm.vhd
-Z38 F../../source/uart_rx_fsm.vhd
+Z36 8../../source/uart_rx_fsm.vhd
+Z37 F../../source/uart_rx_fsm.vhd
 l0
 L10
 V>b^6CeTNd6UR:[Veig[bG3
@@ -197,30 +197,30 @@ V>b^6CeTNd6UR:[Veig[bG3
 R7
 33
 !i10b 1
-Z39 !s108 1521765153.561000
-Z40 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/uart_rx_fsm.vhd|
-Z41 !s107 ../../source/uart_rx_fsm.vhd|
+Z38 !s108 1521804571.425000
+Z39 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/uart_rx_fsm.vhd|
+Z40 !s107 ../../source/uart_rx_fsm.vhd|
 R11
 R12
 Artl
 R1
 R2
 R3
-Z42 DEx4 work 11 uart_rx_fsm 0 22 >b^6CeTNd6UR:[Veig[bG3
+Z41 DEx4 work 11 uart_rx_fsm 0 22 >b^6CeTNd6UR:[Veig[bG3
 l28
 L22
-Z43 V2;N`>ZMaIV?[0Q:E3?A7T1
-Z44 !s100 <l<zYiTd5bQ4fQY4F?mkm0
+Z42 V2;N`>ZMaIV?[0Q:E3?A7T1
+Z43 !s100 <l<zYiTd5bQ4fQY4F?mkm0
 R7
 33
 !i10b 1
+R38
 R39
 R40
-R41
 R11
 R12
 Euart_rx_only_top
-R19
+Z44 w1521208667
 R2
 R3
 R4
@@ -231,7 +231,7 @@ L24
 VkJX58fXzOl34C9P]@DQJd2
 R7
 33
-Z47 !s108 1521765152.530000
+Z47 !s108 1521804569.581000
 Z48 !s90 -reportprogress|300|-2008|-explicit|-work|work|../../source/uart_rx_only_top.vhd|
 Z49 !s107 ../../source/uart_rx_only_top.vhd|
 R11

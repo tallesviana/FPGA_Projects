@@ -17,5 +17,5 @@ vcom -2008 -explicit -work work ../../source/uart_rx_fsm.vhd
 vsim -novopt -t 1ns -lib work work.testbench_uart_rx_only_top
 
 do ../scripts/wave.do
-run 30.0 us 
+run -all
 

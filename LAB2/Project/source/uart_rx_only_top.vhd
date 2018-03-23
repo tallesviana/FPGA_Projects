@@ -25,11 +25,11 @@ ENTITY uart_rx_only_top IS
 	PORT
 	(
 		CLOCK_50 :  IN  STD_LOGIC;
-		GPIO_1_1 :  IN  STD_LOGIC;
-		KEY_N_0 :  IN  STD_LOGIC;
-		HEX0_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
-		HEX1_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
-		LEDR_0 :  OUT  STD_LOGIC
+		GPIO_1 :  IN  STD_LOGIC_VECTOR(1 DOWNTO 1);
+		KEY :  IN  STD_LOGIC_VECTOR(0 DOWNTO 0);
+		HEX0 :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+		HEX1 :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+		LEDR :  OUT  STD_LOGIC_VECTOR(0 DOWNTO 0)
 	);
 END uart_rx_only_top;
 
@@ -95,7 +95,7 @@ SIGNAL	t_fall :  STD_LOGIC;
 SIGNAL	t_gnd :  STD_LOGIC;
 SIGNAL	t_isrunning :  STD_LOGIC;
 SIGNAL	t_isstart :  STD_LOGIC;
-SIGNAL	t_reset :  STD_LOGIC;
+SIGNAL	t_reset :  STD_LOGIC_VECTOR(0 DOWNTO 0);
 SIGNAL	t_seg_hi :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 SIGNAL	t_seg_lo :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 SIGNAL	t_serial_data :  STD_LOGIC;
@@ -111,7 +111,7 @@ BEGIN
 b2v_inst : sync_n_edgedetector
 PORT MAP(data_in => t_serial_data_in,
 		 clock => t_clock,
-		 reset_n => t_reset,
+		 reset_n => t_reset(0),
 		 data_sync => t_serial_data,
 		 fall => t_fall);
 
@@ -119,7 +119,7 @@ PORT MAP(data_in => t_serial_data_in,
 b2v_inst2 : baud_tick_generator
 GENERIC MAP(clocks_por_bit => 1600
 			)
-PORT MAP(reset_n => t_reset,
+PORT MAP(reset_n => t_reset(0),
 		 clock => t_clock,
 		 run_i => t_isrunning,
 		 start_bit_i => t_isstart,
@@ -128,7 +128,7 @@ PORT MAP(reset_n => t_reset,
 
 b2v_inst3 : buffer_registers
 PORT MAP(clock => t_clock,
-		 reset_n => t_reset,
+		 reset_n => t_reset(0),
 		 data_rx_i => t_serial_data,
 		 tick_i => t_tick,
 		 store_i => t_complete,
@@ -155,7 +155,7 @@ PORT MAP(blank_n_i => t_vcc,
 
 b2v_inst9 : uart_rx_fsm
 PORT MAP(clock => t_clock,
-		 reset_n => t_reset,
+		 reset_n => t_reset(0),
 		 data_rx_i => t_serial_data,
 		 trigger_i => t_fall,
 		 tick_i => t_tick,
@@ -163,12 +163,12 @@ PORT MAP(clock => t_clock,
 		 isstart_bit_o => t_isstart,
 		 complete_o => t_complete);
 
-HEX0_N <= t_seg_lo;
+HEX0 <= t_seg_lo;
 t_clock <= CLOCK_50;
-t_reset <= KEY_N_0;
-t_serial_data_in <= GPIO_1_1;
-HEX1_N <= t_seg_hi;
-LEDR_0 <= t_complete;
+t_reset <= KEY;
+t_serial_data_in <= GPIO_1(1);
+HEX1 <= t_seg_hi;
+LEDR(0) <= t_complete;
 
 t_gnd <= '0';
 t_vcc <= '1';
