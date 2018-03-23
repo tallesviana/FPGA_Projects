@@ -48,7 +48,7 @@ BEGIN
             IF tick_i = '1' THEN
                IF data_rx_i = '0' THEN
                    next_state <= data_bits;
-                   next_count <= to_unsigned(8, 4);
+                   next_count <= to_unsigned(7, 4);
                 ELSE
                     next_state <= idle;
                 END IF;

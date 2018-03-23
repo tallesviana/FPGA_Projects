@@ -1,6 +1,7 @@
 -------------------------------------------
 -- Block code:  testbench_uart_rx_only_top.vhd
 -- History: 	13.Mar.2018 - 1st version (dqtm)
+--				22.Mar.2018 - 2nd version - Adapted to my uart - Talles Viana
 --                 <date> - <changes>  (<author>)
 -- Function: Testbench for uart_rx_only_top in EA999 - Lab2
 --           
@@ -46,8 +47,10 @@ END COMPONENT;
 	CONSTANT clk_50M_halfp 	: time := 10 ns;  		-- Half-Period of Clock 50MHz
 	CONSTANT baud_31k250_per : time := 32 us;		-- One-Period of Baud Rate 31.25KHz
 	
-	SIGNAL tb_reg0_hi	: std_logic_vector(3 downto 0); -- to check DUT-internal signal
-	SIGNAL tb_reg0_lo	: std_logic_vector(3 downto 0);
+	SIGNAL tb_hex_data	: std_logic_vector(7 downto 0); -- to check DUT-internal signal
+	SIGNAL tb_tick      : std_logic;					-- check baud tick generate
+	SIGNAL tb_complete  : std_logic;					-- check completion
+	SIGNAL tb_isrunning : std_logic;					-- check if fsm is running
 
 	SIGNAL tb_test_vector : std_logic_vector(9 downto 0); -- (stop-bit)+(data-byte)+(start-bit) to shift in serial_in
 	
@@ -77,8 +80,10 @@ BEGIN
 	-- VHDL-2008 Syntax allowing to bind 
 	--           internal signals to a debug signal in the testbench
 	-------------------------------------------
-	tb_reg0_hi <= <<signal DUT.hexa_hi : std_logic_vector(3 downto 0)>>;
-	tb_reg0_lo <= <<signal DUT.hexa_lo : std_logic_vector(3 downto 0)>>;
+	tb_hex_data <= <<signal DUT.d : std_logic_vector(7 downto 0)>>;		-- Output Data
+	tb_tick <= <<signal DUT.t_tick : std_logic>>;						--Tick signal
+	tb_complete <= <<signal DUT.t_complete : std_logic>>;				-- Complete signal
+	tb_isrunning <= <<signal DUT.t_isrunning : std_logic>>;				-- isrunning signal
 	
 	
   -- Stimuli Process
@@ -87,7 +92,7 @@ BEGIN
 		-- STEP 0
 		report "Initialise: define constants and pulse reset on/off";
 		tb_serdata <= '1';
-		tb_test_vector <= B"1_0001_0010_0"; -- (stop-bit)+(data-byte)+(start-bit)
+		tb_test_vector <= B"1_1110_0101_0"; -- (stop-bit)+(data-byte)+(start-bit)
 		----------------
 		tb_reset_n <= '0';
 		wait for 20 * clk_50M_halfp; 
@@ -114,8 +119,8 @@ BEGIN
 		-- STEP 2
 		report "Wait few clock_50M periods and check parallel output";
 		wait for 20 * clk_50M_halfp;
-		assert (tb_reg0_hi = x"1") report "Reg_0 Lower Nibble Wrong" severity note;
-		assert (tb_reg0_lo = x"2") report "Reg_0 Lower Nibble Wrong" severity note;
+		assert (tb_hex_data = "11100101") report "!!!!!! Received Data is WRONG !!!!!!" severity note;
+		--assert (tb_reg0_lo = x"2") report "Reg_0 Lower Nibble Wrong" severity note;
 		wait for 20 * clk_50M_halfp;
 		
 		-- stop simulation

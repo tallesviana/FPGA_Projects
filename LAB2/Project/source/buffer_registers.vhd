@@ -31,8 +31,10 @@ BEGIN
     comb_logic: PROCESS(tick_i, reg, store_i)
     BEGIN
         IF store_i = '0' THEN
-            IF rising_edge(tick_i) THEN
+            IF tick_i = '1' THEN
                 next_reg <= data_rx_i & reg(9 downto 1);   -- Towards LSB
+			ELSE
+				next_reg <= reg;
             END IF;
         ELSE
                 next_reg <= (OTHERS => '1');  -- Set all bits to 1
