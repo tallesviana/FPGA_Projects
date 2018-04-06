@@ -1,0 +1,408 @@
+Analysis & Synthesis report for audio_synth_top
+Fri Apr 06 10:29:37 2018
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |audio_synth_top|i2c_master:master|fsm_state
+  9. State Machine - |audio_synth_top|codec_ctrl:codec|state
+ 10. User-Specified and Inferred Latches
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Fri Apr 06 10:29:37 2018           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; audio_synth_top                                 ;
+; Top-level Entity Name              ; audio_synth_top                                 ;
+; Family                             ; Cyclone II                                      ;
+; Total logic elements               ; 144                                             ;
+;     Total combinational functions  ; 134                                             ;
+;     Dedicated logic registers      ; 65                                              ;
+; Total registers                    ; 65                                              ;
+; Total pins                         ; 18                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C20F484C7       ;                    ;
+; Top-level entity name                                                      ; audio_synth_top    ; audio_synth_top    ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                 ;
++----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                          ; Library ;
++----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------+---------+
+; ../source/sync_block.vhd         ; yes             ; User VHDL File  ; //Mac/Home/Desktop/EA999/PROJECT/Audiobocs/source/sync_block.vhd      ;         ;
+; ../source/reg_table_pkg.vhd      ; yes             ; User VHDL File  ; //Mac/Home/Desktop/EA999/PROJECT/Audiobocs/source/reg_table_pkg.vhd   ;         ;
+; ../source/i2c_master.vhd         ; yes             ; User VHDL File  ; //Mac/Home/Desktop/EA999/PROJECT/Audiobocs/source/i2c_master.vhd      ;         ;
+; ../source/codec_ctrl.vhd         ; yes             ; User VHDL File  ; //Mac/Home/Desktop/EA999/PROJECT/Audiobocs/source/codec_ctrl.vhd      ;         ;
+; ../source/clock_div.vhd          ; yes             ; User VHDL File  ; //Mac/Home/Desktop/EA999/PROJECT/Audiobocs/source/clock_div.vhd       ;         ;
+; ../source/audio_synth_top.vhd    ; yes             ; User VHDL File  ; //Mac/Home/Desktop/EA999/PROJECT/Audiobocs/source/audio_synth_top.vhd ;         ;
++----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------+---------+
+
+
++----------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                ;
++---------------------------------------------+------------------------------+
+; Resource                                    ; Usage                        ;
++---------------------------------------------+------------------------------+
+; Estimated Total logic elements              ; 144                          ;
+;                                             ;                              ;
+; Total combinational functions               ; 134                          ;
+; Logic element usage by number of LUT inputs ;                              ;
+;     -- 4 input functions                    ; 63                           ;
+;     -- 3 input functions                    ; 39                           ;
+;     -- <=2 input functions                  ; 32                           ;
+;                                             ;                              ;
+; Logic elements by mode                      ;                              ;
+;     -- normal mode                          ; 131                          ;
+;     -- arithmetic mode                      ; 3                            ;
+;                                             ;                              ;
+; Total registers                             ; 65                           ;
+;     -- Dedicated logic registers            ; 65                           ;
+;     -- I/O registers                        ; 0                            ;
+;                                             ;                              ;
+; I/O pins                                    ; 18                           ;
+; Embedded Multiplier 9-bit elements          ; 0                            ;
+; Maximum fan-out node                        ; clock_div:clk_div_1|count[1] ;
+; Maximum fan-out                             ; 65                           ;
+; Total fan-out                               ; 654                          ;
+; Average fan-out                             ; 3.01                         ;
++---------------------------------------------+------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                            ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                    ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+--------------+
+; |audio_synth_top           ; 134 (0)           ; 65 (0)       ; 0           ; 0            ; 0       ; 0         ; 18   ; 0            ; |audio_synth_top                       ; work         ;
+;    |clock_div:clk_div_1|   ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|clock_div:clk_div_1   ; work         ;
+;    |codec_ctrl:codec|      ; 59 (59)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|codec_ctrl:codec      ; work         ;
+;    |i2c_master:master|     ; 73 (73)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2c_master:master     ; work         ;
+;    |sync_block:init_sync|  ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|sync_block:init_sync  ; work         ;
+;    |sync_block:reset_sync| ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|sync_block:reset_sync ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |audio_synth_top|i2c_master:master|fsm_state                                                                                                                                                                      ;
++--------------------------------+------------------+---------------------------+----------------------+-----------------------+--------------------------------+-------------------+----------------------------+------------------+
+; Name                           ; fsm_state.S_STOP ; fsm_state.S_WAIT_FOR_STOP ; fsm_state.S_ACK_BYTE ; fsm_state.S_SEND_BYTE ; fsm_state.S_WAIT_FOR_NEXT_BYTE ; fsm_state.S_START ; fsm_state.S_WAIT_FOR_START ; fsm_state.S_IDLE ;
++--------------------------------+------------------+---------------------------+----------------------+-----------------------+--------------------------------+-------------------+----------------------------+------------------+
+; fsm_state.S_IDLE               ; 0                ; 0                         ; 0                    ; 0                     ; 0                              ; 0                 ; 0                          ; 0                ;
+; fsm_state.S_WAIT_FOR_START     ; 0                ; 0                         ; 0                    ; 0                     ; 0                              ; 0                 ; 1                          ; 1                ;
+; fsm_state.S_START              ; 0                ; 0                         ; 0                    ; 0                     ; 0                              ; 1                 ; 0                          ; 1                ;
+; fsm_state.S_WAIT_FOR_NEXT_BYTE ; 0                ; 0                         ; 0                    ; 0                     ; 1                              ; 0                 ; 0                          ; 1                ;
+; fsm_state.S_SEND_BYTE          ; 0                ; 0                         ; 0                    ; 1                     ; 0                              ; 0                 ; 0                          ; 1                ;
+; fsm_state.S_ACK_BYTE           ; 0                ; 0                         ; 1                    ; 0                     ; 0                              ; 0                 ; 0                          ; 1                ;
+; fsm_state.S_WAIT_FOR_STOP      ; 0                ; 1                         ; 0                    ; 0                     ; 0                              ; 0                 ; 0                          ; 1                ;
+; fsm_state.S_STOP               ; 1                ; 0                         ; 0                    ; 0                     ; 0                              ; 0                 ; 0                          ; 1                ;
++--------------------------------+------------------+---------------------------+----------------------+-----------------------+--------------------------------+-------------------+----------------------------+------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------+
+; State Machine - |audio_synth_top|codec_ctrl:codec|state               ;
++-------------------+------------------+-------------------+------------+
+; Name              ; state.WAIT_WRITE ; state.START_WRITE ; state.IDLE ;
++-------------------+------------------+-------------------+------------+
+; state.IDLE        ; 0                ; 0                 ; 0          ;
+; state.START_WRITE ; 0                ; 1                 ; 1          ;
+; state.WAIT_WRITE  ; 1                ; 0                 ; 1          ;
++-------------------+------------------+-------------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                               ;
++-----------------------------------------------------+------------------------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal                ; Free of Timing Hazards ;
++-----------------------------------------------------+------------------------------------+------------------------+
+; codec_ctrl:codec|next_regcount[3]                   ; codec_ctrl:codec|Selector13        ; yes                    ;
+; codec_ctrl:codec|next_regcount[2]                   ; codec_ctrl:codec|Selector13        ; yes                    ;
+; codec_ctrl:codec|next_regcount[1]                   ; codec_ctrl:codec|Selector13        ; yes                    ;
+; codec_ctrl:codec|next_regcount[0]                   ; codec_ctrl:codec|Selector13        ; yes                    ;
+; codec_ctrl:codec|write_data_o[12]                   ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[11]                   ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[10]                   ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[9]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[6]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[5]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[4]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[3]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[2]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[1]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; codec_ctrl:codec|write_data_o[0]                    ; codec_ctrl:codec|state.START_WRITE ; yes                    ;
+; Number of user-specified and inferred latches = 15  ;                                    ;                        ;
++-----------------------------------------------------+------------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 65    ;
+; Number of registers using Synchronous Clear  ; 3     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 59    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 29    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; i2c_master:master|scl                  ; 2       ;
+; i2c_master:master|sda                  ; 6       ;
+; Total number of inverted registers = 2 ;         ;
++----------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |audio_synth_top|i2c_master:master|byte_count[1] ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |audio_synth_top|i2c_master:master|bit_count[2]  ;
+; 8:1                ; 13 bits   ; 65 LEs        ; 13 LEs               ; 52 LEs                 ; Yes        ; |audio_synth_top|i2c_master:master|data[13]      ;
+; 8:1                ; 10 bits   ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |audio_synth_top|i2c_master:master|data[10]      ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |audio_synth_top|codec_ctrl:codec|next_state     ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |audio_synth_top|i2c_master:master|Selector30    ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |audio_synth_top|i2c_master:master|Selector31    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Fri Apr 06 10:29:35 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off AudioBocs -c audio_synth_top
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file //mac/home/desktop/ea999/project/audiobocs/source/sync_block.vhd
+    Info (12022): Found design unit 1: sync_block-rtl
+    Info (12023): Found entity 1: sync_block
+Info (12021): Found 1 design units, including 0 entities, in source file //mac/home/desktop/ea999/project/audiobocs/source/reg_table_pkg.vhd
+    Info (12022): Found design unit 1: reg_table_pkg
+Info (12021): Found 2 design units, including 1 entities, in source file //mac/home/desktop/ea999/project/audiobocs/source/i2c_master.vhd
+    Info (12022): Found design unit 1: i2c_master-rtl
+    Info (12023): Found entity 1: i2c_master
+Info (12021): Found 2 design units, including 1 entities, in source file //mac/home/desktop/ea999/project/audiobocs/source/codec_ctrl.vhd
+    Info (12022): Found design unit 1: codec_ctrl-rtl
+    Info (12023): Found entity 1: codec_ctrl
+Info (12021): Found 2 design units, including 1 entities, in source file //mac/home/desktop/ea999/project/audiobocs/source/clock_div.vhd
+    Info (12022): Found design unit 1: clock_div-rtl
+    Info (12023): Found entity 1: clock_div
+Info (12021): Found 2 design units, including 1 entities, in source file //mac/home/desktop/ea999/project/audiobocs/source/audio_synth_top.vhd
+    Info (12022): Found design unit 1: audio_synth_top-top
+    Info (12023): Found entity 1: audio_synth_top
+Info (12127): Elaborating entity "audio_synth_top" for the top level hierarchy
+Info (12128): Elaborating entity "clock_div" for hierarchy "clock_div:clk_div_1"
+Info (12128): Elaborating entity "sync_block" for hierarchy "sync_block:reset_sync"
+Info (12128): Elaborating entity "codec_ctrl" for hierarchy "codec_ctrl:codec"
+Warning (10631): VHDL Process Statement warning at codec_ctrl.vhd(43): inferring latch(es) for signal or variable "next_regcount", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at codec_ctrl.vhd(43): inferring latch(es) for signal or variable "write_data_o", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "write_data_o[0]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[1]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[2]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[3]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[4]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[5]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[6]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[7]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[8]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[9]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[10]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[11]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[12]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[13]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[14]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "write_data_o[15]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "next_regcount[0]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "next_regcount[1]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "next_regcount[2]" at codec_ctrl.vhd(43)
+Info (10041): Inferred latch for "next_regcount[3]" at codec_ctrl.vhd(43)
+Info (12128): Elaborating entity "i2c_master" for hierarchy "i2c_master:master"
+Warning (13050): Open-drain buffer(s) that do not directly drive top-level pin(s) are removed
+    Warning (13051): Converted the fanout from the open-drain buffer "i2c_master:master|sda_io" to the node "i2c_master:master|logic_proc" into a wire
+Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
+    Info (13026): Duplicate LATCH primitive "codec_ctrl:codec|write_data_o[5]" merged with LATCH primitive "codec_ctrl:codec|write_data_o[6]"
+Warning (13012): Latch codec_ctrl:codec|next_regcount[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal codec_ctrl:codec|state.WAIT_WRITE
+Warning (13012): Latch codec_ctrl:codec|next_regcount[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal codec_ctrl:codec|state.WAIT_WRITE
+Warning (13012): Latch codec_ctrl:codec|next_regcount[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal codec_ctrl:codec|state.WAIT_WRITE
+Warning (13012): Latch codec_ctrl:codec|next_regcount[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal codec_ctrl:codec|regcount[0]
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "KEY[2]"
+    Warning (15610): No output dependent on input pin "KEY[3]"
+Info (21057): Implemented 166 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 15 input pins
+    Info (21059): Implemented 2 output pins
+    Info (21060): Implemented 1 bidirectional pins
+    Info (21061): Implemented 148 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 16 warnings
+    Info: Peak virtual memory: 496 megabytes
+    Info: Processing ended: Fri Apr 06 10:29:37 2018
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+

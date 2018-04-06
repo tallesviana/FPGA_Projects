@@ -11,7 +11,7 @@ ENTITY audio_synth_top IS
     PORT(
         CLOCK_50 :  IN std_logic;
         KEY      :  IN std_logic_vector(3 downto 0);
-        SW       :  IN std_logic_vector(9 downto 0)
+        SW       :  IN std_logic_vector(9 downto 0);
         AUD_XCK  :  OUT std_logic;
         I2C_SCLK :  OUT std_logic;
         I2C_SDAT :  INOUT std_logic
@@ -100,48 +100,48 @@ BEGIN
 
 clk_div_1: clock_div
     PORT MAP(
-        clk_fast_i => t_clock_50;
+        clk_fast_i => t_clock_50,
         clk_slow_o => t_clock_12_5
     );
 
 reset_sync: sync_block
     PORT MAP(
-        async_i => t_key(0);
-        clk     => t_clock_12_5;
+        async_i => t_key(0),
+        clk     => t_clock_12_5,
         syncd_o => t_reset_syncd
     );
 
 init_sync: sync_block
     PORT MAP(
-        async_i => t_key(1);
-        clk     => t_clock_12_5;
+        async_i => t_key(1),
+        clk     => t_clock_12_5,
         syncd_o => t_init_syncd
     );
 
 codec: codec_ctrl
     PORT MAP(
-        event_ctrl_i => t_sw;
-        init_i       => t_init_syncd;
-        write_done_i => t_write_done;
-        ack_error_i  => t_ack_error;
-        clk          => t_clock_12_5;
-        reset_n      => t_reset_syncd;
-        write_o      => t_write;
+        event_ctrl_i => t_sw,
+        init_i       => t_init_syncd,
+        write_done_i => t_write_done,
+        ack_error_i  => t_ack_error,
+        clk          => t_clock_12_5,
+        reset_n      => t_reset_syncd,
+        write_o      => t_write,
         write_data_o => t_data2write
     );
 
 master: i2c_master
     PORT MAP(
-        clk         => t_clock_12_5;
-        reset_n     => t_reset_syncd;
+        clk         => t_clock_12_5,
+        reset_n     => t_reset_syncd,
 
-        write_i     => t_write;
-        write_data_i=> t_data2write;
+        write_i     => t_write,
+        write_data_i=> t_data2write,
         
-        sda_io		=> t_i2c_sdat;
-        scl_o		=> t_i2c_sclk;
+        sda_io		=> t_i2c_sdat,
+        scl_o		=> t_i2c_sclk,
         
-        write_done_o=> t_write_done;
+        write_done_o=> t_write_done,
         ack_error_o	=> t_ack_error
     );
 

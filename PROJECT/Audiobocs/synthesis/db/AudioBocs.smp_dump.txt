@@ -1,0 +1,17 @@
+
+State Machine - |audio_synth_top|i2c_master:master|fsm_state
+Name fsm_state.S_STOP fsm_state.S_WAIT_FOR_STOP fsm_state.S_ACK_BYTE fsm_state.S_SEND_BYTE fsm_state.S_WAIT_FOR_NEXT_BYTE fsm_state.S_START fsm_state.S_WAIT_FOR_START fsm_state.S_IDLE 
+fsm_state.S_IDLE 0 0 0 0 0 0 0 0 
+fsm_state.S_WAIT_FOR_START 0 0 0 0 0 0 1 1 
+fsm_state.S_START 0 0 0 0 0 1 0 1 
+fsm_state.S_WAIT_FOR_NEXT_BYTE 0 0 0 0 1 0 0 1 
+fsm_state.S_SEND_BYTE 0 0 0 1 0 0 0 1 
+fsm_state.S_ACK_BYTE 0 0 1 0 0 0 0 1 
+fsm_state.S_WAIT_FOR_STOP 0 1 0 0 0 0 0 1 
+fsm_state.S_STOP 1 0 0 0 0 0 0 1 
+
+State Machine - |audio_synth_top|codec_ctrl:codec|state
+Name state.WAIT_WRITE state.START_WRITE state.IDLE 
+state.IDLE 0 0 0 
+state.START_WRITE 0 1 1 
+state.WAIT_WRITE 1 0 1 

@@ -1,0 +1,16 @@
+Fitter Status : Successful - Fri Apr 06 10:29:43 2018
+Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+Revision Name : audio_synth_top
+Top-level Entity Name : audio_synth_top
+Family : Cyclone II
+Device : EP2C20F484C7
+Timing Models : Final
+Total logic elements : 139 / 18,752 ( < 1 % )
+    Total combinational functions : 134 / 18,752 ( < 1 % )
+    Dedicated logic registers : 65 / 18,752 ( < 1 % )
+Total registers : 65
+Total pins : 18 / 315 ( 6 % )
+Total virtual pins : 0
+Total memory bits : 0 / 239,616 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 52 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )
