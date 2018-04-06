@@ -22,7 +22,7 @@ ENTITY codec_ctrl IS
         reset_n      :  IN std_logic;
 
         write_o      :  OUT std_logic;
-        write_data_o(8 downto 0) :  OUT std_logic_vector(15 downto 0)
+        write_data_o :  OUT std_logic_vector(15 downto 0)
     );
 END codec_ctrl;
 
@@ -35,15 +35,16 @@ ARCHITECTURE rtl OF codec_ctrl IS
     SIGNAL state, next_state :  codec_state;
     SIGNAL regcount, next_regcount :  integer range 0 to 9;
 
-    SIGNAL data_registers  :  st_codec_register_array;
 
 BEGIN
 
     -- PROCESS FOR COMB_INPUT FSM --
 
-    fsm_drive: PROCESS (state, regcount, write_data_i, ack_error_i, event_ctrl_i, init_i)
+    fsm_drive: PROCESS (state, regcount, write_done_i, ack_error_i, event_ctrl_i, init_i)
     BEGIN
         next_state <= state;
+        next_regcount <= regcount;
+        write_data_o <= (OTHERS => '0');
 
         CASE state IS
 
@@ -62,18 +63,18 @@ BEGIN
             -- Load data, and start writing
             WHEN START_WRITE =>  
 
-                write_data_o(8 downto 0) <= std_logic_vector(to_unsigned(regcount, 7));
+                write_data_o(15 downto 9) <= std_logic_vector(to_unsigned(regcount, 7));
 
                 CASE event_ctrl_i IS        -- Select Functions
-                    WHEN '0000000000' =>
+                    WHEN "0000000000" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_BYPASS(regcount);
-                    WHEN '0000000001' =>
+                    WHEN "0000000001" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_MUTE_LEFT(regcount);
-                    WHEN '0000000010' =>
+                    WHEN "0000000010" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_MUTE_RIGHT(regcount);
-                    WHEN '0000000011' =>
+                    WHEN "0000000011" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_MUTE_BOTH(regcount);
-                    WHEN '0000000100' =>
+                    WHEN "0000000100" =>
                         write_data_o(8 downto 0) <= C_W8731_ADC_DAC_0DB_48K(regcount);
                     WHEN OTHERS =>
                         write_data_o(8 downto 0) <= (OTHERS => '0');

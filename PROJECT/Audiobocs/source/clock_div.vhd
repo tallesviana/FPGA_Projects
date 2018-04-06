@@ -20,7 +20,7 @@ END clock_div;
 
 ARCHITECTURE rtl OF clock_div IS
 
-    SIGNAL count, next_count  :  unsigned(1 downto 0) := 0;  -- This is signal forcing, just use it here!!!
+    SIGNAL count, next_count  :  unsigned(1 downto 0) := to_unsigned(0,2);  -- This is signal forcing, just use it here!!!
 
 BEGIN
 
@@ -29,7 +29,7 @@ BEGIN
         comb_logic: PROCESS(count)
         BEGIN
             next_count <= count + 1;       
-        END PROCESS
+        END PROCESS;
 
     -->>   Sequential Logic
 
