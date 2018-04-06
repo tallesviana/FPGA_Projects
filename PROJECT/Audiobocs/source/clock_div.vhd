@@ -20,7 +20,7 @@ END clock_div;
 
 ARCHITECTURE rtl OF clock_div IS
 
-    SIGNAL count, next_count  :  unsigned(1 downto 0) := 0;  -- Initialize count
+    SIGNAL count, next_count  :  unsigned(1 downto 0) := 0;  -- This is signal forcing, just use it here!!!
 
 BEGIN
 
