@@ -44,7 +44,7 @@ BEGIN
     BEGIN
         next_state <= state;
         next_regcount <= regcount;
-        write_data_o <= (OTHERS => '0');
+        
 
         CASE state IS
 
@@ -53,6 +53,7 @@ BEGIN
         
                 next_regcount <= 0;  -- Register counter reset
                 write_o <= '0';
+                write_data_o <= (OTHERS => '0');
 
                 IF init_i = '0' THEN        -- If KEY is pressed
                     -- Go to Next State
@@ -60,7 +61,7 @@ BEGIN
                 END IF;
             
             
-            -- Load data, and start writing
+            -- START WRITING DATA
             WHEN START_WRITE =>  
 
                 write_data_o(15 downto 9) <= std_logic_vector(to_unsigned(regcount, 7));
@@ -87,11 +88,11 @@ BEGIN
             -- Wait ACK_ERROR or WRITE_DONE
             WHEN WAIT_WRITE =>
                 write_o <= '0';
-                -- If ack_error, returns to IDLE
-                IF (ack_error_i = '1') THEN
-                    next_state <= IDLE;
+                -- If ack_error, returns to IDLE   -- !!! Not treating the ACK error !!!!
+                --IF (ack_error_i = '1') THEN
+                --    next_state <= IDLE;
 
-                ELSIF (write_done_i = '1') THEN
+                IF (write_done_i = '1') THEN
                     -- If write_done: check if it is the last reg
                     IF regcount < 9 THEN
                         -- If not, load next data

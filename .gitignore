@@ -1,0 +1,3 @@
+#Ignore synthesis files, since they are garbage
+**/synthesis/*
+**/simulation/Modelsim/*

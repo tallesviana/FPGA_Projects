@@ -3,43 +3,27 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow Model Setup 'clock_div:clk_div_1|count[1]'
-Slack : -3.113
-TNS   : -122.339
-
-Type  : Slow Model Setup 'codec_ctrl:codec|state.START_WRITE'
-Slack : -2.616
-TNS   : -17.402
+Slack : -3.460
+TNS   : -142.217
 
 Type  : Slow Model Setup 'CLOCK_50'
-Slack : 0.139
+Slack : 0.136
 TNS   : 0.000
-
-Type  : Slow Model Setup 'codec_ctrl:codec|regcount[0]'
-Slack : 0.477
-TNS   : 0.000
-
-Type  : Slow Model Hold 'codec_ctrl:codec|regcount[0]'
-Slack : -3.702
-TNS   : -13.525
 
 Type  : Slow Model Hold 'CLOCK_50'
-Slack : -2.693
-TNS   : -2.693
-
-Type  : Slow Model Hold 'codec_ctrl:codec|state.START_WRITE'
-Slack : -0.982
-TNS   : -3.272
+Slack : -2.690
+TNS   : -2.690
 
 Type  : Slow Model Hold 'clock_div:clk_div_1|count[1]'
-Slack : -0.872
-TNS   : -2.568
+Slack : 0.445
+TNS   : 0.000
 
 Type  : Slow Model Recovery 'clock_div:clk_div_1|count[1]'
-Slack : -2.253
-TNS   : -76.243
+Slack : -1.259
+TNS   : -48.007
 
 Type  : Slow Model Removal 'clock_div:clk_div_1|count[1]'
-Slack : 1.185
+Slack : 1.189
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'CLOCK_50'
@@ -50,52 +34,28 @@ Type  : Slow Model Minimum Pulse Width 'clock_div:clk_div_1|count[1]'
 Slack : -0.611
 TNS   : -76.986
 
-Type  : Slow Model Minimum Pulse Width 'codec_ctrl:codec|regcount[0]'
-Slack : 0.500
-TNS   : 0.000
-
-Type  : Slow Model Minimum Pulse Width 'codec_ctrl:codec|state.START_WRITE'
-Slack : 0.500
-TNS   : 0.000
-
 Type  : Fast Model Setup 'clock_div:clk_div_1|count[1]'
-Slack : -1.053
-TNS   : -21.353
-
-Type  : Fast Model Setup 'codec_ctrl:codec|state.START_WRITE'
-Slack : -0.256
-TNS   : -0.754
+Slack : -0.726
+TNS   : -24.042
 
 Type  : Fast Model Setup 'CLOCK_50'
-Slack : 0.643
+Slack : 0.641
 TNS   : 0.000
-
-Type  : Fast Model Setup 'codec_ctrl:codec|regcount[0]'
-Slack : 1.202
-TNS   : 0.000
-
-Type  : Fast Model Hold 'codec_ctrl:codec|regcount[0]'
-Slack : -1.884
-TNS   : -7.057
 
 Type  : Fast Model Hold 'CLOCK_50'
-Slack : -1.724
-TNS   : -1.724
+Slack : -1.721
+TNS   : -1.721
 
 Type  : Fast Model Hold 'clock_div:clk_div_1|count[1]'
-Slack : -0.962
-TNS   : -15.578
-
-Type  : Fast Model Hold 'codec_ctrl:codec|state.START_WRITE'
-Slack : -0.890
-TNS   : -4.408
+Slack : 0.215
+TNS   : 0.000
 
 Type  : Fast Model Recovery 'clock_div:clk_div_1|count[1]'
-Slack : -0.870
-TNS   : -7.569
+Slack : -0.023
+TNS   : -0.092
 
 Type  : Fast Model Removal 'clock_div:clk_div_1|count[1]'
-Slack : 0.587
+Slack : 0.589
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'CLOCK_50'
@@ -105,13 +65,5 @@ TNS   : -3.380
 Type  : Fast Model Minimum Pulse Width 'clock_div:clk_div_1|count[1]'
 Slack : -0.500
 TNS   : -63.000
-
-Type  : Fast Model Minimum Pulse Width 'codec_ctrl:codec|regcount[0]'
-Slack : 0.500
-TNS   : 0.000
-
-Type  : Fast Model Minimum Pulse Width 'codec_ctrl:codec|state.START_WRITE'
-Slack : 0.500
-TNS   : 0.000
 
 ------------------------------------------------------------

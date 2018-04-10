@@ -25,7 +25,7 @@ COMPONENT audio_synth_top
 	(
     	CLOCK_50		: IN   	std_logic;		-- DE2 clock from xtal 50MHz
 		KEY				: IN   	std_logic_vector( 3 downto 0);  -- DE2 low_active input buttons
-		SW				: IN	std_logic_vector(17 downto 0);	-- DE2 input switches
+		SW				: IN	std_logic_vector(9 downto 0);	-- DE2 input switches
 		AUD_XCK			: OUT	std_logic;		-- master clock for Audio Codec
 		I2C_SCLK		: OUT	std_logic;		-- clock from I2C master block
 		I2C_SDAT		: INOUT std_logic		-- data  from I2C master block
@@ -33,7 +33,7 @@ COMPONENT audio_synth_top
 END COMPONENT;
 
 COMPONENT i2c_slave_bfm 
-	GENERIC(	verbose     : boolean := false );
+	GENERIC(	verbose     : boolean := true );
 	PORT(		sda_io		: inout std_logic := 'H';
 				scl_io		: inout std_logic := 'H' );
 END COMPONENT;
@@ -56,8 +56,10 @@ END COMPONENT;
 	CONSTANT CLK_50M_HALFP 	: time := 10 ns;  		-- Half-Period of Clock 50MHz
 	
 	-- Auxiliary Signals for internal probes
-	SIGNAL tb_reg0_up	: std_logic_vector(3 downto 0); -- to check DUT-internal signal
-	SIGNAL tb_reg0_lo	: std_logic_vector(3 downto 0);	
+	SIGNAL tb_write_done: std_logic;
+	SIGNAL tb_ack_error : std_logic;
+	SIGNAL tb_write     : std_logic;
+	SIGNAL tb_data2write: std_logic_vector(15 downto 0);
 	
 BEGIN
   -- Instantiations
@@ -69,7 +71,7 @@ BEGIN
 	KEY(2)			=>  CST_ONE,		-- currently unused
 	KEY(3)			=>  CST_ONE,
     SW(2 downto 0)	=> tb_sw,			-- so far only 3 LSB used
-	SW(17 downto 3) => (OTHERS => '1'),
+	SW(9 downto 3) => (OTHERS => '0'),
 	AUD_XCK			=>	tb_aud_xck,		-- IF to Audio Codec
     I2C_SCLK		=>	tb_i2c_sclk,
     I2C_SDAT		=>	tb_i2c_sdat
@@ -96,9 +98,11 @@ BEGIN
 	-- VHDL-2008 Syntax allowing to bind 
 	--           internal signals to a debug signal in the testbench
 	-------------------------------------------
-	-- tb_reg0_up <= <<signal DUT.reg0_up_hexa : std_logic_vector(3 downto 0) >>;
-	-- tb_reg0_lo <= <<signal DUT.reg0_lo_hexa : std_logic_vector(3 downto 0) >>;
 	
+	tb_write_done <= <<signal DUT.t_write_done : std_logic >>;
+	tb_ack_error  <= <<signal DUT.t_ack_error : std_logic >>;
+	tb_write      <= <<signal DUT.t_write : std_logic >>;
+	tb_data2write <= <<signal DUT.t_data2write : std_logic_vector(15 downto 0) >>;
 	
   -- Stimuli Process
 	stimuli: PROCESS

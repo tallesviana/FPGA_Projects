@@ -92,7 +92,7 @@ BEGIN
 		-- STEP 0
 		report "Initialise: define constants and pulse reset on/off";
 		tb_serdata <= '1';
-		tb_test_vector <= B"1_1110_0101_0"; -- (stop-bit)+(data-byte)+(start-bit)
+		tb_test_vector <= B"1_1010_1111_0"; -- (stop-bit)+(data-byte)+(start-bit) = 0xAF
 		----------------
 		tb_reset_n <= '0';
 		wait for 20 * clk_50M_halfp; 
