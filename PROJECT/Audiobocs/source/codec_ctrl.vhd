@@ -45,6 +45,7 @@ BEGIN
         -- Default statements
         next_state <= state;
         next_regcount <= regcount;
+        write_data_o <= (OTHERS => '0');
         
 
         -- CASES --
