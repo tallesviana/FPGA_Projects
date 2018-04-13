@@ -28,7 +28,7 @@ add wave -noupdate -divider -height 25 Testbench
 add wave -noupdate -label {tb_SDA
 } /testbench_audio_synth_top/tb_i2c_sdat
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {89320 ns} 0}
+WaveRestoreCursors {{Cursor 1} {1400 ns} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 199
 configure wave -valuecolwidth 158
@@ -44,4 +44,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {70038 ns} {93242 ns}
+WaveRestoreZoom {0 ns} {23204 ns}

@@ -2,7 +2,7 @@
 --    CODEC CONTROLLER - WM8731  
 --    Controls WM8731 functions   
 --    03/04/18 - 1st Version - Talles Viana
---
+--    13/04/18 - Comments and indentation
 
 LIBRARY ieee;
 use ieee.std_logic_1164.all;
@@ -18,7 +18,7 @@ ENTITY codec_ctrl IS
         init_i       :  in std_logic;
         write_done_i :  IN std_logic;
         ack_error_i  :  IN std_logic;
-        clk    :  IN std_logic;
+        clk          :  IN std_logic;
         reset_n      :  IN std_logic;
 
         write_o      :  OUT std_logic;
@@ -30,7 +30,7 @@ END codec_ctrl;
 
 ARCHITECTURE rtl OF codec_ctrl IS
 
-    TYPE codec_state IS (IDLE, START_WRITE, WAIT_WRITE);    -- States of the CODEC Controller
+    TYPE codec_state IS (IDLE, START_WRITE, WAIT_WRITE);    -- States of the CODEC
 
     SIGNAL state, next_state :  codec_state;
     SIGNAL regcount, next_regcount :  integer range 0 to 9;
@@ -42,10 +42,12 @@ BEGIN
 
     fsm_drive: PROCESS (state, regcount, write_done_i, ack_error_i, event_ctrl_i, init_i)
     BEGIN
+        -- Default statements
         next_state <= state;
         next_regcount <= regcount;
         
 
+        -- CASES --
         CASE state IS
 
             -- IDLE STATE --
@@ -64,9 +66,11 @@ BEGIN
             -- START WRITING DATA
             WHEN START_WRITE =>  
 
+                -- Set register number on WM8731
                 write_data_o(15 downto 9) <= std_logic_vector(to_unsigned(regcount, 7));
 
-                CASE event_ctrl_i IS        -- Select Functions
+                -- Select Functions
+                CASE event_ctrl_i IS
                     WHEN "0000000000" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_BYPASS(regcount);
                     WHEN "0000000001" =>
@@ -81,25 +85,29 @@ BEGIN
                         write_data_o(8 downto 0) <= (OTHERS => '0');
                 END CASE;           
 
+                -- Flag bit - indicates we have data to write on WM8731
                 write_o <= '1';
+                -- Go the next state
                 next_state <= WAIT_WRITE;
 
             
-            -- Wait ACK_ERROR or WRITE_DONE
+            -- WAIT STATE - ACK_ERROR or WRITE_DONE
             WHEN WAIT_WRITE =>
+                -- Flag bit - no new data to write
                 write_o <= '0';
+
                 -- If ack_error, returns to IDLE
                 IF (ack_error_i = '1') THEN
                     next_state <= IDLE;
 
                 ELSIF (write_done_i = '1') THEN
-                    -- If write_done: check if it is the last reg
+                    -- If write_done: check if it is the last register
                     IF regcount < 9 THEN
-                        -- If not, load next data
+                        -- Writing registers by register on WM8731
                         next_regcount <= regcount + 1;
                         next_state <= START_WRITE;
                     ELSE
-                        -- If so, go to IDLE
+                        -- If it was the last registers, go to IDLE
                         next_state <= IDLE;
                     END IF;
                 END IF;
@@ -107,6 +115,7 @@ BEGIN
             WHEN OTHERS =>
                 next_state <= IDLE;
                 next_regcount <= 0;
+                write_data_o <= (OTHERS => '0');
         END CASE;
             
 
