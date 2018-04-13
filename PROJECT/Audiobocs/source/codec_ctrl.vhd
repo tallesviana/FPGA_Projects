@@ -88,11 +88,11 @@ BEGIN
             -- Wait ACK_ERROR or WRITE_DONE
             WHEN WAIT_WRITE =>
                 write_o <= '0';
-                -- If ack_error, returns to IDLE   -- !!! Not treating the ACK error !!!!
-                --IF (ack_error_i = '1') THEN
-                --    next_state <= IDLE;
+                -- If ack_error, returns to IDLE
+                IF (ack_error_i = '1') THEN
+                    next_state <= IDLE;
 
-                IF (write_done_i = '1') THEN
+                ELSIF (write_done_i = '1') THEN
                     -- If write_done: check if it is the last reg
                     IF regcount < 9 THEN
                         -- If not, load next data

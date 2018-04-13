@@ -89,7 +89,6 @@ SIGNAL t_write      : std_logic;  -- Signals from Codec Ctrl to I2C Master
 SIGNAL t_data2write : std_logic_vector(15 downto 0);
 
 SIGNAL t_i2c_sclk   : std_logic;  -- Output signals from I2C Master
-SIGNAL t_i2c_sdat   : std_logic;
 
 ------------------------------------------------------
 -->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
@@ -138,7 +137,7 @@ master: i2c_master
         write_i     => t_write,
         write_data_i=> t_data2write,
         
-        sda_io		=> t_i2c_sdat,
+        sda_io		=> I2C_SDAT,  -- Connected I2C SDA directly
         scl_o		=> t_i2c_sclk,
         
         write_done_o=> t_write_done,
@@ -150,6 +149,5 @@ t_key      <= KEY;
 t_sw       <= SW;
 AUD_XCK    <= t_clock_12_5;
 I2C_SCLK   <= t_i2c_sclk;
-I2C_SDAT   <= t_i2c_sdat;
 
 END top;
