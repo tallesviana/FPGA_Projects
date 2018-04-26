@@ -14,6 +14,7 @@ add wave -noupdate -height 25 -expand -group {Codec Ctrl
 } -radix hexadecimal /testbench_audio_synth_top/tb_data2write
 add wave -noupdate -height 25 -expand -group {I2C Master} -color Orange -height 25 -label {State
 } /testbench_audio_synth_top/DUT/master/fsm_state
+add wave -noupdate -height 25 -expand -group {I2C Master} -label {16bits Data} /testbench_audio_synth_top/DUT/master/data
 add wave -noupdate -height 25 -expand -group {I2C Master} -color yellow -height 25 -label {SDA
 } /testbench_audio_synth_top/DUT/master/sda
 add wave -noupdate -height 25 -expand -group {I2C Master} -height 25 -label {SCL
@@ -28,7 +29,7 @@ add wave -noupdate -divider -height 25 Testbench
 add wave -noupdate -label {tb_SDA
 } /testbench_audio_synth_top/tb_i2c_sdat
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1400 ns} 0}
+WaveRestoreCursors {{Cursor 1} {536760 ns} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 199
 configure wave -valuecolwidth 158
@@ -44,4 +45,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ns} {23204 ns}
+WaveRestoreZoom {525158 ns} {548362 ns}

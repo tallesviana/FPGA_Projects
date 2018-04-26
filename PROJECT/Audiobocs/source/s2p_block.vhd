@@ -16,7 +16,7 @@ ENTITY s2p_block IS
         clk, reset_n : IN std_logic;
         ENABLE_i       : IN std_logic;   -- BLCK signal
         SHIFT_i      : IN std_logic;
-        SER_i        : IN std_logic
+        SER_i        : IN std_logic;
 
         PAR_o        : OUT std_logic_vector(15 downto 0)
     );
