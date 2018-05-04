@@ -51,7 +51,7 @@ BEGIN
         END IF;
     END PROCESS;
 
-    --===== CONCURREMENT ASSIGNMENTS =====-
+    --===== CONCURRENT ASSIGNMENTS =====-
     SER_o <=shiftreg(15);  -- Sends towards MSB
     
 END rtl;

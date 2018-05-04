@@ -66,13 +66,13 @@ COMPONENT p2s_block IS
     );
 END COMPONENT;
 
-COMPONENT mux_block IS
-    PORT(
-        left_i, right_i :  IN std_logic;
-        sel_i           :  IN std_logic;
-        channel_o       : OUT std_logic
-    );
-END COMPONENT;
+--COMPONENT mux_block IS
+  --  PORT(
+    --    left_i, right_i :  IN std_logic;
+      --  sel_i           :  IN std_logic;
+        --channel_o       : OUT std_logic
+    --);
+--END COMPONENT;
     ------------------------------------------------
     --              Internal Signals   
     ------------------------------------------------

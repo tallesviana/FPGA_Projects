@@ -49,5 +49,8 @@ BEGIN
             shiftreg <= next_shiftreg;
         END IF;
     END PROCESS;
+	
+	--====== CONCURRENT ASSIGNMENTS =======
+	PAR_o <= shiftreg;
 
 END rtl;

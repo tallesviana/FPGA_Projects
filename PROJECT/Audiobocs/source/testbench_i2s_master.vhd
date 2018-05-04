@@ -44,7 +44,7 @@ END COMPONENT;
 
     -- ADC serial data IN
     SIGNAL tb_adc_s_i  :  std_logic;
-    SIGNAL tb_adc_test :  std_logic(127 downto 0);
+    SIGNAL tb_adc_test :  std_logic_vector(127 downto 0);
 
     -- DAC serial data OUT
     SIGNAL tb_dac_s_o  : std_logic;
@@ -95,6 +95,30 @@ BEGIN
     stimuli: PROCESS
     BEGIN
         -- STEP 0
-        report " Initializing: Stimuli process - define  and pulse reset"
-        tb_adc_s_i
+        report " Initializing: Stimuli process - define  and pulse reset";
+        tb_adc_test <= X"AAAA111111111111_BBBB222222122222";
+		tb_adc_s_i  <= '0';
+		tb_reset_n  <= '0';
+		tb_init_n   <= '1';
+        ----------------------------
+        wait for 12*CLK_12M_HALFP;
+        tb_reset_n <= '1';
+        tb_init_n  <= '0';
+        wait for 4*CLK_12M_HALFP;
+        tb_init_n  <= '1';
+        
+		-- STEP 1
+		report "Waiting WS/BCLK falling edge...";
+		wait until falling_edge(tb_ws);
+		wait until falling_edge(tb_bclk);
+		
+		report "Sending serial data IN !!";
+		for i in 127 downto 0 loop
+		    tb_adc_s_i <= tb_adc_test(i);
+			wait until falling_edge(tb_bclk);
+		end loop;
+
+		assert false report "Serial transmission finished!! Check outputs";
+		
     END PROCESS stimuli;
+END struct;

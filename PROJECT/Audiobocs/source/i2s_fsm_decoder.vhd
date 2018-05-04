@@ -98,10 +98,10 @@ BEGIN
     
 
     --=====   BIT COUNTER  ======--   -- Counts up to 127
-    counter: PROCESS (count, init_n)
+    counter: PROCESS (count, init_n, bclk)
     BEGIN
         IF init_n = '0' THEN
-            next_count <= to_unsigned(0,7);
+            next_count <= to_unsigned(127,7);
         ELSIF bclk = '1'THEN                -- BLCK as enable
             next_count <= count + 1;
         ELSE
@@ -125,7 +125,7 @@ BEGIN
     BEGIN
         IF reset_n = '0' THEN
             state <= load;
-            count <= to_unsigned(0, 7);
+            count <= to_unsigned(127, 7);
             bclk  <= '0';
         ELSIF rising_edge(clk) THEN
             state <= next_state;
