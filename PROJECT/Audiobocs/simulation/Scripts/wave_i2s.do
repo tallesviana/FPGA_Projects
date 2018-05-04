@@ -29,7 +29,7 @@ add wave -noupdate /testbench_i2s_master/DUT/p2s_right/PAR_i
 add wave -noupdate /testbench_i2s_master/DUT/p2s_right/SER_o
 add wave -noupdate /testbench_i2s_master/DUT/p2s_right/shiftreg
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {22860 ns} 0}
+WaveRestoreCursors {{Cursor 1} {13680 ns} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 138
@@ -45,4 +45,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {18284 ns} {24437 ns}
+WaveRestoreZoom {0 ns} {6153 ns}

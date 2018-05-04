@@ -117,6 +117,8 @@ BEGIN
 		    tb_adc_s_i <= tb_adc_test(i);
 			wait until falling_edge(tb_bclk);
 		end loop;
+		
+		wait for 30us;
 
 		assert false report "Serial transmission finished!! Check outputs";
 		
