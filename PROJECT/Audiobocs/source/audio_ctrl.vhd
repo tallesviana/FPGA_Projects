@@ -62,13 +62,13 @@ modes: PROCESS(mode, next_mode, sw_cfg_i, init_n)
 BEGIN
     IF init_n = '0' THEN
         CASE sw_cfg_i IS
-            WHEN '00' =>
+            WHEN "00" =>
                 next_mode <= ADC_NoF;
-            WHEN '01' =>
+            WHEN "01" =>
                 next_mode <= Gen_NoF;
-            WHEN '10' =>
+            WHEN "10" =>
                 next_mode <= ADC_F;
-            WHEN '11' =>
+            WHEN "11" =>
                 next_mode <= Gen_F;
             WHEN OTHERS =>
                 next_mode <= mode;
@@ -82,17 +82,15 @@ END PROCESS modes;
 flip_flops: PROCESS(clk_12M, next_mode, reset_n_12M)
 BEGIN
     IF reset_n_12M = '0' THEN
-        mode <= '00';
+        mode <= ADC_NoF;
     ELSIF rising_edge(clk_12M) THEN
         mode <= next_mode;
     END IF;
 END PROCESS flip_flops;
 
 filter_l: fir_core
-    PORT MAP(
-        
-            lut_fir := LUT_FIR_LPF_200Hz ,  -- from audio_filter_pkg
-      
+    GENERIC MAP(lut_fir => LUT_FIR_LPF_200Hz )  -- from audio_filter_pkg)
+    PORT MAP(      
             clk => clk_12M ,       	
             reset_n => reset_n_12M,     	
             strobe_i => strobe,		
@@ -101,10 +99,8 @@ filter_l: fir_core
     );
 
 filter_r: fir_core
-    PORT MAP(
-        
-            lut_fir := LUT_FIR_LPF_200Hz ,  -- from audio_filter_pkg
-      
+    GENERIC MAP(lut_fir => LUT_FIR_LPF_200Hz)
+    PORT MAP(    
             clk => clk_12M ,       	
             reset_n => reset_n_12M,     	
             strobe_i => strobe,		
@@ -113,7 +109,8 @@ filter_r: fir_core
     );
 
 -- Concurrent Statements
-
+choose_path: PROCESS(ALL)
+BEGIN
     CASE mode IS
         WHEN ADC_NoF  =>
             DACDAT_pl_o <= ADCDAT_pl_i;
@@ -141,6 +138,9 @@ filter_r: fir_core
             dacdat_filter_i_l <= (OTHERS=>'0');
             dacdat_filter_i_r <= (OTHERS=>'0');
     END CASE;
+END PROCESS choose_path;
+
+init_o <= init_n;
 
 
 END struct;
