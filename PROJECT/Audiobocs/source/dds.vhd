@@ -36,11 +36,11 @@ ARCHITECTURE rtl OF dds IS
 BEGIN
 
 --============ COUNTER =============-
-cumulator: PROCESS(tone_on_i, phi_incr_i, strobe_i, count)
+cumulator: PROCESS(tone_on_i, phi_incr_i, strobe_i, count, next_count)
 BEGIN
     IF tone_on_i = '1' THEN
         IF strobe_i = '1' THEN
-            next_count <= count + phi_incr_i;
+            next_count <= count + unsigned(phi_incr_i);
         ELSE
             next_count <= count;
         END IF;
