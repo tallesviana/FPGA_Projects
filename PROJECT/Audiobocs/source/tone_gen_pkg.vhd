@@ -10,6 +10,7 @@
 ------------|----------|-------------------------------------------------------
 -- 12.04.13 | dqtm     | file created for DTP2 Milestone-3 in FS13
 -- 02.04.14 | dqtm     | updated for DTP2 in FS14, cause using new parameters
+-- 27.04.18 | dqtm     | updated for EA999 in FS18, check naming compatibility with filter_pkg
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
@@ -24,29 +25,13 @@ library ieee;
 
 package tone_gen_pkg is
 
-    -------------------------------------------------------------------------------
-	-- TYPES AND CONSTANTS FOR MIDI INTERFACE
-	-------------------------------------------------------------------------------	
-	type t_note_record is
-	  record
-		valid 		: std_logic;
-		number 		: std_logic_vector(6 downto 0);
-		velocity	: std_logic_vector(6 downto 0); 
-	  end record;
-
-	CONSTANT NOTE_INIT_VALUE : t_note_record := (valid  	=> '0',
-												 number 	=> (others => '0'),
-												 velocity 	=> (others => '0'));
-	  
-	type t_midi_array is array (0 to 9) of t_note_record; -- 10x note_record
-
 
     -------------------------------------------------------------------------------
 	-- CONSTANT DECLARATION FOR SEVERAL BLOCKS (DDS, TONE_GENERATOR, ...)
 	-------------------------------------------------------------------------------
     constant N_CUM:					natural :=19; 			-- number of bits in phase cumulator phicum_reg
-    constant N_LUT:					natural :=8;  			-- number of bits in LUT address
-    constant L: 					natural := 2**N_LUT; 	-- length of LUT
+    constant N_ADDR_LUT_DDS:		natural :=8;  			-- number of bits in DDS LUT address
+    constant L: 					natural := 2**N_ADDR_LUT_DDS; 	-- length of DDS LUT
     constant N_RESOL:				natural := 13;			-- Attention: 1 bit reserved for sign
 	constant N_AUDIO :				natural := 16;			-- Audio Paralell Bus width
 	-------------------------------------------------------------------------------
