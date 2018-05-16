@@ -117,10 +117,11 @@ BEGIN
 		    tb_adc_s_i <= tb_adc_test(i);
 			wait until falling_edge(tb_bclk);
 		end loop;
-		
-		wait for 30us;
+				
+		assert (tb_pl_data = X"AAAA") report "Value in left channel P2S is wrong !!!" severity note;
+		assert (tb_pr_data = X"BBBB") report "Value in right channel P2S is wrong !!!" severity note;
 
-		assert false report "Serial transmission finished!! Check outputs";
+		assert false report "Serial transmission have finished! P2S's have loaded correct values!!" severity failure;
 		
     END PROCESS stimuli;
 END struct;

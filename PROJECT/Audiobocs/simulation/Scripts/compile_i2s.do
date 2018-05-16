@@ -12,5 +12,5 @@ vcom -2008 -explicit -work work ../../source/p2s_block.vhd
 vsim -novopt -t 1ns -lib work work.testbench_i2s_master
 
 do ../scripts/wave_i2s.do
-run 35us
+run 22us
 
