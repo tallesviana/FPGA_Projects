@@ -1,8 +1,24 @@
--------------------------------------------
+-----------------------------------------------------
 --    CODEC CONTROLLER - WM8731  
 --    Controls WM8731 functions   
 --    03/04/18 - 1st Version - Talles Viana
 --    13/04/18 - Comments and indentation
+-----------------------------------------------------
+--  Functions
+-----------------------------------------------------
+--  Only the three switches control the functions
+--   SW0, SW1 and SW2   -  the KEY1 selects
+-----------------------------------------------------
+-- "000" => ANALOG_BYPASS
+-- "001" => ANALOG_MUTE_LEFT
+-- "010" => ANALOG_MUTE_RIGHT
+-- "011" => ANALOG_MUTE_BOTH
+--
+-- "100" => ADC_DAC_0DB_48K
+-- "101" => ADC_DAC_MUTE_LEFT
+-- "110" => ADC_DAC_MUTE_RIGHT
+-- "111" => ADC_DAC_MUTE_BOTH
+-----------------------------------------------------
 
 LIBRARY ieee;
 use ieee.std_logic_1164.all;
@@ -14,7 +30,7 @@ use work.reg_table_pkg.all;     -- Using the data package
 
 ENTITY codec_ctrl IS
     PORT(
-        event_ctrl_i :  IN std_logic_vector(9 downto 0);
+        event_ctrl_i :  IN std_logic_vector(2 downto 0);
         init_i       :  in std_logic;
         write_done_i :  IN std_logic;
         ack_error_i  :  IN std_logic;
@@ -72,16 +88,22 @@ BEGIN
 
                 -- Select Functions
                 CASE event_ctrl_i IS
-                    WHEN "0000000000" =>
+                    WHEN "000" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_BYPASS(regcount);
-                    WHEN "0000000001" =>
+                    WHEN "001" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_MUTE_LEFT(regcount);
-                    WHEN "0000000010" =>
+                    WHEN "010" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_MUTE_RIGHT(regcount);
-                    WHEN "0000000011" =>
+                    WHEN "011" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_MUTE_BOTH(regcount);
-                    WHEN "0000000100" =>
+                    WHEN "100" =>
                         write_data_o(8 downto 0) <= C_W8731_ADC_DAC_0DB_48K(regcount);
+					WHEN "101" =>
+					    write_data_o(8 downto 0) <= C_W8731_ADC_DAC_MUTE_LEFT(regcount);
+					WHEN "110" =>
+					    write_data_o(8 downto 0) <= C_W8731_ADC_DAC_MUTE_RIGHT(regcount);
+					WHEN "111" =>
+					    write_data_o(8 downto 0) <= C_W8731_ADC_DAC_MUTE_BOTH(regcount);
                     WHEN OTHERS =>
                         write_data_o(8 downto 0) <= (OTHERS => '0');
                 END CASE;           

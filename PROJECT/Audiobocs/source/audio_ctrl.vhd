@@ -1,3 +1,21 @@
+---------------------------------------------------------
+--    I2S - AUDIO CONTROLLER
+---------------------------------------------------------
+-- 12/05/18 - tallesvv
+---------------------------------------------------------
+--
+--  Basically it controls the I2S audio interface, routing 
+--  the audio from DDS or ADCDAT to digital output
+---------------------------------------------------------
+--     FUNCTIONS
+---------------------------------------------------------
+--
+--  SW0 - controls routing to FIR   0 - No FIR   1 - With FIR
+--  SW1 - controls routing to output   0 - from ADC   0 - from DDS
+--
+---------------------------------------------------------
+
+
 LIBRARY ieee;
   use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
@@ -9,7 +27,6 @@ ENTITY audio_ctrl IS
         reset_n_12M  :  IN std_logic;
         init_n   :  IN std_logic;
 
-        -- SW(0) -> Filter? (1-Y, 0-N)     SW(1) -> Data flow (1-ADC, 0-Generated)
         sw_cfg_i :  IN std_logic_vector(1 downto 0);  -- Selects if data going to filter Datagen or DataADC
         
         strobe :  IN std_logic;
@@ -88,8 +105,9 @@ BEGIN
     END IF;
 END PROCESS flip_flops;
 
+--  FIR  -   LEFT CHANNEL
 filter_l: fir_core
-    GENERIC MAP(lut_fir => LUT_FIR_LPF_200Hz )  -- from audio_filter_pkg)
+    GENERIC MAP(lut_fir => LUT_FIR_LPF_1k6Hz )  -- from audio_filter_pkg)
     PORT MAP(      
             clk => clk_12M ,       	
             reset_n => reset_n_12M,     	
@@ -98,8 +116,9 @@ filter_l: fir_core
             fdata_o	 =>	dacdat_filter_o_l	
     );
 
+--  FIR  -    RIGHT CHANNEL
 filter_r: fir_core
-    GENERIC MAP(lut_fir => LUT_FIR_LPF_200Hz)
+    GENERIC MAP(lut_fir => LUT_FIR_LPF_1k6Hz)
     PORT MAP(    
             clk => clk_12M ,       	
             reset_n => reset_n_12M,     	
@@ -108,7 +127,7 @@ filter_r: fir_core
             fdata_o	 =>	dacdat_filter_o_r	
     );
 
--- Concurrent Statements
+-- Concurrent Statements - Audio Routing
 choose_path: PROCESS(ALL)
 BEGIN
     CASE mode IS

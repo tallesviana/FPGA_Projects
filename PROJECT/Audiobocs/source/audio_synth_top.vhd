@@ -1,3 +1,9 @@
+---------------------------------------------------------
+------------    AUDIO SYNTH TOP ENTITY
+---------------------------------------------------------
+-- 15/05/18 - tallesvv
+---------------------------------------------------------
+
 LIBRARY ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -38,7 +44,7 @@ ARCHITECTURE top OF audio_synth_top IS
 
 COMPONENT codec_ctrl IS
     PORT(
-        event_ctrl_i :  IN std_logic_vector(9 downto 0);
+        event_ctrl_i :  IN std_logic_vector(2 downto 0);
         init_i       :  in std_logic;
         write_done_i :  IN std_logic;
         ack_error_i  :  IN std_logic;
@@ -194,7 +200,7 @@ init_audio_sync: sync_block                 -- INIT AUDIO CTRL SINC
 
 codec: codec_ctrl                           --  CODEC CONTROLLER
     PORT MAP(
-        event_ctrl_i => t_sw,
+        event_ctrl_i => t_sw(2 downto 0),
         init_i       => t_init_codec_syncd,
         write_done_i => t_write_done,
         ack_error_i  => t_ack_error,

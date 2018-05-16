@@ -119,7 +119,7 @@ constant C_W8731_ANALOG_MUTE_LEFT : t_codec_register_array := (
     0	=>  "000000000" or C_LINE_IN_LINVOL_M12DB,
     1	=>  "000000000" or C_LINE_IN_LINVOL_M12DB,
     2	=>  "000000000" or C_HP_OUT_HPVOL_MUTE,		-- Mute 	left
-    3	=>  "000000000" or C_HP_OUT_HPVOL_0DB,		-- louder 	right
+    3	=>  "000000000" or C_HP_OUT_HPVOL_M4DB,		-- louder 	right
     4	=>  "000000000" or C_ANALOG_AP_MUTEMIC or C_ANALOG_AP_BYPASS, 
     5	=>  "000000000" or C_DIGITAL_AP_DACMU or C_DIGITAL_AP_DEEMP_DIS,
     6	=>  "000000000" or C_POWER_DOWN_NONE,
@@ -137,7 +137,7 @@ constant C_W8731_ANALOG_MUTE_LEFT : t_codec_register_array := (
 constant C_W8731_ANALOG_MUTE_RIGHT : t_codec_register_array := (
     0	=>  "000000000" or C_LINE_IN_LINVOL_M12DB,
     1	=>  "000000000" or C_LINE_IN_LINVOL_M12DB,
-    2	=>  "000000000" or C_HP_OUT_HPVOL_0DB,		-- louder 	left
+    2	=>  "000000000" or C_HP_OUT_HPVOL_M4DB,		-- louder 	left
     3	=>  "000000000" or C_HP_OUT_HPVOL_MUTE,		-- Mute 	right
     4	=>  "000000000" or C_ANALOG_AP_MUTEMIC or C_ANALOG_AP_BYPASS, 
     5	=>  "000000000" or C_DIGITAL_AP_DACMU or C_DIGITAL_AP_DEEMP_DIS,
@@ -176,8 +176,45 @@ constant C_W8731_ANALOG_MUTE_BOTH : t_codec_register_array := (
 constant C_W8731_ADC_DAC_0DB_48K: t_codec_register_array := (
     0   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
     1   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
-    2   =>  "000000000" or C_HP_OUT_HPVOL_0DB,
-    3   =>  "000000000" or C_HP_OUT_HPVOL_0DB,
+    2   =>  "000000000" or C_HP_OUT_HPVOL_M4DB,
+    3   =>  "000000000" or C_HP_OUT_HPVOL_M4DB,
+    4   =>  "000000000" or C_ANALOG_AP_MUTEMIC or C_ANALOG_AP_DACSEL, 
+    5   =>  "000000000" or C_DIGITAL_AP_DEEMP_DIS,
+    6   =>  "000000000" or C_POWER_DOWN_NONE,
+    7   =>  "000000000" or C_DIGITAL_AI_IWL_16 or C_DIGITAL_AI_FORMAT_I2S,
+    8   =>  "000000000",  -- 48kHz with mclk=12.288MHz
+    9   =>  "000000000" or C_DIGITAL_ACTIVATE_ACTIVE );
+
+	
+constant C_W8731_ADC_DAC_MUTE_LEFT: t_codec_register_array := (
+    0   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
+    1   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
+    2   =>  "000000000" or C_HP_OUT_HPVOL_MUTE,
+    3   =>  "000000000" or C_HP_OUT_HPVOL_M4DB,
+    4   =>  "000000000" or C_ANALOG_AP_MUTEMIC or C_ANALOG_AP_DACSEL, 
+    5   =>  "000000000" or C_DIGITAL_AP_DEEMP_DIS,
+    6   =>  "000000000" or C_POWER_DOWN_NONE,
+    7   =>  "000000000" or C_DIGITAL_AI_IWL_16 or C_DIGITAL_AI_FORMAT_I2S,
+    8   =>  "000000000",  -- 48kHz with mclk=12.288MHz
+    9   =>  "000000000" or C_DIGITAL_ACTIVATE_ACTIVE );
+	
+constant C_W8731_ADC_DAC_MUTE_RIGHT: t_codec_register_array := (
+    0   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
+    1   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
+    2   =>  "000000000" or C_HP_OUT_HPVOL_M4DB,
+    3   =>  "000000000" or C_HP_OUT_HPVOL_MUTE,
+    4   =>  "000000000" or C_ANALOG_AP_MUTEMIC or C_ANALOG_AP_DACSEL, 
+    5   =>  "000000000" or C_DIGITAL_AP_DEEMP_DIS,
+    6   =>  "000000000" or C_POWER_DOWN_NONE,
+    7   =>  "000000000" or C_DIGITAL_AI_IWL_16 or C_DIGITAL_AI_FORMAT_I2S,
+    8   =>  "000000000",  -- 48kHz with mclk=12.288MHz
+    9   =>  "000000000" or C_DIGITAL_ACTIVATE_ACTIVE );
+	
+constant C_W8731_ADC_DAC_MUTE_BOTH: t_codec_register_array := (
+    0   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
+    1   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,
+    2   =>  "000000000" or C_HP_OUT_HPVOL_MUTE,
+    3   =>  "000000000" or C_HP_OUT_HPVOL_MUTE,
     4   =>  "000000000" or C_ANALOG_AP_MUTEMIC or C_ANALOG_AP_DACSEL, 
     5   =>  "000000000" or C_DIGITAL_AP_DEEMP_DIS,
     6   =>  "000000000" or C_POWER_DOWN_NONE,
