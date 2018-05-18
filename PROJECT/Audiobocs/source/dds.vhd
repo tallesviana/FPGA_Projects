@@ -10,7 +10,9 @@ LIBRARY ieee;
   use ieee.numeric_std.all;
   use work.tone_gen_pkg.all;
 
---|||||||     ENTITY     |||||||--
+------------------------------------------------------
+-->>>>>>>>>>>      ENTITY DECLARATION   <<<<<<<<<<<<<<
+------------------------------------------------------
 
 ENTITY dds IS
     PORT(
@@ -24,7 +26,9 @@ ENTITY dds IS
     );
 END dds;
 
---||||||||    ARCHITECTURE   |||||||||--
+------------------------------------------------------
+-->>>>>>>>>>>>>     ARCHITECTURE   <<<<<<<<<<<<<<<<<<<
+------------------------------------------------------
 
 ARCHITECTURE rtl OF dds IS
 
@@ -32,13 +36,15 @@ ARCHITECTURE rtl OF dds IS
   SIGNAL addr               :  integer range 0 to L-1;
   SIGNAL audio_out          :  std_logic_vector(N_AUDIO - 1 downto 0);
 
--- =========== BEGIN ============-
+------------------------------------------------------
+-->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
+------------------------------------------------------
 BEGIN
 
 --============ COUNTER =============-
 cumulator: PROCESS(tone_on_i, phi_incr_i, strobe_i, count, next_count)
 BEGIN
-    IF tone_on_i = '1' THEN
+    IF tone_on_i = '0' THEN
         IF strobe_i = '1' THEN
             next_count <= count + unsigned(phi_incr_i);
         ELSE
@@ -66,7 +72,7 @@ flip_flop: PROCESS(clk, reset_n, next_count)
 
 --========   CONCURRENT ASSIGNMENT OUT ========
 
-  dacdat_g_o <= audio_out WHEN tone_on_i = '1' ELSE (OTHERS=>'0');
+  dacdat_g_o <= audio_out WHEN tone_on_i = '0' ELSE (OTHERS=>'0');
 
 END rtl;
 

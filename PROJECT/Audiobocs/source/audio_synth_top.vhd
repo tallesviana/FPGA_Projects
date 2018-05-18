@@ -7,7 +7,7 @@
 LIBRARY ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-
+use work.tone_gen_pkg.all;
 LIBRARY work;  -- Able to see the other components
 
 ------------------------------------------------------
@@ -19,9 +19,6 @@ ENTITY audio_synth_top IS
         CLOCK_50 :  IN std_logic;
         KEY      :  IN std_logic_vector(3 downto 0);
         SW       :  IN std_logic_vector(9 downto 0);
-
-        DACDAT_gL:  IN std_logic_vector(15 downto 0); -- Generated signal -- Temporary
-        DACDAT_gR:  IN std_logic_vector(15 downto 0);
 
         AUD_XCK  :  OUT std_logic;
         I2C_SCLK :  OUT std_logic;
@@ -41,6 +38,26 @@ END audio_synth_top;
 ------------------------------------------------------
 
 ARCHITECTURE top OF audio_synth_top IS
+
+COMPONENT dds IS
+    PORT(
+        clk, reset_n: IN std_logic;
+
+        tone_on_i  :  IN std_logic;                                 -- Tone on or off
+        phi_incr_i :  IN std_logic_vector(N_CUM - 1 downto 0);      -- LUT phi increment
+        strobe_i   :  IN std_logic;                                 -- Reload audio sample
+
+        dacdat_g_o :  out std_logic_vector(N_AUDIO - 1 downto 0)  -- Generated audio sample
+    );
+END COMPONENT;
+
+COMPONENT dds_sw_ctrl IS
+    PORT(
+	    switches_i :  IN std_logic_vector(6 downto 0);
+		   
+		phi_incr_o :  OUT std_logic_vector(N_CUM - 1 downto 0)
+	 );
+END COMPONENT;
 
 COMPONENT codec_ctrl IS
     PORT(
@@ -157,12 +174,16 @@ SIGNAL t_i2c_sclk   : std_logic;  -- Output signals from I2C Master
 SIGNAL t_dacdat_pl  : std_logic_vector(15 downto 0);  -- I2S and AudioCtrl signals
 SIGNAL t_dacdat_pr  : std_logic_vector(15 downto 0);
 
+SIGNAL t_dacdat_gen : std_logic_vector(15 downto 0);  -- DDS Data
+
 SIGNAL t_adcdat_pl  : std_logic_vector(15 downto 0);
 SIGNAL t_adcdat_pr  : std_logic_vector(15 downto 0);
 
 SIGNAL t_strobe     : std_logic;
 SIGNAL t_ws         : std_logic;
 SIGNAL t_init_audioctrl2i2s : std_logic;
+
+SIGNAL t_phi_incr   : std_logic_vector(N_CUM - 1 downto 0);
 
 ------------------------------------------------------
 -->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
@@ -197,6 +218,25 @@ init_audio_sync: sync_block                 -- INIT AUDIO CTRL SINC
         clk     => t_clock_12_5,
         syncd_o => t_init_audio_syncd
     );
+	
+sin_gen: dds								-- DDS SIN GENERATOR
+    PORT MAP(
+        clk         => t_clock_12_5, 
+		reset_n     => t_reset_syncd,
+
+        tone_on_i   => t_sw(2),
+        phi_incr_i  => t_phi_incr,
+        strobe_i    => t_strobe,
+
+        dacdat_g_o  => t_dacdat_gen
+    );
+
+dds_ctrl:  dds_sw_ctrl						-- DDS CONTROLLER VIA SWITCHES
+    PORT MAP(
+	    switches_i  => t_sw(9 downto 3),
+		   
+		phi_incr_o  => t_phi_incr
+	 );
 
 codec: codec_ctrl                           --  CODEC CONTROLLER
     PORT MAP(
@@ -236,8 +276,8 @@ audio:  audio_ctrl                                  -- AUDIO CONTROLLER
         ADCDAT_pl_i  => t_adcdat_pl,
         ADCDAT_pr_i  => t_adcdat_pr,
 
-        DACDAT_gen_pl_i  => DACDAT_gL,             -- Temporary signals
-        DACDAT_gen_pr_i  => DACDAT_gR,
+        DACDAT_gen_pl_i  => t_dacdat_gen,
+        DACDAT_gen_pr_i  => t_dacdat_gen,
 
         DACDAT_pl_o  => t_dacdat_pl,
         DACDAT_pr_o  => t_dacdat_pr,
