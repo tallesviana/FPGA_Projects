@@ -32,6 +32,8 @@ END dds;
 
 ARCHITECTURE rtl OF dds IS
 
+  SIGNAL workaround, next_workaround          : boolean;    -- REMOVE LATER
+
   SIGNAL count, next_count  :  unsigned(N_CUM - 1 downto 0) := to_unsigned(0, N_CUM);
   SIGNAL addr               :  integer range 0 to L-1;
   SIGNAL audio_out          :  std_logic_vector(N_AUDIO - 1 downto 0);
@@ -42,13 +44,15 @@ ARCHITECTURE rtl OF dds IS
 BEGIN
 
 --============ COUNTER =============-
-cumulator: PROCESS(tone_on_i, phi_incr_i, strobe_i, count, next_count)
+cumulator: PROCESS(next_workaround, workaround, tone_on_i, phi_incr_i, strobe_i, count, next_count)
 BEGIN
     IF tone_on_i = '0' THEN
-        IF strobe_i = '1' THEN
+        IF strobe_i = '1' and workaround = false THEN
             next_count <= count + unsigned(phi_incr_i);
+			next_workaround <= true;
         ELSE
             next_count <= count;
+			next_workaround <= false;
         END IF;
     ELSE
         next_count <= (OTHERS => '0');
@@ -61,8 +65,10 @@ flip_flop: PROCESS(clk, reset_n, next_count)
     BEGIN
         IF reset_n = '0' THEN
             count <= (OTHERS => '0');
+			workaround <= false;
         ELSIF rising_edge(clk) THEN
             count <= next_count;
+			workaround <= next_workaround;
         END IF;
     END PROCESS;
 
