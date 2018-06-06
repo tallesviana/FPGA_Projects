@@ -20,17 +20,17 @@ END tuner_visual;
 ARCHITECTURE rtl OF tuner_visual IS
 
 -- Signals & Constants Declaration
-  CONSTANT note_bar   : std_logic_vector(27 downto 0):= "1000000_1000000_1000000_1000000";
-	CONSTANT note_E2 		: std_logic_vector(27 downto 0):= "0000000_1111001_1011011_0000000";
-  CONSTANT note_A2 		: std_logic_vector(27 downto 0):= "0000000_1110111_1011011_0000000";
-	CONSTANT note_D3 		: std_logic_vector(27 downto 0):= "0000000_1011110_1001111_0000000";
-  CONSTANT note_G3 		: std_logic_vector(27 downto 0):= "0000000_0111101_1001111_0000000";
-  CONSTANT note_B3 		: std_logic_vector(27 downto 0):= "0000000_1111100_1001111_0000000";
-  CONSTANT note_E4 		: std_logic_vector(27 downto 0):= "0000000_1111001_1100110_0000000"; 
+  CONSTANT note_bar   : std_logic_vector(27 downto 0):= "1000000100000010000001000000";
+	CONSTANT note_E2 		: std_logic_vector(27 downto 0):= "0000000111100110110110000000";
+  CONSTANT note_A2 		: std_logic_vector(27 downto 0):= "0000000111011110110110000000";
+	CONSTANT note_D3 		: std_logic_vector(27 downto 0):= "0000000101111010011110000000";
+  CONSTANT note_G3 		: std_logic_vector(27 downto 0):= "0000000011110110011110000000";
+  CONSTANT note_B3 		: std_logic_vector(27 downto 0):= "0000000111110010011110000000";
+  CONSTANT note_E4 		: std_logic_vector(27 downto 0):= "0000000111100111001100000000"; 
 
   SIGNAL ledg_value      :   std_logic_vector(7 downto 0);
   SIGNAL ledr_diff_value :   unsigned(9 downto 0);
-  SIGNAL tuned_value:   unsigned(9 downto 0) := "0000110000";  -- Gonna shift this value, depends on delta!
+  CONSTANT tuned_value:   unsigned(9 downto 0) := "0000110000";  -- Gonna shift this value, depends on delta!
   SIGNAL hex_seg    :   std_logic_vector(27 downto 0);
 
 BEGIN
@@ -53,6 +53,8 @@ BEGIN
   delta: PROCESS(ALL)
     variable diff : natural;
     BEGIN
+
+      ledg_value <= (OTHERS => '0');  -- NOT TUNED
 
       IF abs(signed(DELTA_I)) > 6340 THEN
         diff := 5;
@@ -86,7 +88,7 @@ BEGIN
     HEX2_O <= not(hex_seg(20 downto 14));
     HEX3_O <= not(hex_seg(27 downto 21));
 
-    LEDR_O <= ledr_diff_value;
+    LEDR_O <= std_logic_vector(ledr_diff_value);
     LEDG_O <= ledg_value;
 
 END rtl;

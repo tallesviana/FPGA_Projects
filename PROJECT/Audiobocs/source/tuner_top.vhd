@@ -6,7 +6,7 @@ LIBRARY ieee;
 --     ENTITY       ----------------------------
 ------------------------------------------------
 
-ENTITY tuner IS
+ENTITY tuner_top IS
     PORT(
         RESET_N, CLK :  IN std_logic;
 
@@ -21,13 +21,13 @@ ENTITY tuner IS
         tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
 
   );
-END tuner;
+END tuner_top;
 
 ------------------------------------------------
 --     ARCHITECTURE ----------------------------
 ------------------------------------------------
 
-ARCHITECTURE struct OF tuner IS
+ARCHITECTURE struct OF tuner_top IS
 
   COMPONENT square_gen IS
   PORT(
@@ -66,8 +66,8 @@ END COMPONENT;
 ------------------------------------------------
 
   SIGNAL t_square_wave  :  std_logic;
-  SIGNAL t_note         :  std_logic;
-  SIGNAL t_delta        :  std_logic;
+  SIGNAL t_note         :  std_logic_vector(2 downto 0);
+  SIGNAL t_delta        :  std_logic_vector(16 downto 0);
 
   SIGNAL t_hex          :  std_logic_vector(27 downto 0);
   SIGNAL t_ledr         :  std_logic_vector(9 downto 0);

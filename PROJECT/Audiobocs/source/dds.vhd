@@ -4,6 +4,8 @@
 --   Runs using a LUT with a sin
 ------------------------------------------
 -- 13/May - 1st Version tallesvv
+-- Introduced workaround because the tone was higher
+------------------------------------------
 
 LIBRARY ieee;
   use ieee.std_logic_1164.all;
@@ -56,6 +58,7 @@ BEGIN
         END IF;
     ELSE
         next_count <= (OTHERS => '0');
+        next_workaround <= false;
     END IF;
 END PROCESS;
 

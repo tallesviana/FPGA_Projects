@@ -2,6 +2,7 @@
 ------------    AUDIO SYNTH TOP ENTITY
 ---------------------------------------------------------
 -- 15/05/18 - tallesvv
+-- 06/06/18 - tallesvv - Add tuner
 ---------------------------------------------------------
 
 LIBRARY ieee;
@@ -29,7 +30,32 @@ ENTITY audio_synth_top IS
 
         AUD_BCLK    :  OUT std_logic;
         AUD_DACLRCK :  OUT std_logic;
-        AUD_ADCLRCK :  OUT std_logic
+        AUD_ADCLRCK :  OUT std_logic;
+
+        HEX0_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
+        HEX1_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+        HEX2_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+        HEX3_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+
+        LEDR_0 :  OUT  STD_LOGIC;
+        LEDR_1 :  OUT  STD_LOGIC;
+        LEDR_2 :  OUT  STD_LOGIC;
+        LEDR_3 :  OUT  STD_LOGIC;
+        LEDR_4 :  OUT  STD_LOGIC;
+        LEDR_5 :  OUT  STD_LOGIC;
+        LEDR_6 :  OUT  STD_LOGIC;
+        LEDR_7 :  OUT  STD_LOGIC;
+        LEDR_8 :  OUT  STD_LOGIC;
+        LEDR_9 :  OUT  STD_LOGIC;
+
+        LEDG_0 :  OUT  STD_LOGIC;
+        LEDG_1 :  OUT  STD_LOGIC;
+        LEDG_2 :  OUT  STD_LOGIC;
+        LEDG_3 :  OUT  STD_LOGIC;
+        LEDG_4 :  OUT  STD_LOGIC;
+        LEDG_5 :  OUT  STD_LOGIC;
+        LEDG_6 :  OUT  STD_LOGIC;
+        LEDG_7 :  OUT  STD_LOGIC
     );
 END audio_synth_top;
 
@@ -38,6 +64,22 @@ END audio_synth_top;
 ------------------------------------------------------
 
 ARCHITECTURE top OF audio_synth_top IS
+
+COMPONENT tuner_top IS
+    PORT(
+        RESET_N, CLK :  IN std_logic;
+
+        tuner_AUDIO_I      :  IN std_logic_vector(15 downto 0);
+
+        tuner_HEX0_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
+        tuner_HEX1_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+        tuner_HEX2_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+        tuner_HEX3_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+
+        tuner_LEDR_O :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);  --LEDR_0 on the top level
+        tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
+  );
+END COMPONENT;
 
 COMPONENT dds IS
     PORT(
@@ -154,72 +196,73 @@ END COMPONENT;
 -->>>>>>>>>>>      SIGNAL DECLARATION   <<<<<<<<<<<<<<
 ------------------------------------------------------
 
-SIGNAL t_clock_50   :  std_logic;  -- Input clock - 50MHz
-SIGNAL t_clock_12_5 :  std_logic;  -- Sys clock   - 12,5MHz
-SIGNAL t_key        :  std_logic_vector(3 downto 0);  -- Input keys
-SIGNAL t_sw         :  std_logic_vector(9 downto 0);  -- Input toggle switches
+SIGNAL t_clock_50   :  std_logic;                       -- Input clock - 50MHz
+SIGNAL t_clock_12_5 :  std_logic;                       -- Sys clock   - 12,5MHz
+SIGNAL t_key        :  std_logic_vector(3 downto 0);    -- Input keys
+SIGNAL t_sw         :  std_logic_vector(9 downto 0);    -- Input toggle switches
 
-SIGNAL t_reset_syncd      :  std_logic;  -- Key signals after syncing - RESET
-SIGNAL t_init_codec_syncd :  std_logic;  -- INIT CODEC CTRL
-SIGNAL t_init_audio_syncd :  std_logic;  -- INIT AUDIO CTRL
+SIGNAL t_reset_syncd      :  std_logic;                 -- Key signals after syncing - RESET
+SIGNAL t_init_codec_syncd :  std_logic;                 -- INIT CODEC CTRL
+SIGNAL t_init_audio_syncd :  std_logic;                 -- INIT AUDIO CTRL
 
-SIGNAL t_write_done :  std_logic;  -- Feedback signals
+SIGNAL t_write_done :  std_logic;                       -- Feedback signals
 SIGNAL t_ack_error  :  std_logic;
 
-SIGNAL t_write      : std_logic;  -- Signals from Codec Ctrl to I2C Master
+SIGNAL t_write      : std_logic;                        -- Signals from Codec Ctrl to I2C Master
 SIGNAL t_data2write : std_logic_vector(15 downto 0);
 
-SIGNAL t_i2c_sclk   : std_logic;  -- Output signals from I2C Master
+SIGNAL t_i2c_sclk   : std_logic;                        -- Output signals from I2C Master
 
-SIGNAL t_dacdat_pl  : std_logic_vector(15 downto 0);  -- I2S and AudioCtrl signals
+SIGNAL t_dacdat_pl  : std_logic_vector(15 downto 0);    -- I2S and AudioCtrl signals
 SIGNAL t_dacdat_pr  : std_logic_vector(15 downto 0);
 
-SIGNAL t_dacdat_gen : std_logic_vector(15 downto 0);  -- DDS Data
+SIGNAL t_dacdat_gen : std_logic_vector(15 downto 0);    -- DDS Generated Data
 
 SIGNAL t_adcdat_pl  : std_logic_vector(15 downto 0);
 SIGNAL t_adcdat_pr  : std_logic_vector(15 downto 0);
 
-SIGNAL t_strobe     : std_logic;
+SIGNAL t_strobe     : std_logic;                        -- Strobe signal
 SIGNAL t_ws         : std_logic;
 SIGNAL t_init_audioctrl2i2s : std_logic;
 
 SIGNAL t_phi_incr   : std_logic_vector(N_CUM - 1 downto 0);
 
+SIGNAL t_ledr_o     : std_logic_vector(9 DOWNTO 0);     --LEDR_0 on the top level
+SIGNAL t_ledg_o     : std_logic_vector(7 DOWNTO 0);     --LEDR_0 on the top level
+
 ------------------------------------------------------
 -->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
 ------------------------------------------------------
-
 BEGIN
 
-
-clk_div_1: clock_div                        --  CLOCK DIVIDER
+clk_div_1: clock_div                            --  CLOCK DIVIDER
     PORT MAP(
         clk_fast_i => t_clock_50,
         clk_slow_o => t_clock_12_5
     );
 
-reset_sync: sync_block                      --  RESET SINC 
+reset_sync: sync_block                          --  RESET SINC 
     PORT MAP(
         async_i => t_key(0),
         clk     => t_clock_12_5,
         syncd_o => t_reset_syncd
     );
 
-init_codec_sync: sync_block                 -- INIT CODEC CTRL SINC
+init_codec_sync: sync_block                     -- INIT CODEC CTRL SINC
     PORT MAP(
         async_i => t_key(1),
         clk     => t_clock_12_5,
         syncd_o => t_init_codec_syncd
     );
 
-init_audio_sync: sync_block                 -- INIT AUDIO CTRL SINC
+init_audio_sync: sync_block                     -- INIT AUDIO CTRL SINC
     PORT MAP(       
         async_i => t_key(2),
         clk     => t_clock_12_5,
         syncd_o => t_init_audio_syncd
     );
 	
-sin_gen: dds								-- DDS SIN GENERATOR
+sin_gen: dds								    -- DDS SIN GENERATOR
     PORT MAP(
         clk         => t_clock_12_5, 
 		reset_n     => t_reset_syncd,
@@ -231,14 +274,14 @@ sin_gen: dds								-- DDS SIN GENERATOR
         dacdat_g_o  => t_dacdat_gen
     );
 
-dds_ctrl:  dds_sw_ctrl						-- DDS CONTROLLER VIA SWITCHES
+dds_ctrl:  dds_sw_ctrl						    -- DDS CONTROLLER VIA SWITCHES
     PORT MAP(
 	    switches_i  => t_sw(9 downto 3),
 		   
 		phi_incr_o  => t_phi_incr
 	 );
 
-codec: codec_ctrl                           --  CODEC CONTROLLER
+codec: codec_ctrl                               --  CODEC CONTROLLER
     PORT MAP(
         event_ctrl_i => t_sw(2 downto 0),
         init_i       => t_init_codec_syncd,
@@ -250,7 +293,7 @@ codec: codec_ctrl                           --  CODEC CONTROLLER
         write_data_o => t_data2write
     );
 
-master: i2c_master                          -- I2C MASTER
+master: i2c_master                              -- I2C MASTER
     PORT MAP(
         clk         => t_clock_12_5,
         reset_n     => t_reset_syncd,
@@ -258,14 +301,14 @@ master: i2c_master                          -- I2C MASTER
         write_i     => t_write,
         write_data_i=> t_data2write,
         
-        sda_io		=> I2C_SDAT,  -- Connected I2C SDA directly
+        sda_io		=> I2C_SDAT,                -- Connected I2C SDA directly
         scl_o		=> t_i2c_sclk,
         
         write_done_o=> t_write_done,
         ack_error_o	=> t_ack_error
     );
 
-audio:  audio_ctrl                                  -- AUDIO CONTROLLER
+audio:  audio_ctrl                              -- AUDIO CONTROLLER
     PORT MAP(
         clk_12M      => t_clock_12_5,
         reset_n_12M  => t_reset_syncd,
@@ -285,7 +328,7 @@ audio:  audio_ctrl                                  -- AUDIO CONTROLLER
         init_o       => t_init_audioctrl2i2s
     );
 
-i2s: i2s_master                                     -- I2S MASTER BLOCK
+i2s: i2s_master                                 -- I2S MASTER BLOCK
     PORT MAP(
         clk_12M  => t_clock_12_5,
         reset_n  => t_reset_syncd,
@@ -304,14 +347,50 @@ i2s: i2s_master                                     -- I2S MASTER BLOCK
         WS_o         => t_ws
     );
 
+extra_tuner: tuner_top                          -- EXTRA - TUNER
+    PORT MAP(
+        RESET_N     => t_reset_syncd,
+        CLK         => t_clock_12_5,
 
-t_clock_50 <= CLOCK_50;
+        tuner_AUDIO_I   => t_dacdat_pl,
+
+        tuner_HEX0_O    =>  HEX0_N,
+        tuner_HEX1_O    =>  HEX1_N,
+        tuner_HEX2_O    =>  HEX2_N,
+        tuner_HEX3_O    =>  HEX3_N,
+
+        tuner_LEDR_O    =>  t_ledr_o,
+        tuner_LEDG_O    =>  t_ledg_o
+  );
+
+
+t_clock_50 <= CLOCK_50;     -- Inputs
 t_key      <= KEY;
 t_sw       <= SW;
-AUD_XCK    <= t_clock_12_5;
-I2C_SCLK   <= t_i2c_sclk;
 
+AUD_XCK    <= t_clock_12_5; -- WM8731
+I2C_SCLK   <= t_i2c_sclk;
 AUD_ADCLRCK <= t_ws;
 AUD_DACLRCK <= t_ws;
+
+LEDR_0 <= t_ledr_o(0);      -- Tuner visual
+LEDR_1 <= t_ledr_o(1);
+LEDR_2 <= t_ledr_o(2);
+LEDR_3 <= t_ledr_o(3);
+LEDR_4 <= t_ledr_o(4);
+LEDR_5 <= t_ledr_o(5);
+LEDR_6 <= t_ledr_o(6);
+LEDR_7 <= t_ledr_o(7);
+LEDR_8 <= t_ledr_o(8);
+LEDR_9 <= t_ledr_o(9);
+
+LEDG_0 <= t_ledg_o(0);
+LEDG_1 <= t_ledg_o(1);
+LEDG_2 <= t_ledg_o(2);
+LEDG_3 <= t_ledg_o(3);
+LEDG_4 <= t_ledg_o(4);
+LEDG_5 <= t_ledg_o(5);
+LEDG_6 <= t_ledg_o(6);
+LEDG_7 <= t_ledg_o(7);
 
 END top;

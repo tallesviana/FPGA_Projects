@@ -35,11 +35,13 @@ BEGIN
         next_count_mean <= count_mean;
     ELSIF flag_count_on = '1' THEN
         flag_count_on <= '0';
+        next_count_clk <= count_clk;
         --next_count_mean <= (count_clk + count_mean)/2;   -- Average
         next_count_mean <= count_clk;
     ELSE
         flag_count_on <= '0';
         next_count_clk <= (OTHERS => '0');
+        next_count_mean <= count_mean;
     END IF;
 END PROCESS count_high;
 
@@ -50,7 +52,7 @@ check_note: PROCESS(ALL)
 BEGIN
     delta := abs(signed(CLK_COUNT(0) - count_mean));
     next_chosen_note <= E2;
-
+    index := 0;
     FOR I in 1 to 5 LOOP
         IF abs(signed(CLK_COUNT(I)-count_mean)) < delta THEN
             delta := abs(signed(CLK_COUNT(I)-count_mean));
