@@ -32,30 +32,14 @@ ENTITY audio_synth_top IS
         AUD_DACLRCK :  OUT std_logic;
         AUD_ADCLRCK :  OUT std_logic;
 
-        HEX0_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
-        HEX1_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
-        HEX2_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
-        HEX3_N :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+        HEX0 :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
+        HEX1 :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+        HEX2 :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
+        HEX3 :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
 
-        LEDR_0 :  OUT  STD_LOGIC;
-        LEDR_1 :  OUT  STD_LOGIC;
-        LEDR_2 :  OUT  STD_LOGIC;
-        LEDR_3 :  OUT  STD_LOGIC;
-        LEDR_4 :  OUT  STD_LOGIC;
-        LEDR_5 :  OUT  STD_LOGIC;
-        LEDR_6 :  OUT  STD_LOGIC;
-        LEDR_7 :  OUT  STD_LOGIC;
-        LEDR_8 :  OUT  STD_LOGIC;
-        LEDR_9 :  OUT  STD_LOGIC;
-
-        LEDG_0 :  OUT  STD_LOGIC;
-        LEDG_1 :  OUT  STD_LOGIC;
-        LEDG_2 :  OUT  STD_LOGIC;
-        LEDG_3 :  OUT  STD_LOGIC;
-        LEDG_4 :  OUT  STD_LOGIC;
-        LEDG_5 :  OUT  STD_LOGIC;
-        LEDG_6 :  OUT  STD_LOGIC;
-        LEDG_7 :  OUT  STD_LOGIC
+        LEDR :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);
+        
+        LEDG :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
 END audio_synth_top;
 
@@ -354,10 +338,10 @@ extra_tuner: tuner_top                          -- EXTRA - TUNER
 
         tuner_AUDIO_I   => t_dacdat_pl,
 
-        tuner_HEX0_O    =>  HEX0_N,
-        tuner_HEX1_O    =>  HEX1_N,
-        tuner_HEX2_O    =>  HEX2_N,
-        tuner_HEX3_O    =>  HEX3_N,
+        tuner_HEX0_O    =>  HEX0,
+        tuner_HEX1_O    =>  HEX1,
+        tuner_HEX2_O    =>  HEX2,
+        tuner_HEX3_O    =>  HEX3,
 
         tuner_LEDR_O    =>  t_ledr_o,
         tuner_LEDG_O    =>  t_ledg_o
@@ -373,24 +357,7 @@ I2C_SCLK   <= t_i2c_sclk;
 AUD_ADCLRCK <= t_ws;
 AUD_DACLRCK <= t_ws;
 
-LEDR_0 <= t_ledr_o(0);      -- Tuner visual
-LEDR_1 <= t_ledr_o(1);
-LEDR_2 <= t_ledr_o(2);
-LEDR_3 <= t_ledr_o(3);
-LEDR_4 <= t_ledr_o(4);
-LEDR_5 <= t_ledr_o(5);
-LEDR_6 <= t_ledr_o(6);
-LEDR_7 <= t_ledr_o(7);
-LEDR_8 <= t_ledr_o(8);
-LEDR_9 <= t_ledr_o(9);
-
-LEDG_0 <= t_ledg_o(0);
-LEDG_1 <= t_ledg_o(1);
-LEDG_2 <= t_ledg_o(2);
-LEDG_3 <= t_ledg_o(3);
-LEDG_4 <= t_ledg_o(4);
-LEDG_5 <= t_ledg_o(5);
-LEDG_6 <= t_ledg_o(6);
-LEDG_7 <= t_ledg_o(7);
+LEDR <= t_ledr_o;      -- Tuner visual
+LEDG <= t_ledg_o;
 
 END top;
