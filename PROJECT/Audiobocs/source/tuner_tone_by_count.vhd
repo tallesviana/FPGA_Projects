@@ -22,26 +22,25 @@ ARCHITECTURE rtl OF tuner_tone_by_count IS
   SIGNAL count_mean, next_count_mean  : unsigned(16 downto 0) := to_unsigned(0, 17);
   SIGNAL chosen_note, next_chosen_note : notes;
 
-  SIGNAL flag_count_on : std_logic;
+  SIGNAL next_flag_count_on, flag_count_on : std_logic;
 
 BEGIN
 
 -- COUNTER PROCESS  -  COUNTING NUMBER OF CLOCKS
 count_high: PROCESS(ALL)
 BEGIN
+    next_count_mean <= count_mean;
+    next_count_clk <= count_clk;
+    next_flag_count_on <= flag_count_on;
+
     IF wave_i = '1' THEN
-        flag_count_on <= '1';
+        next_flag_count_on <= '1';
         next_count_clk <= count_clk + 1;
-        next_count_mean <= count_mean;
     ELSIF flag_count_on = '1' THEN
-        flag_count_on <= '0';
-        next_count_clk <= count_clk;
-        --next_count_mean <= (count_clk + count_mean)/2;   -- Average
-        next_count_mean <= count_clk;
+        next_flag_count_on <= '0';
+        next_count_mean <= count_clk;  -- I can change this parameter
     ELSE
-        flag_count_on <= '0';
         next_count_clk <= (OTHERS => '0');
-        next_count_mean <= count_mean;
     END IF;
 END PROCESS count_high;
 
@@ -77,10 +76,12 @@ BEGIN
         count_clk <= (OTHERS => '0');
         count_mean <= (OTHERS => '0');
         chosen_note <= E2;
+        flag_count_on <= '0';
     ELSIF rising_edge(clk) THEN
         count_clk <= next_count_clk;
         count_mean <= next_count_mean;
         chosen_note <= next_chosen_note;
+        flag_count_on <= next_flag_count_on;
     END IF;
 END PROCESS flip_flops;
 
