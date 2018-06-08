@@ -39,7 +39,10 @@ ENTITY audio_synth_top IS
 
         LEDR :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);
         
-        LEDG :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
+        LEDG :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+		
+		---------------------   DEBUGGING  ----------------
+		GPIO_0: OUT  STD_LOGIC_VECTOR(0 DOWNTO 0)
     );
 END audio_synth_top;
 
@@ -359,5 +362,7 @@ AUD_DACLRCK <= t_ws;
 
 LEDR <= t_ledr_o;      -- Tuner visual
 LEDG <= t_ledg_o;
+
+GPIO_0(0) <= t_dacdat_pl(t_dacdat_pl'left);
 
 END top;

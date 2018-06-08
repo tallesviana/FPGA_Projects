@@ -107,7 +107,7 @@ END PROCESS flip_flops;
 
 --  FIR  -   LEFT CHANNEL
 filter_l: fir_core
-    GENERIC MAP(lut_fir => LUT_FIR_LPF_400Hz )  -- from audio_filter_pkg)
+    GENERIC MAP(lut_fir => LUT_FIR_LPF_300Hz_v2 )  -- from audio_filter_pkg)
     PORT MAP(      
             clk => clk_12M ,       	
             reset_n => reset_n_12M,     	
@@ -118,7 +118,7 @@ filter_l: fir_core
 
 --  FIR  -    RIGHT CHANNEL
 filter_r: fir_core
-    GENERIC MAP(lut_fir => LUT_FIR_LPF_400Hz)
+    GENERIC MAP(lut_fir => LUT_FIR_LPF_300Hz_v2)
     PORT MAP(    
             clk => clk_12M ,       	
             reset_n => reset_n_12M,     	
