@@ -14,7 +14,7 @@ END tuner_tone_by_count;
 
 ARCHITECTURE rtl OF tuner_tone_by_count IS
 
-  TYPE notes IS (E2, A2, D3, G3, B3, E4);
+  TYPE notes IS (BELOW, E2, A2, D3, G3, B3, E4, ABOVE);
   TYPE clk_num IS ARRAY (0 to 5) of natural;
   CONSTANT CLK_COUNT  :  clk_num := (75840, 56818, 42575, 31888, 25314, 18962); -- E2, A2, D3, G3, B3, E4
 
@@ -59,14 +59,20 @@ BEGIN
         END IF;
     END LOOP;
 
-    CASE index IS
-        WHEN 1 =>  next_chosen_note <= A2;
-        WHEN 2 =>  next_chosen_note <= D3;
-        WHEN 3 =>  next_chosen_note <= G3;
-        WHEN 4 =>  next_chosen_note <= B3;
-        WHEN 5 =>  next_chosen_note <= E4;
-        WHEN OTHERS =>  next_chosen_note <= E2;
-    END CASE;
+    IF count_mean > 85350 THEN
+        next_chosen_note <= BELOW;
+    ELSIF count_mean < 9450 THEN
+        next_chosen_note <= ABOVE;
+    ELSE
+        CASE index IS
+            WHEN 1 =>  next_chosen_note <= A2;
+            WHEN 2 =>  next_chosen_note <= D3;
+            WHEN 3 =>  next_chosen_note <= G3;
+            WHEN 4 =>  next_chosen_note <= B3;
+            WHEN 5 =>  next_chosen_note <= E4;
+            WHEN OTHERS =>  next_chosen_note <= E2;
+        END CASE;
+    END IF;
 END PROCESS check_note;
 
 -- FLIP-FLOPS
@@ -75,7 +81,7 @@ BEGIN
     IF reset_n = '0' THEN
         count_clk <= (OTHERS => '0');
         count_mean <= (OTHERS => '0');
-        chosen_note <= E2;
+        chosen_note <= BELOW;
         flag_count_on <= '0';
     ELSIF rising_edge(clk) THEN
         count_clk <= next_count_clk;
