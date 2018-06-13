@@ -211,7 +211,7 @@ constant C_W8731_ADC_DAC_0DB_48K: t_codec_register_array := (
 -- dac enabled, no sidetone
 -- adc/dac sampling 48kHz
 -- interface in I2S mode, 16 bit quantisation
-constant C_W8731_ADC_DAC_0DB_48K: t_codec_register_array := (
+constant C_W8731_ADC_DAC_P6DB_48K: t_codec_register_array := (
     0   =>  "000000000" or C_LINE_IN_LINVOL_P6DB,
     1   =>  "000000000" or C_LINE_IN_LINVOL_P6DB,
     2   =>  "000000000" or C_HP_OUT_HPVOL_M4DB,

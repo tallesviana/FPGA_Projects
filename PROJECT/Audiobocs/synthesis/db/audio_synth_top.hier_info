@@ -1857,23 +1857,41 @@ tuner_LEDG_O[7] <= tuner_visual:visual.LEDG_O[7]
 
 
 |audio_synth_top|tuner_top:extra_tuner|square_gen:sq_gen
-audio_i[0] => ~NO_FANOUT~
-audio_i[1] => ~NO_FANOUT~
-audio_i[2] => ~NO_FANOUT~
-audio_i[3] => ~NO_FANOUT~
-audio_i[4] => ~NO_FANOUT~
-audio_i[5] => ~NO_FANOUT~
-audio_i[6] => ~NO_FANOUT~
-audio_i[7] => ~NO_FANOUT~
-audio_i[8] => ~NO_FANOUT~
-audio_i[9] => ~NO_FANOUT~
-audio_i[10] => ~NO_FANOUT~
-audio_i[11] => ~NO_FANOUT~
-audio_i[12] => ~NO_FANOUT~
-audio_i[13] => ~NO_FANOUT~
-audio_i[14] => ~NO_FANOUT~
-audio_i[15] => square_wave_o.DATAIN
-square_wave_o <= audio_i[15].DB_MAX_OUTPUT_PORT_TYPE
+clk => state.CLK
+reset_n => state.PRESET
+audio_i[0] => LessThan0.IN32
+audio_i[0] => LessThan1.IN32
+audio_i[1] => LessThan0.IN31
+audio_i[1] => LessThan1.IN31
+audio_i[2] => LessThan0.IN30
+audio_i[2] => LessThan1.IN30
+audio_i[3] => LessThan0.IN29
+audio_i[3] => LessThan1.IN29
+audio_i[4] => LessThan0.IN28
+audio_i[4] => LessThan1.IN28
+audio_i[5] => LessThan0.IN27
+audio_i[5] => LessThan1.IN27
+audio_i[6] => LessThan0.IN26
+audio_i[6] => LessThan1.IN26
+audio_i[7] => LessThan0.IN25
+audio_i[7] => LessThan1.IN25
+audio_i[8] => LessThan0.IN24
+audio_i[8] => LessThan1.IN24
+audio_i[9] => LessThan0.IN23
+audio_i[9] => LessThan1.IN23
+audio_i[10] => LessThan0.IN22
+audio_i[10] => LessThan1.IN22
+audio_i[11] => LessThan0.IN21
+audio_i[11] => LessThan1.IN21
+audio_i[12] => LessThan0.IN20
+audio_i[12] => LessThan1.IN20
+audio_i[13] => LessThan0.IN19
+audio_i[13] => LessThan1.IN19
+audio_i[14] => LessThan0.IN18
+audio_i[14] => LessThan1.IN18
+audio_i[15] => LessThan0.IN17
+audio_i[15] => LessThan1.IN17
+square_wave_o <= state.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |audio_synth_top|tuner_top:extra_tuner|tuner_tone_by_count:tuner_count

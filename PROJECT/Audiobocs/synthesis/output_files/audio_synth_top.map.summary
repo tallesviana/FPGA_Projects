@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Tue Jun 12 21:45:23 2018
+Analysis & Synthesis Status : Successful - Tue Jun 12 22:35:56 2018
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : audio_synth_top
 Top-level Entity Name : audio_synth_top
 Family : Cyclone II
-Total logic elements : 1,721
-    Total combinational functions : 1,627
-    Dedicated logic registers : 293
-Total registers : 293
+Total logic elements : 1,175
+    Total combinational functions : 1,098
+    Dedicated logic registers : 252
+Total registers : 252
 Total pins : 69
 Total virtual pins : 0
 Total memory bits : 16,320

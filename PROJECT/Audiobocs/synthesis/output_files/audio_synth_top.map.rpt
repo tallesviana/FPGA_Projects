@@ -1,5 +1,5 @@
 Analysis & Synthesis report for audio_synth_top
-Tue Jun 12 21:45:23 2018
+Tue Jun 12 22:35:56 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -23,26 +23,28 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
  15. State Machine - |audio_synth_top|i2c_master:master|fsm_state
  16. State Machine - |audio_synth_top|codec_ctrl:codec|state
  17. Registers Removed During Synthesis
- 18. General Register Statistics
- 19. Inverted Register Statistics
- 20. Registers Packed Into Inferred Megafunctions
- 21. Multiplexer Restructuring Statistics (Restructuring Performed)
- 22. Source assignments for audio_ctrl:audio|fir_core:filter_l|single_port_ram:tap_line|altsyncram:ram_rtl_0|altsyncram_71a1:auto_generated
- 23. Source assignments for audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line|altsyncram:ram_rtl_0|altsyncram_71a1:auto_generated
- 24. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_l
- 25. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_l|single_port_ram:tap_line
- 26. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_r
- 27. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line
- 28. Parameter Settings for User Entity Instance: i2s_master:i2s|i2s_fsm_decoder:i2s_decoder
- 29. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_l|single_port_ram:tap_line|altsyncram:ram_rtl_0
- 30. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line|altsyncram:ram_rtl_0
- 31. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_l|lpm_mult:Mult1
- 32. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_l|lpm_divide:Mod0
- 33. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_r|lpm_mult:Mult1
- 34. altsyncram Parameter Settings by Entity Instance
- 35. lpm_mult Parameter Settings by Entity Instance
- 36. Elapsed Time Per Partition
- 37. Analysis & Synthesis Messages
+ 18. Removed Registers Triggering Further Register Optimizations
+ 19. General Register Statistics
+ 20. Inverted Register Statistics
+ 21. Registers Packed Into Inferred Megafunctions
+ 22. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 23. Source assignments for audio_ctrl:audio|fir_core:filter_l|single_port_ram:tap_line|altsyncram:ram_rtl_0|altsyncram_71a1:auto_generated
+ 24. Source assignments for audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line|altsyncram:ram_rtl_0|altsyncram_71a1:auto_generated
+ 25. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_l
+ 26. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_l|single_port_ram:tap_line
+ 27. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_r
+ 28. Parameter Settings for User Entity Instance: audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line
+ 29. Parameter Settings for User Entity Instance: i2s_master:i2s|i2s_fsm_decoder:i2s_decoder
+ 30. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_l|single_port_ram:tap_line|altsyncram:ram_rtl_0
+ 31. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line|altsyncram:ram_rtl_0
+ 32. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_l|lpm_mult:Mult1
+ 33. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_l|lpm_divide:Mod0
+ 34. Parameter Settings for Inferred Entity Instance: audio_ctrl:audio|fir_core:filter_r|lpm_mult:Mult1
+ 35. altsyncram Parameter Settings by Entity Instance
+ 36. lpm_mult Parameter Settings by Entity Instance
+ 37. Port Connectivity Checks: "tuner_top:extra_tuner|square_gen:sq_gen"
+ 38. Elapsed Time Per Partition
+ 39. Analysis & Synthesis Messages
 
 
 
@@ -68,15 +70,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Jun 12 21:45:23 2018           ;
+; Analysis & Synthesis Status        ; Successful - Tue Jun 12 22:35:56 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; audio_synth_top                                 ;
 ; Top-level Entity Name              ; audio_synth_top                                 ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 1,721                                           ;
-;     Total combinational functions  ; 1,627                                           ;
-;     Dedicated logic registers      ; 293                                             ;
-; Total registers                    ; 293                                             ;
+; Total logic elements               ; 1,175                                           ;
+;     Total combinational functions  ; 1,098                                           ;
+;     Dedicated logic registers      ; 252                                             ;
+; Total registers                    ; 252                                             ;
 ; Total pins                         ; 69                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 16,320                                          ;
@@ -241,29 +243,29 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+------------------------------+
 ; Resource                                    ; Usage                        ;
 +---------------------------------------------+------------------------------+
-; Estimated Total logic elements              ; 1,721                        ;
+; Estimated Total logic elements              ; 1,175                        ;
 ;                                             ;                              ;
-; Total combinational functions               ; 1627                         ;
+; Total combinational functions               ; 1098                         ;
 ; Logic element usage by number of LUT inputs ;                              ;
-;     -- 4 input functions                    ; 907                          ;
-;     -- 3 input functions                    ; 470                          ;
-;     -- <=2 input functions                  ; 250                          ;
+;     -- 4 input functions                    ; 805                          ;
+;     -- 3 input functions                    ; 182                          ;
+;     -- <=2 input functions                  ; 111                          ;
 ;                                             ;                              ;
 ; Logic elements by mode                      ;                              ;
-;     -- normal mode                          ; 1199                         ;
-;     -- arithmetic mode                      ; 428                          ;
+;     -- normal mode                          ; 970                          ;
+;     -- arithmetic mode                      ; 128                          ;
 ;                                             ;                              ;
-; Total registers                             ; 293                          ;
-;     -- Dedicated logic registers            ; 293                          ;
+; Total registers                             ; 252                          ;
+;     -- Dedicated logic registers            ; 252                          ;
 ;     -- I/O registers                        ; 0                            ;
 ;                                             ;                              ;
 ; I/O pins                                    ; 69                           ;
 ; Total memory bits                           ; 16320                        ;
 ; Embedded Multiplier 9-bit elements          ; 4                            ;
 ; Maximum fan-out node                        ; clock_div:clk_div_1|count[1] ;
-; Maximum fan-out                             ; 357                          ;
-; Total fan-out                               ; 7456                         ;
-; Average fan-out                             ; 3.62                         ;
+; Maximum fan-out                             ; 316                          ;
+; Total fan-out                               ; 5719                         ;
+; Average fan-out                             ; 3.85                         ;
 +---------------------------------------------+------------------------------+
 
 
@@ -272,8 +274,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                      ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                 ; Library Name ;
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |audio_synth_top                                ; 1627 (1)          ; 293 (0)      ; 16320       ; 4            ; 0       ; 2         ; 69   ; 0            ; |audio_synth_top                                                                                                                                    ; work         ;
-;    |audio_ctrl:audio|                           ; 490 (42)          ; 89 (4)       ; 16320       ; 4            ; 0       ; 2         ; 0    ; 0            ; |audio_synth_top|audio_ctrl:audio                                                                                                                   ; work         ;
+; |audio_synth_top                                ; 1098 (1)          ; 252 (0)      ; 16320       ; 4            ; 0       ; 2         ; 69   ; 0            ; |audio_synth_top                                                                                                                                    ; work         ;
+;    |audio_ctrl:audio|                           ; 485 (37)          ; 89 (4)       ; 16320       ; 4            ; 0       ; 2         ; 0    ; 0            ; |audio_synth_top|audio_ctrl:audio                                                                                                                   ; work         ;
 ;       |fir_core:filter_l|                       ; 384 (341)         ; 53 (53)      ; 8160        ; 2            ; 0       ; 1         ; 0    ; 0            ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_l                                                                                                 ; work         ;
 ;          |lpm_divide:Mod0|                      ; 43 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_l|lpm_divide:Mod0                                                                                 ; work         ;
 ;             |lpm_divide_a5m:auto_generated|     ; 43 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_l|lpm_divide:Mod0|lpm_divide_a5m:auto_generated                                                   ; work         ;
@@ -291,22 +293,19 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |altsyncram:ram_rtl_0|              ; 0 (0)             ; 0 (0)        ; 8160        ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line|altsyncram:ram_rtl_0                                                   ; work         ;
 ;                |altsyncram_71a1:auto_generated| ; 0 (0)             ; 0 (0)        ; 8160        ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line|altsyncram:ram_rtl_0|altsyncram_71a1:auto_generated                    ; work         ;
 ;    |clock_div:clk_div_1|                        ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|clock_div:clk_div_1                                                                                                                ; work         ;
-;    |codec_ctrl:codec|                           ; 22 (22)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|codec_ctrl:codec                                                                                                                   ; work         ;
-;    |dds:sin_gen|                                ; 245 (245)         ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|dds:sin_gen                                                                                                                        ; work         ;
+;    |codec_ctrl:codec|                           ; 23 (23)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|codec_ctrl:codec                                                                                                                   ; work         ;
+;    |dds:sin_gen|                                ; 248 (248)         ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|dds:sin_gen                                                                                                                        ; work         ;
 ;    |dds_sw_ctrl:dds_ctrl|                       ; 139 (139)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|dds_sw_ctrl:dds_ctrl                                                                                                               ; work         ;
-;    |i2c_master:master|                          ; 91 (91)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2c_master:master                                                                                                                  ; work         ;
-;    |i2s_master:i2s|                             ; 103 (1)           ; 77 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s                                                                                                                     ; work         ;
+;    |i2c_master:master|                          ; 87 (87)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2c_master:master                                                                                                                  ; work         ;
+;    |i2s_master:i2s|                             ; 113 (1)           ; 77 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s                                                                                                                     ; work         ;
 ;       |i2s_fsm_decoder:i2s_decoder|             ; 32 (32)           ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s|i2s_fsm_decoder:i2s_decoder                                                                                         ; work         ;
-;       |p2s_block:p2s_left|                      ; 38 (38)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_left                                                                                                  ; work         ;
-;       |p2s_block:p2s_right|                     ; 32 (32)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_right                                                                                                 ; work         ;
+;       |p2s_block:p2s_left|                      ; 41 (41)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_left                                                                                                  ; work         ;
+;       |p2s_block:p2s_right|                     ; 39 (39)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_right                                                                                                 ; work         ;
 ;       |s2p_block:s2p_left|                      ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s|s2p_block:s2p_left                                                                                                  ; work         ;
 ;       |s2p_block:s2p_right|                     ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|i2s_master:i2s|s2p_block:s2p_right                                                                                                 ; work         ;
 ;    |sync_block:init_audio_sync|                 ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|sync_block:init_audio_sync                                                                                                         ; work         ;
 ;    |sync_block:init_codec_sync|                 ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|sync_block:init_codec_sync                                                                                                         ; work         ;
 ;    |sync_block:reset_sync|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|sync_block:reset_sync                                                                                                              ; work         ;
-;    |tuner_top:extra_tuner|                      ; 534 (0)           ; 41 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|tuner_top:extra_tuner                                                                                                              ; work         ;
-;       |tuner_tone_by_count:tuner_count|         ; 466 (466)         ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|tuner_top:extra_tuner|tuner_tone_by_count:tuner_count                                                                              ; work         ;
-;       |tuner_visual:visual|                     ; 68 (68)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |audio_synth_top|tuner_top:extra_tuner|tuner_visual:visual                                                                                          ; work         ;
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -440,37 +439,58 @@ Encoding Type:  One-Hot
 +-------------------+------------------+-------------------+------------+
 
 
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                            ;
++-------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+; Register name                                                           ; Reason for Removal                                                                  ;
++-------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+; tuner_top:extra_tuner|square_gen:sq_gen|state                           ; Stuck at VCC due to stuck port preset                                               ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|flag_count_on     ; Stuck at GND due to stuck port data_in                                              ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|count_clk[0..16]  ; Lost fanout                                                                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|count_mean[0..15] ; Merged with tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|count_mean[16]    ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|count_mean[16]    ; Stuck at GND due to stuck port data_in                                              ;
+; i2c_master:master|clk_divider[0]                                        ; Merged with i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|bclk                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.E2    ; Lost fanout                                                                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.A2    ; Lost fanout                                                                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.D3    ; Lost fanout                                                                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.G3    ; Lost fanout                                                                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.B3    ; Lost fanout                                                                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.E4    ; Lost fanout                                                                         ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.BELOW ; Merged with tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.ABOVE ;
+; audio_ctrl:audio|fir_core:filter_r|fir_state.tap_0                      ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.tap_0                      ;
+; audio_ctrl:audio|fir_core:filter_r|fir_state.tap_x_mac                  ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.tap_x_mac                  ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[7]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[7]                       ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[6]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[6]                       ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[5]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[5]                       ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[4]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[4]                       ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[3]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[3]                       ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[2]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[2]                       ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[1]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[1]                       ;
+; audio_ctrl:audio|fir_core:filter_r|tap_counter[0]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[0]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[7]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[7]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[6]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[6]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[5]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[5]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[4]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[4]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[3]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[3]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[2]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[2]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[1]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[1]                       ;
+; audio_ctrl:audio|fir_core:filter_r|addr_offset[0]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[0]                       ;
+; audio_ctrl:audio|fir_core:filter_r|fir_state.idle                       ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.idle                       ;
+; audio_ctrl:audio|fir_core:filter_r|fir_state.tap_x_waitrd               ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.tap_x_waitrd               ;
+; audio_ctrl:audio|fir_core:filter_r|fir_state.sample_rdy                 ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.sample_rdy                 ;
+; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.ABOVE ; Lost fanout                                                                         ;
+; Total Number of Removed Registers = 66                                  ;                                                                                     ;
++-------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+
+
 +-------------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                              ;
-+-------------------------------------------------------------------------+-----------------------------------------------------------------------+
-; Register name                                                           ; Reason for Removal                                                    ;
-+-------------------------------------------------------------------------+-----------------------------------------------------------------------+
-; i2c_master:master|clk_divider[0]                                        ; Merged with i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|bclk           ;
-; audio_ctrl:audio|fir_core:filter_r|fir_state.tap_0                      ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.tap_0        ;
-; audio_ctrl:audio|fir_core:filter_r|fir_state.tap_x_mac                  ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.tap_x_mac    ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[7]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[7]         ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[6]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[6]         ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[5]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[5]         ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[4]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[4]         ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[3]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[3]         ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[2]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[2]         ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[1]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[1]         ;
-; audio_ctrl:audio|fir_core:filter_r|tap_counter[0]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|tap_counter[0]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[7]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[7]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[6]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[6]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[5]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[5]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[4]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[4]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[3]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[3]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[2]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[2]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[1]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[1]         ;
-; audio_ctrl:audio|fir_core:filter_r|addr_offset[0]                       ; Merged with audio_ctrl:audio|fir_core:filter_l|addr_offset[0]         ;
-; audio_ctrl:audio|fir_core:filter_r|fir_state.idle                       ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.idle         ;
-; audio_ctrl:audio|fir_core:filter_r|fir_state.tap_x_waitrd               ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.tap_x_waitrd ;
-; audio_ctrl:audio|fir_core:filter_r|fir_state.sample_rdy                 ; Merged with audio_ctrl:audio|fir_core:filter_l|fir_state.sample_rdy   ;
-; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.BELOW ; Lost fanout                                                           ;
-; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note.ABOVE ; Lost fanout                                                           ;
-; Total Number of Removed Registers = 24                                  ;                                                                       ;
-+-------------------------------------------------------------------------+-----------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                     ;
++-----------------------------------------------+--------------------------+----------------------------------------------------------------------+
+; Register name                                 ; Reason for Removal       ; Registers Removed due to This Register                               ;
++-----------------------------------------------+--------------------------+----------------------------------------------------------------------+
+; tuner_top:extra_tuner|square_gen:sq_gen|state ; Stuck at VCC             ; tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|count_mean[16] ;
+;                                               ; due to stuck port preset ;                                                                      ;
++-----------------------------------------------+--------------------------+----------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -478,12 +498,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 293   ;
-; Number of registers using Synchronous Clear  ; 48    ;
+; Total registers                              ; 252   ;
+; Number of registers using Synchronous Clear  ; 30    ;
 ; Number of registers using Synchronous Load   ; 8     ;
-; Number of registers using Asynchronous Clear ; 285   ;
+; Number of registers using Asynchronous Clear ; 244   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 225   ;
+; Number of registers using Clock Enable       ; 190   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -516,30 +536,26 @@ Encoding Type:  One-Hot
 +----------------------------------------------------------------------------+-----------------------------------------------------------------------+------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------+
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |audio_synth_top|tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|count_clk[16]       ;
-; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |audio_synth_top|dds:sin_gen|count[1]                                                      ;
-; 5:1                ; 14 bits   ; 42 LEs        ; 28 LEs               ; 14 LEs                 ; Yes        ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_right|shiftreg[2]                            ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 30 LEs               ; 15 LEs                 ; Yes        ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_left|shiftreg[3]                             ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |audio_synth_top|i2c_master:master|byte_count[0]                                           ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |audio_synth_top|i2c_master:master|bit_count[0]                                            ;
-; 6:1                ; 8 bits    ; 32 LEs        ; 8 LEs                ; 24 LEs                 ; Yes        ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_r|tap_counter[6]                         ;
-; 6:1                ; 8 bits    ; 32 LEs        ; 8 LEs                ; 24 LEs                 ; Yes        ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_l|tap_counter[2]                         ;
-; 8:1                ; 13 bits   ; 65 LEs        ; 13 LEs               ; 52 LEs                 ; Yes        ; |audio_synth_top|i2c_master:master|data[15]                                                ;
-; 8:1                ; 6 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |audio_synth_top|i2c_master:master|data[11]                                                ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |audio_synth_top|codec_ctrl:codec|next_state                                               ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; No         ; |audio_synth_top|tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|next_chosen_note.G3 ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |audio_synth_top|codec_ctrl:codec|next_regcount                                            ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |audio_synth_top|tuner_top:extra_tuner|tuner_visual:visual|\delta:diff[0]                  ;
-; 7:1                ; 17 bits   ; 68 LEs        ; 68 LEs               ; 0 LEs                  ; No         ; |audio_synth_top|tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|Selector11          ;
-; 10:1               ; 5 bits    ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; No         ; |audio_synth_top|i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|Selector3                      ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |audio_synth_top|i2c_master:master|Selector30                                              ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |audio_synth_top|i2c_master:master|Selector28                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |audio_synth_top|dds:sin_gen|count[0]                                 ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 30 LEs               ; 15 LEs                 ; Yes        ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_right|shiftreg[6]       ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 30 LEs               ; 15 LEs                 ; Yes        ; |audio_synth_top|i2s_master:i2s|p2s_block:p2s_left|shiftreg[10]       ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |audio_synth_top|i2c_master:master|byte_count[0]                      ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |audio_synth_top|i2c_master:master|bit_count[0]                       ;
+; 6:1                ; 8 bits    ; 32 LEs        ; 8 LEs                ; 24 LEs                 ; Yes        ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_r|tap_counter[5]    ;
+; 6:1                ; 8 bits    ; 32 LEs        ; 8 LEs                ; 24 LEs                 ; Yes        ; |audio_synth_top|audio_ctrl:audio|fir_core:filter_l|tap_counter[2]    ;
+; 8:1                ; 13 bits   ; 65 LEs        ; 13 LEs               ; 52 LEs                 ; Yes        ; |audio_synth_top|i2c_master:master|data[23]                           ;
+; 8:1                ; 6 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |audio_synth_top|i2c_master:master|data[12]                           ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |audio_synth_top|codec_ctrl:codec|next_state                          ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |audio_synth_top|codec_ctrl:codec|next_regcount                       ;
+; 10:1               ; 5 bits    ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; No         ; |audio_synth_top|i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|Selector0 ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |audio_synth_top|i2c_master:master|Selector26                         ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |audio_synth_top|i2c_master:master|Selector28                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
@@ -937,12 +953,22 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+---------------------------------------------------+
 
 
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "tuner_top:extra_tuner|square_gen:sq_gen"                                                                                                       ;
++---------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                                                                      ;
++---------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; clk     ; Input ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; reset_n ; Input ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
++---------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 +-------------------------------+
 ; Elapsed Time Per Partition    ;
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:15     ;
+; Top            ; 00:00:19     ;
 +----------------+--------------+
 
 
@@ -952,7 +978,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Jun 12 21:45:01 2018
+    Info: Processing started: Tue Jun 12 22:35:29 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Audiobocs -c audio_synth_top
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file //mac/home/desktop/ea999/project/audiobocs/source/tuner_visual.vhd
@@ -1108,6 +1134,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/add_
     Info (12023): Found entity 1: add_sub_lkc
 Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_mkc.tdf
     Info (12023): Found entity 1: add_sub_mkc
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
@@ -1117,13 +1144,46 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "HEX0[3]" is stuck at VCC
     Warning (13410): Pin "HEX0[4]" is stuck at VCC
     Warning (13410): Pin "HEX0[5]" is stuck at VCC
+    Warning (13410): Pin "HEX0[6]" is stuck at GND
+    Warning (13410): Pin "HEX1[0]" is stuck at VCC
+    Warning (13410): Pin "HEX1[1]" is stuck at VCC
+    Warning (13410): Pin "HEX1[2]" is stuck at VCC
+    Warning (13410): Pin "HEX1[3]" is stuck at VCC
+    Warning (13410): Pin "HEX1[4]" is stuck at VCC
+    Warning (13410): Pin "HEX1[5]" is stuck at VCC
     Warning (13410): Pin "HEX1[6]" is stuck at GND
+    Warning (13410): Pin "HEX2[0]" is stuck at VCC
+    Warning (13410): Pin "HEX2[1]" is stuck at VCC
+    Warning (13410): Pin "HEX2[2]" is stuck at VCC
+    Warning (13410): Pin "HEX2[3]" is stuck at VCC
+    Warning (13410): Pin "HEX2[4]" is stuck at VCC
+    Warning (13410): Pin "HEX2[5]" is stuck at VCC
+    Warning (13410): Pin "HEX2[6]" is stuck at GND
     Warning (13410): Pin "HEX3[0]" is stuck at VCC
     Warning (13410): Pin "HEX3[1]" is stuck at VCC
     Warning (13410): Pin "HEX3[2]" is stuck at VCC
     Warning (13410): Pin "HEX3[3]" is stuck at VCC
     Warning (13410): Pin "HEX3[4]" is stuck at VCC
     Warning (13410): Pin "HEX3[5]" is stuck at VCC
+    Warning (13410): Pin "HEX3[6]" is stuck at GND
+    Warning (13410): Pin "LEDR[0]" is stuck at GND
+    Warning (13410): Pin "LEDR[1]" is stuck at GND
+    Warning (13410): Pin "LEDR[2]" is stuck at GND
+    Warning (13410): Pin "LEDR[3]" is stuck at GND
+    Warning (13410): Pin "LEDR[4]" is stuck at VCC
+    Warning (13410): Pin "LEDR[5]" is stuck at VCC
+    Warning (13410): Pin "LEDR[6]" is stuck at GND
+    Warning (13410): Pin "LEDR[7]" is stuck at GND
+    Warning (13410): Pin "LEDR[8]" is stuck at GND
+    Warning (13410): Pin "LEDR[9]" is stuck at GND
+    Warning (13410): Pin "LEDG[0]" is stuck at VCC
+    Warning (13410): Pin "LEDG[1]" is stuck at VCC
+    Warning (13410): Pin "LEDG[2]" is stuck at VCC
+    Warning (13410): Pin "LEDG[3]" is stuck at VCC
+    Warning (13410): Pin "LEDG[4]" is stuck at VCC
+    Warning (13410): Pin "LEDG[5]" is stuck at VCC
+    Warning (13410): Pin "LEDG[6]" is stuck at VCC
+    Warning (13410): Pin "LEDG[7]" is stuck at VCC
 Critical Warning (18061): Ignored Power-Up Level option on the following registers
     Critical Warning (18010): Register i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|count[6] will power up to High
     Critical Warning (18010): Register i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|count[5] will power up to High
@@ -1132,22 +1192,22 @@ Critical Warning (18061): Ignored Power-Up Level option on the following registe
     Critical Warning (18010): Register i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|count[2] will power up to High
     Critical Warning (18010): Register i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|count[1] will power up to High
     Critical Warning (18010): Register i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|count[0] will power up to High
-Info (17049): 2 registers lost all their fanouts during netlist optimizations.
+Info (17049): 24 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "KEY[3]"
-Info (21057): Implemented 1859 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1313 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 16 input pins
     Info (21059): Implemented 52 output pins
     Info (21060): Implemented 1 bidirectional pins
-    Info (21061): Implemented 1722 logic cells
+    Info (21061): Implemented 1176 logic cells
     Info (21064): Implemented 64 RAM segments
     Info (21062): Implemented 4 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 27 warnings
-    Info: Peak virtual memory: 518 megabytes
-    Info: Processing ended: Tue Jun 12 21:45:23 2018
-    Info: Elapsed time: 00:00:22
-    Info: Total CPU time (on all processors): 00:00:20
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 61 warnings
+    Info: Peak virtual memory: 525 megabytes
+    Info: Processing ended: Tue Jun 12 22:35:56 2018
+    Info: Elapsed time: 00:00:27
+    Info: Total CPU time (on all processors): 00:00:25
 
 
