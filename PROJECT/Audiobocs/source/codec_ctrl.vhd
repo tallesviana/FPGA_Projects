@@ -97,7 +97,7 @@ BEGIN
                     WHEN "011" =>
                         write_data_o(8 downto 0) <= C_W8731_ANALOG_MUTE_BOTH(regcount);
                     WHEN "100" =>
-                        write_data_o(8 downto 0) <= C_W8731_ADC_DAC_0DB_48K(regcount);
+                        write_data_o(8 downto 0) <= C_W8731_ADC_DAC_P12DB_48K(regcount);
 					WHEN "101" =>
 					    write_data_o(8 downto 0) <= C_W8731_ADC_DAC_MUTE_LEFT(regcount);
 					WHEN "110" =>

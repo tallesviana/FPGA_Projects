@@ -222,6 +222,24 @@ constant C_W8731_ADC_DAC_P6DB_48K: t_codec_register_array := (
     7   =>  "000000000" or C_DIGITAL_AI_IWL_16 or C_DIGITAL_AI_FORMAT_I2S,
     8   =>  "000000000",  -- 48kHz with mclk=12.288MHz
     9   =>  "000000000" or C_DIGITAL_ACTIVATE_ACTIVE );
+
+-- C_W8731_ADC_DAC_P12DB_48K =====================================================
+-- input gain -12dB / 0dB / +6dB
+-- output gain -12dB / 0dB / +6dB
+-- dac enabled, no sidetone
+-- adc/dac sampling 48kHz
+-- interface in I2S mode, 16 bit quantisation
+constant C_W8731_ADC_DAC_P12DB_48K: t_codec_register_array := (
+    0   =>  "000000000" or C_LINE_IN_LINVOL_P12DB,
+    1   =>  "000000000" or C_LINE_IN_LINVOL_P12DB,
+    2   =>  "000000000" or C_HP_OUT_HPVOL_M4DB,
+    3   =>  "000000000" or C_HP_OUT_HPVOL_M4DB,
+    4   =>  "000000000" or C_ANALOG_AP_MUTEMIC or C_ANALOG_AP_DACSEL,
+    5   =>  "000000000" or C_DIGITAL_AP_DEEMP_DIS,
+    6   =>  "000000000" or C_POWER_DOWN_NONE,
+    7   =>  "000000000" or C_DIGITAL_AI_IWL_16 or C_DIGITAL_AI_FORMAT_I2S,
+    8   =>  "000000000",  -- 48kHz with mclk=12.288MHz
+    9   =>  "000000000" or C_DIGITAL_ACTIVATE_ACTIVE );
 	
 constant C_W8731_ADC_DAC_MUTE_LEFT: t_codec_register_array := (
     0   =>  "000000000" or C_LINE_IN_LINVOL_M12DB,

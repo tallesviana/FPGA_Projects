@@ -336,7 +336,7 @@ extra_tuner: tuner_top                          -- EXTRA - TUNER
         RESET_N     => t_reset_syncd,
         CLK         => t_clock_12_5,
 
-        tuner_AUDIO_I   => t_dacdat_pl,   -- <<<<< ---  Tuner input
+        tuner_AUDIO_I   => t_dacdat_pr,   -- <<<<< ---  Tuner input
 
         tuner_HEX0_O    =>  HEX0,
         tuner_HEX1_O    =>  HEX1,

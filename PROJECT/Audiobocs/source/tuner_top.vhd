@@ -31,6 +31,8 @@ ARCHITECTURE struct OF tuner_top IS
 
   COMPONENT square_gen IS
   PORT(
+      clk, reset_n  :  IN  std_logic;
+  
       audio_i       :  IN  std_logic_vector(15 downto 0);
       square_wave_o :  OUT std_logic
   );
@@ -81,6 +83,8 @@ BEGIN
 
 sq_gen: square_gen
   PORT MAP(
+      clk            => CLK,
+      reset_n        => RESET_N,
       audio_i        => tuner_AUDIO_I,
       square_wave_o  =>  t_square_wave
   );
