@@ -1,4 +1,46 @@
 
+State Machine - |audio_synth_top|tuner_top:extra_tuner|tuner_tone_by_count:tuner_count|chosen_note
+Name chosen_note.ABOVE chosen_note.E4 chosen_note.B3 chosen_note.G3 chosen_note.D3 chosen_note.A2 chosen_note.E2 chosen_note.BELOW 
+chosen_note.BELOW 0 0 0 0 0 0 0 0 
+chosen_note.E2 0 0 0 0 0 0 1 1 
+chosen_note.A2 0 0 0 0 0 1 0 1 
+chosen_note.D3 0 0 0 0 1 0 0 1 
+chosen_note.G3 0 0 0 1 0 0 0 1 
+chosen_note.B3 0 0 1 0 0 0 0 1 
+chosen_note.E4 0 1 0 0 0 0 0 1 
+chosen_note.ABOVE 1 0 0 0 0 0 0 1 
+
+State Machine - |audio_synth_top|i2s_master:i2s|i2s_fsm_decoder:i2s_decoder|state
+Name state.hold_r state.shift_r state.hold_l state.shift_l state.load 
+state.load 0 0 0 0 0 
+state.shift_l 0 0 0 1 1 
+state.hold_l 0 0 1 0 1 
+state.shift_r 0 1 0 0 1 
+state.hold_r 1 0 0 0 1 
+
+State Machine - |audio_synth_top|audio_ctrl:audio|mode
+Name mode.ADC_F mode.Gen_NoF mode.Gen_F mode.ADC_NoF 
+mode.ADC_NoF 0 0 0 0 
+mode.Gen_F 0 0 1 1 
+mode.Gen_NoF 0 1 0 1 
+mode.ADC_F 1 0 0 1 
+
+State Machine - |audio_synth_top|audio_ctrl:audio|fir_core:filter_r|fir_state
+Name fir_state.sample_rdy fir_state.tap_x_mac fir_state.tap_x_waitrd fir_state.tap_0 fir_state.idle 
+fir_state.idle 0 0 0 0 0 
+fir_state.tap_0 0 0 0 1 1 
+fir_state.tap_x_waitrd 0 0 1 0 1 
+fir_state.tap_x_mac 0 1 0 0 1 
+fir_state.sample_rdy 1 0 0 0 1 
+
+State Machine - |audio_synth_top|audio_ctrl:audio|fir_core:filter_l|fir_state
+Name fir_state.sample_rdy fir_state.tap_x_mac fir_state.tap_x_waitrd fir_state.tap_0 fir_state.idle 
+fir_state.idle 0 0 0 0 0 
+fir_state.tap_0 0 0 0 1 1 
+fir_state.tap_x_waitrd 0 0 1 0 1 
+fir_state.tap_x_mac 0 1 0 0 1 
+fir_state.sample_rdy 1 0 0 0 1 
+
 State Machine - |audio_synth_top|i2c_master:master|fsm_state
 Name fsm_state.S_STOP fsm_state.S_WAIT_FOR_STOP fsm_state.S_ACK_BYTE fsm_state.S_SEND_BYTE fsm_state.S_WAIT_FOR_NEXT_BYTE fsm_state.S_START fsm_state.S_WAIT_FOR_START fsm_state.S_IDLE 
 fsm_state.S_IDLE 0 0 0 0 0 0 0 0 

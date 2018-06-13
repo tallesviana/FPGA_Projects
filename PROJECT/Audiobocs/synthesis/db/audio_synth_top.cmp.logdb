@@ -1,1 +1,2 @@
 v1
+PORT_SWAPPING,PORT_SWAPPING_FINISHED,audio_ctrl:audio|fir_core:filter_r|lpm_mult:Mult1|mult_i1t:auto_generated|mac_mult1,

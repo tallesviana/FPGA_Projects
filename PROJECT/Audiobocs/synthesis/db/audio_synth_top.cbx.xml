@@ -1,5 +1,10 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="audio_synth_top">
+		<CBX_INST_ENTRY INSTANCE_NAME="|audio_synth_top|audio_ctrl:audio|fir_core:filter_l|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_a5m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|audio_synth_top|audio_ctrl:audio|fir_core:filter_l|lpm_mult:Mult1" CBX_FILE_NAME="mult_i1t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|audio_synth_top|audio_ctrl:audio|fir_core:filter_l|single_port_ram:tap_line|altsyncram:ram_rtl_0" CBX_FILE_NAME="altsyncram_71a1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|audio_synth_top|audio_ctrl:audio|fir_core:filter_r|lpm_mult:Mult1" CBX_FILE_NAME="mult_i1t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|audio_synth_top|audio_ctrl:audio|fir_core:filter_r|single_port_ram:tap_line|altsyncram:ram_rtl_0" CBX_FILE_NAME="altsyncram_71a1.tdf"/>
 	</PROJECT>
 </LOG_ROOT>
