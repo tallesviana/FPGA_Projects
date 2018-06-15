@@ -39,7 +39,9 @@ ENTITY audio_synth_top IS
 
         LEDR :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);
         
-        LEDG :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
+        LEDG :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+        GPIO_0: OUT  STD_LOGIC_VECTOR(0 DOWNTO 0)
     );
 END audio_synth_top;
 
@@ -61,7 +63,9 @@ COMPONENT tuner_top IS
         tuner_HEX3_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
 
         tuner_LEDR_O :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);  --LEDR_0 on the top level
-        tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
+        tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+        tuner_debug:    OUT std_logic
   );
 END COMPONENT;
 
@@ -214,6 +218,10 @@ SIGNAL t_phi_incr   : std_logic_vector(N_CUM - 1 downto 0);
 SIGNAL t_ledr_o     : std_logic_vector(9 DOWNTO 0);     --LEDR_0 on the top level
 SIGNAL t_ledg_o     : std_logic_vector(7 DOWNTO 0);     --LEDR_0 on the top level
 
+-- DEBUGGING
+
+SIGNAL t_tuner_debug : std_logic_vector(0 DOWNTO 0);
+
 ------------------------------------------------------
 -->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
 ------------------------------------------------------
@@ -344,7 +352,9 @@ extra_tuner: tuner_top                          -- EXTRA - TUNER
         tuner_HEX3_O    =>  HEX3,
 
         tuner_LEDR_O    =>  t_ledr_o,
-        tuner_LEDG_O    =>  t_ledg_o
+        tuner_LEDG_O    =>  t_ledg_o,
+
+        tuner_debug     =>  t_tuner_debug(0)
   );
 
 
@@ -359,5 +369,9 @@ AUD_DACLRCK <= t_ws;
 
 LEDR <= t_ledr_o;      -- Tuner visual
 LEDG <= t_ledg_o;
+
+----- DEBUGGING
+GPIO_0 <= t_tuner_debug;
+
 
 END top;

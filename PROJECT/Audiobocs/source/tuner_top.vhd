@@ -18,7 +18,9 @@ ENTITY tuner_top IS
         tuner_HEX3_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
 
         tuner_LEDR_O :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);  --LEDR_0 on the top level
-        tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
+        tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+        tuner_debug:    OUT std_logic
 
   );
 END tuner_top;
@@ -119,5 +121,7 @@ tuner_HEX3_O  <= t_hex(27 downto 21);
 
 tuner_LEDR_O  <=  t_ledr;
 tuner_LEDG_O  <=  t_ledg;
+
+tuner_debug <= t_square_wave;
 
 END struct;
