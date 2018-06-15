@@ -51,11 +51,13 @@ END audio_synth_top;
 
 ARCHITECTURE top OF audio_synth_top IS
 
-COMPONENT tuner_top IS
+COMPONENT tuner_top_v2 IS
     PORT(
         RESET_N, CLK :  IN std_logic;
 
         tuner_AUDIO_I      :  IN std_logic_vector(15 downto 0);
+
+        tuner_STROBE_I      : IN std_logic;
 
         tuner_HEX0_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
         tuner_HEX1_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -339,12 +341,14 @@ i2s: i2s_master                                 -- I2S MASTER BLOCK
         WS_o         => t_ws
     );
 
-extra_tuner: tuner_top                          -- EXTRA - TUNER
+extra_tuner: tuner_top_v2                          -- EXTRA - TUNER
     PORT MAP(
         RESET_N     => t_reset_syncd,
         CLK         => t_clock_12_5,
 
         tuner_AUDIO_I   => t_dacdat_pr,   -- <<<<< ---  Tuner input
+
+        tuner_STROBE_I  => t_strobe,
 
         tuner_HEX0_O    =>  HEX0,
         tuner_HEX1_O    =>  HEX1,
