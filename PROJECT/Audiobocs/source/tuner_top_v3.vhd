@@ -1,3 +1,10 @@
+--------------------------------------------------------
+--          TUNER BLOCK  -------------------------------
+--------------------------------------------------------
+--  Guitar tuner block
+--  Where you use SW(9) to tune E4, B3, G3
+--  and use SW(7) to tune D3, A2, and E2.
+--------------------------------------------------------
 LIBRARY ieee;
     use ieee.std_logic_1164.all;
     use ieee.numeric_std.all;
@@ -6,7 +13,7 @@ LIBRARY ieee;
 --     ENTITY       ----------------------------
 ------------------------------------------------
 
-ENTITY tuner_top_v2 IS
+ENTITY tuner_top_v3 IS
     PORT(
         RESET_N, CLK :  IN std_logic;
 
@@ -14,7 +21,7 @@ ENTITY tuner_top_v2 IS
 
         tuner_STROBE_I      : IN std_logic;
 
-        tuner_SWITCHES_I    : IN std_logic_vector(5 DOWNTO 0);
+        tuner_SWITCHES_I    : IN std_logic_vector(2 DOWNTO 0);
 
         tuner_HEX0_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
         tuner_HEX1_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -24,14 +31,28 @@ ENTITY tuner_top_v2 IS
         tuner_LEDR_O :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);  --LEDR_0 on the top level
         tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
   );
-END tuner_top_v2;
+END tuner_top_v3;
 
 ------------------------------------------------
 --     ARCHITECTURE ----------------------------
 ------------------------------------------------
 
-ARCHITECTURE struct OF tuner_top_v2 IS
+ARCHITECTURE struct OF tuner_top_v3 IS
 
+  -- CIC FILTER, where you can choose decimation rate and filter order  
+  COMPONENT cic_top is
+    generic (   RATE : unsigned(9 downto 0) := to_unsigned(100, 10);    -- Decimator
+                ORDER: natural := 5);                                   -- How many I and C ?
+    PORT(
+        CLK, RESET_N: in std_logic;
+        STROBE_IN   : in std_logic;
+
+        SIGNAL_IN   : in std_logic_vector(15 downto 0);
+        SIGNAL_OUT  : out std_logic_vector(15 downto 0)
+    );
+  end COMPONENT;
+
+  -- FILTER BANK - choose a filter to be used in tuning process
   COMPONENT tuner_filter_cascade IS
     PORT(
         CLK         : IN std_logic;
@@ -45,11 +66,12 @@ ARCHITECTURE struct OF tuner_top_v2 IS
     );
   END COMPONENT;
 
+  -- SELECT FILTER - basically it is what choose
   COMPONENT tuner_select_freq IS
     PORT(
         clk, reset_n    :  IN STD_LOGIC;
 
-        sw_choice       :  IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+        sw_choice       :  IN STD_LOGIC_VECTOR(2 DOWNTO 0);
 
         LOW_I   :  IN STD_LOGIC_VECTOR(15 DOWNTO 0);
         MID_I   :  IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -111,12 +133,14 @@ END COMPONENT;
 
   SIGNAL t_audio2square :  std_logic_vector(15 downto 0);
 
+  SIGNAL t_audio2cic    :  std_logic_vector(15 downto 0);
+  SIGNAL t_cic_filter   :  std_logic_vector(15 downto 0);
+
 ------------------------------------------------
 --     BEGINNIG     ----------------------------
 ------------------------------------------------
 
 BEGIN
-
 fir_cascade: tuner_filter_cascade
   PORT MAP(
         CLK         => CLK,
@@ -140,14 +164,26 @@ selects: tuner_select_freq
         MID_I       => t_aud_200,
         HIGH_I      => t_aud_400,
 
-        CHOSEN_O    => t_audio2square
+        CHOSEN_O    => t_audio2cic
+    );
+
+ciczera: cic_top
+    generic map (   RATE    => to_unsigned(3, 10),    -- Decimator rate
+                ORDER       => 1)                     -- How many I and C filters?
+    PORT map(
+        CLK         => CLK,
+        reset_n     => RESET_N,
+        STROBE_IN   => tuner_STROBE_I,
+
+        SIGNAL_IN   => t_audio2cic,
+        SIGNAL_OUT  => t_cic_filter
     );
 
 sq_gen: square_gen
   PORT MAP(
       clk            => CLK,
       reset_n        => RESET_N,
-      audio_i        => t_audio2square,
+      audio_i        => t_cic_filter,
       square_wave_o  =>  t_square_wave
   );
 

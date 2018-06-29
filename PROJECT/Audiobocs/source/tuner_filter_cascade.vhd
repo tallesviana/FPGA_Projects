@@ -39,7 +39,7 @@ ARCHITECTURE struct OF tuner_filter_cascade IS
 BEGIN 
 
 fir_400: fir_core
-    GENERIC MAP(lut_fir => LUT_FIR_LPF_400Hz_v2 )  -- Constant from audio_filter_pkg
+    GENERIC MAP(lut_fir => LUT_FIR_BPF_E4_v2 )  -- Constant from audio_filter_pkg
     PORT MAP(      
             clk         => t_clock ,       	
             reset_n     => t_reset,
@@ -54,7 +54,7 @@ fir_200: fir_core
             clk         => t_clock ,       	
             reset_n     => t_reset,
             strobe_i    => t_strobe,		
-            adata_i     => t_aud_400_200,
+            adata_i     => ADATA_I,
             fdata_o	    => t_aud_200_100
     );
 
@@ -64,7 +64,7 @@ fir_100: fir_core
             clk         => t_clock ,       	
             reset_n     => t_reset,
             strobe_i    => t_strobe,		
-            adata_i     => t_aud_200_100,
+            adata_i     => ADATA_I,
             fdata_o	    => t_aud_100
     );
 

@@ -15,7 +15,7 @@ LIBRARY work;  -- Able to see the other components
 -->>>>>>>>>>>      ENTITY DECLARATION   <<<<<<<<<<<<<<
 ------------------------------------------------------
 
-ENTITY audio_synth_top IS
+ENTITY audio_synth_top_v3 IS
     PORT(
         CLOCK_50 :  IN std_logic;
         KEY      :  IN std_logic_vector(3 downto 0);
@@ -39,19 +39,17 @@ ENTITY audio_synth_top IS
 
         LEDR :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);
         
-        LEDG :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
-
-        GPIO_0: OUT  STD_LOGIC_VECTOR(0 DOWNTO 0)
+        LEDG :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
-END audio_synth_top;
+END audio_synth_top_v3;
 
 ------------------------------------------------------
 -->>>>>>>>>>>      COMPONENTS USED      <<<<<<<<<<<<<<
 ------------------------------------------------------
 
-ARCHITECTURE top OF audio_synth_top IS
+ARCHITECTURE top OF audio_synth_top_v3 IS
 
-COMPONENT tuner_top_v2 IS
+COMPONENT tuner_top_v3 IS
     PORT(
         RESET_N, CLK :  IN std_logic;
 
@@ -59,7 +57,7 @@ COMPONENT tuner_top_v2 IS
 
         tuner_STROBE_I      : IN std_logic;
 
-        tuner_SWITCHES_I    : IN std_logic_vector(5 DOWNTO 0);
+        tuner_SWITCHES_I    : IN std_logic_vector(2 DOWNTO 0);
 
         tuner_HEX0_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
         tuner_HEX1_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -67,9 +65,7 @@ COMPONENT tuner_top_v2 IS
         tuner_HEX3_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
 
         tuner_LEDR_O :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);  --LEDR_0 on the top level
-        tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
-
-        tuner_debug:    OUT std_logic
+        tuner_LEDG_O :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
   );
 END COMPONENT;
 
@@ -92,6 +88,18 @@ COMPONENT dds_sw_ctrl IS
 		phi_incr_o :  OUT std_logic_vector(N_CUM - 1 downto 0)
 	 );
 END COMPONENT;
+
+COMPONENT cic_top is
+    generic (   RATE : unsigned(9 downto 0) := to_unsigned(100, 10);    -- Decimator
+                ORDER: natural := 5);                                   -- How many I and C ?
+    PORT(
+        CLK, RESET_N: in std_logic;
+        STROBE_IN   : in std_logic;
+
+        SIGNAL_IN   : in std_logic_vector(15 downto 0);
+        SIGNAL_OUT  : out std_logic_vector(15 downto 0)
+    );
+end COMPONENT;
 
 COMPONENT codec_ctrl IS
     PORT(
@@ -222,9 +230,7 @@ SIGNAL t_phi_incr   : std_logic_vector(N_CUM - 1 downto 0);
 SIGNAL t_ledr_o     : std_logic_vector(9 DOWNTO 0);     --LEDR_0 on the top level
 SIGNAL t_ledg_o     : std_logic_vector(7 DOWNTO 0);     --LEDR_0 on the top level
 
--- DEBUGGING
-
-SIGNAL t_tuner_debug : std_logic_vector(0 DOWNTO 0);
+SIGNAL t_cic_filter : std_logic_vector(15 downto 0);
 
 ------------------------------------------------------
 -->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
@@ -343,7 +349,7 @@ i2s: i2s_master                                 -- I2S MASTER BLOCK
         WS_o         => t_ws
     );
 
-extra_tuner: tuner_top_v2                          -- EXTRA - TUNER
+extra_tuner: tuner_top_v3                          -- EXTRA - TUNER
     PORT MAP(
         RESET_N     => t_reset_syncd,
         CLK         => t_clock_12_5,
@@ -352,7 +358,7 @@ extra_tuner: tuner_top_v2                          -- EXTRA - TUNER
 
         tuner_STROBE_I  => t_strobe,
 
-        tuner_SWITCHES_I => t_sw(9 downto 4),
+        tuner_SWITCHES_I => t_sw(9 downto 7),
 
         tuner_HEX0_O    =>  HEX0,
         tuner_HEX1_O    =>  HEX1,
@@ -360,9 +366,7 @@ extra_tuner: tuner_top_v2                          -- EXTRA - TUNER
         tuner_HEX3_O    =>  HEX3,
 
         tuner_LEDR_O    =>  t_ledr_o,
-        tuner_LEDG_O    =>  t_ledg_o,
-
-        tuner_debug     =>  t_tuner_debug(0)
+        tuner_LEDG_O    =>  t_ledg_o
   );
 
 
@@ -379,7 +383,6 @@ LEDR <= t_ledr_o;      -- Tuner visual
 LEDG <= t_ledg_o;
 
 ----- DEBUGGING
-GPIO_0 <= t_tuner_debug;
 
 
 END top;

@@ -15,7 +15,7 @@ LIBRARY work;  -- Able to see the other components
 -->>>>>>>>>>>      ENTITY DECLARATION   <<<<<<<<<<<<<<
 ------------------------------------------------------
 
-ENTITY audio_synth_top IS
+ENTITY audio_synth_top_v2 IS
     PORT(
         CLOCK_50 :  IN std_logic;
         KEY      :  IN std_logic_vector(3 downto 0);
@@ -43,13 +43,13 @@ ENTITY audio_synth_top IS
 
         GPIO_0: OUT  STD_LOGIC_VECTOR(0 DOWNTO 0)
     );
-END audio_synth_top;
+END audio_synth_top_v2;
 
 ------------------------------------------------------
 -->>>>>>>>>>>      COMPONENTS USED      <<<<<<<<<<<<<<
 ------------------------------------------------------
 
-ARCHITECTURE top OF audio_synth_top IS
+ARCHITECTURE top OF audio_synth_top_v2 IS
 
 COMPONENT tuner_top_v2 IS
     PORT(
@@ -92,6 +92,18 @@ COMPONENT dds_sw_ctrl IS
 		phi_incr_o :  OUT std_logic_vector(N_CUM - 1 downto 0)
 	 );
 END COMPONENT;
+
+COMPONENT cic_top is
+    generic (   RATE : unsigned(9 downto 0) := to_unsigned(100, 10);    -- Decimator
+                ORDER: natural := 5);                                   -- How many I and C ?
+    PORT(
+        CLK, RESET_N: in std_logic;
+        STROBE_IN   : in std_logic;
+
+        SIGNAL_IN   : in std_logic_vector(15 downto 0);
+        SIGNAL_OUT  : out std_logic_vector(15 downto 0)
+    );
+end COMPONENT;
 
 COMPONENT codec_ctrl IS
     PORT(
@@ -226,6 +238,8 @@ SIGNAL t_ledg_o     : std_logic_vector(7 DOWNTO 0);     --LEDR_0 on the top leve
 
 SIGNAL t_tuner_debug : std_logic_vector(0 DOWNTO 0);
 
+SIGNAL t_cic_filter : std_logic_vector(15 downto 0);
+
 ------------------------------------------------------
 -->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
 ------------------------------------------------------
@@ -343,12 +357,24 @@ i2s: i2s_master                                 -- I2S MASTER BLOCK
         WS_o         => t_ws
     );
 
+extra_cic: cic_top
+    generic map(   RATE => to_unsigned(100, 10),    -- Decimator
+                ORDER => 1)                                   -- How many I and C ?
+    PORT MAP(
+        CLK         => t_clock_12_5,
+        RESET_N     => t_reset_syncd,
+        STROBE_IN   => t_strobe,
+
+        SIGNAL_IN   => t_dacdat_pr,
+        SIGNAL_OUT  => t_cic_filter
+    );
+
 extra_tuner: tuner_top_v2                          -- EXTRA - TUNER
     PORT MAP(
         RESET_N     => t_reset_syncd,
         CLK         => t_clock_12_5,
 
-        tuner_AUDIO_I   => t_dacdat_pr,   -- <<<<< ---  Tuner input
+        tuner_AUDIO_I   => t_cic_filter,   -- <<<<< ---  Tuner input
 
         tuner_STROBE_I  => t_strobe,
 
