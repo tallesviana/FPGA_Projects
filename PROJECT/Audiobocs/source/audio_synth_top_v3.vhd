@@ -57,7 +57,7 @@ COMPONENT tuner_top_v3 IS
 
         tuner_STROBE_I      : IN std_logic;
 
-        tuner_SWITCHES_I    : IN std_logic_vector(2 DOWNTO 0);
+        tuner_SWITCHES_I    : IN std_logic;
 
         tuner_HEX0_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
         tuner_HEX1_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -88,18 +88,6 @@ COMPONENT dds_sw_ctrl IS
 		phi_incr_o :  OUT std_logic_vector(N_CUM - 1 downto 0)
 	 );
 END COMPONENT;
-
-COMPONENT cic_top is
-    generic (   RATE : unsigned(9 downto 0) := to_unsigned(100, 10);    -- Decimator
-                ORDER: natural := 5);                                   -- How many I and C ?
-    PORT(
-        CLK, RESET_N: in std_logic;
-        STROBE_IN   : in std_logic;
-
-        SIGNAL_IN   : in std_logic_vector(15 downto 0);
-        SIGNAL_OUT  : out std_logic_vector(15 downto 0)
-    );
-end COMPONENT;
 
 COMPONENT codec_ctrl IS
     PORT(
@@ -230,7 +218,7 @@ SIGNAL t_phi_incr   : std_logic_vector(N_CUM - 1 downto 0);
 SIGNAL t_ledr_o     : std_logic_vector(9 DOWNTO 0);     --LEDR_0 on the top level
 SIGNAL t_ledg_o     : std_logic_vector(7 DOWNTO 0);     --LEDR_0 on the top level
 
-SIGNAL t_cic_filter : std_logic_vector(15 downto 0);
+SIGNAL t_audio2tuner: std_logic_vector(15 downto 0);
 
 ------------------------------------------------------
 -->>>>>>>>>>>      BEGIN OF ARCHITEC   <<<<<<<<<<<<<<
@@ -349,16 +337,14 @@ i2s: i2s_master                                 -- I2S MASTER BLOCK
         WS_o         => t_ws
     );
 
-extra_tuner: tuner_top_v3                          -- EXTRA - TUNER
+extra_tuner: tuner_top_v3                          -- TUNER BLOCK
     PORT MAP(
         RESET_N     => t_reset_syncd,
         CLK         => t_clock_12_5,
 
-        tuner_AUDIO_I   => t_dacdat_pr,   -- <<<<< ---  Tuner input
-
+        tuner_AUDIO_I   => t_audio2tuner,
         tuner_STROBE_I  => t_strobe,
-
-        tuner_SWITCHES_I => t_sw(9 downto 7),
+        tuner_SWITCHES_I => t_sw(9),
 
         tuner_HEX0_O    =>  HEX0,
         tuner_HEX1_O    =>  HEX1,
@@ -368,21 +354,27 @@ extra_tuner: tuner_top_v3                          -- EXTRA - TUNER
         tuner_LEDR_O    =>  t_ledr_o,
         tuner_LEDG_O    =>  t_ledg_o
   );
-
-
-t_clock_50 <= CLOCK_50;     -- Inputs
+tuner_on: PROCESS (all)
+BEGIN
+    CASE t_sw(2) IS
+        WHEN '1'=> t_audio2tuner <= t_dacdat_pr;
+        WHEN '0'=> t_audio2tuner <= (OTHERS => '0');
+        WHEN OTHERS => t_audio2tuner <= (OTHERS => '0');
+    END CASE;
+end PROCESS tuner_on;
+------------------------------------------------
+--     ASSIGMENTS       ------------------------
+------------------------------------------------
+t_clock_50 <= CLOCK_50;
 t_key      <= KEY;
 t_sw       <= SW;
 
-AUD_XCK    <= t_clock_12_5; -- WM8731
+AUD_XCK    <= t_clock_12_5; -- CODEC WM8731 IOs
 I2C_SCLK   <= t_i2c_sclk;
 AUD_ADCLRCK <= t_ws;
 AUD_DACLRCK <= t_ws;
 
-LEDR <= t_ledr_o;      -- Tuner visual
+LEDR <= t_ledr_o;      -- TUNER DISPLAY
 LEDG <= t_ledg_o;
-
------ DEBUGGING
-
 
 END top;

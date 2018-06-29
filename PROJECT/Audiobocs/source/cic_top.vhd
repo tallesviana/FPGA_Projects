@@ -1,8 +1,20 @@
+------------------------------------------------
+--     CIC BLOCK
+------------------------------------------------
+-- Actually, I do not if it is ok to overflow the
+-- accumulator. I think it should be increasing 
+-- the number of bits, every time the audio passes
+-- through an accumlator
+------------------------------------------------
+
+
 library ieee;
     use ieee.std_logic_1164.all;
     use ieee.numeric_std.all;
 
--- ENTITY DECLARATION --
+------------------------------------------------
+--     ENTITY       ----------------------------
+------------------------------------------------
 entity cic_top is
     generic (   RATE : unsigned(9 downto 0) := to_unsigned(100, 10);    -- Decimator
                 ORDER: natural := 5);                                   -- How many I and C ?
@@ -15,7 +27,9 @@ entity cic_top is
     );
 end cic_top;
 
--- ARCHITECTURE --
+------------------------------------------------
+--     ARCHITECTURE       ----------------------
+------------------------------------------------
 ARCHITECTURE struct OF cic_top is
 
     --   COMPONENTS ----
@@ -50,7 +64,9 @@ ARCHITECTURE struct OF cic_top is
     );
     end COMPONENT;
 
-    -- SIGNALS --
+    ------------------------------------------------
+    --     SIGNALS       ----------------------------
+    ------------------------------------------------
 
     TYPE aux_acc IS ARRAY (0 TO ORDER) OF std_logic_vector(15 downto 0);
     TYPE aux_cmb IS ARRAY (0 TO ORDER) OF std_logic_vector(15 downto 0);
@@ -58,11 +74,14 @@ ARCHITECTURE struct OF cic_top is
     SIGNAL audio_aux_cmb : aux_cmb;
     SIGNAL t_strobe_dec : std_logic;
 
+------------------------------------------------
+--     BEGINNING       ----------------------------
+------------------------------------------------
 BEGIN
 
     -- ACCUMULATORS --
     Acc_gen:
-        for i in 0 to ORDER-1 generate
+        for i in 0 to ORDER-1 generate      --<  Generate ACC instances
         ACC: cic_accumulator
             port map(
                 clk         => CLK,
@@ -88,7 +107,7 @@ BEGIN
 
     -- COMBS --
     Cmb_gen:
-        for i in 0 to ORDER-1 generate
+        for i in 0 to ORDER-1 generate      --< Generate COMB instances
         CMB: cic_comb
             port map(
                 clk         => CLK,
@@ -100,7 +119,9 @@ BEGIN
             );
         end generate;
 
-    -- CONCURRENT ASSIGMENTS --
+------------------------------------------------
+--     ASSIGMENTS   ----------------------------
+------------------------------------------------
     audio_aux_acc(0) <= SIGNAL_IN;
     SIGNAL_OUT <= audio_aux_cmb(ORDER);
 

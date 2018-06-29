@@ -21,7 +21,7 @@ ENTITY tuner_top_v3 IS
 
         tuner_STROBE_I      : IN std_logic;
 
-        tuner_SWITCHES_I    : IN std_logic_vector(2 DOWNTO 0);
+        tuner_SWITCHES_I    : IN std_logic;
 
         tuner_HEX0_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);  -- HEX0_N on the top level
         tuner_HEX1_O :  OUT  STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -58,26 +58,10 @@ ARCHITECTURE struct OF tuner_top_v3 IS
         CLK         : IN std_logic;
         RESET_N     : IN std_logic;
         STROBE_I    : IN std_logic;
+        SW_I        : IN std_logic;
         ADATA_I     : IN std_logic_vector(15 downto 0); 
 
-        FDATA_400_O         : OUT std_logic_vector(15 downto 0);  -- Output after 400Hz LPF (HIGH)
-        FDATA_400_200_O     : OUT std_logic_vector(15 downto 0);  -- Output after 400Hz->200 Hz LPF (MID)
-        FDATA_400_200_100_O : OUT std_logic_vector(15 downto 0)   -- Output after 400Hz->200 Hz->100 Hz LPF (LOW)
-    );
-  END COMPONENT;
-
-  -- SELECT FILTER - basically it is what choose
-  COMPONENT tuner_select_freq IS
-    PORT(
-        clk, reset_n    :  IN STD_LOGIC;
-
-        sw_choice       :  IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-
-        LOW_I   :  IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-        MID_I   :  IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-        HIGH_I  :  IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-
-        CHOSEN_O:  OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+        FDATA_O         : OUT std_logic_vector(15 downto 0)
     );
   END COMPONENT;
 
@@ -127,10 +111,6 @@ END COMPONENT;
   SIGNAL t_ledr         :  std_logic_vector(9 downto 0);
   SIGNAL t_ledg         :  std_logic_vector(7 downto 0);
 
-  SIGNAL t_aud_100      :  std_logic_vector(15 downto 0);
-  SIGNAL t_aud_200      :  std_logic_vector(15 downto 0);
-  SIGNAL t_aud_400      :  std_logic_vector(15 downto 0);
-
   SIGNAL t_audio2square :  std_logic_vector(15 downto 0);
 
   SIGNAL t_audio2cic    :  std_logic_vector(15 downto 0);
@@ -141,35 +121,21 @@ END COMPONENT;
 ------------------------------------------------
 
 BEGIN
-fir_cascade: tuner_filter_cascade
+
+fir_cascade: tuner_filter_cascade           --< Filter selecting
   PORT MAP(
         CLK         => CLK,
         RESET_N     => RESET_N,
         STROBE_I    => tuner_STROBE_I,
+        SW_I        => tuner_SWITCHES_I,
         ADATA_I     => tuner_AUDIO_I,
 
-        FDATA_400_O         => t_aud_400,
-        FDATA_400_200_O     => t_aud_200,
-        FDATA_400_200_100_O => t_aud_100
+        FDATA_O => t_audio2cic
     );
 
-selects: tuner_select_freq
-    PORT MAP(
-        clk         => CLK,
-        reset_n     => RESET_N,
-
-        sw_choice   => tuner_SWITCHES_I,
-
-        LOW_I       => t_aud_100,
-        MID_I       => t_aud_200,
-        HIGH_I      => t_aud_400,
-
-        CHOSEN_O    => t_audio2cic
-    );
-
-ciczera: cic_top
+ciczera: cic_top                            --< CIC filter
     generic map (   RATE    => to_unsigned(3, 10),    -- Decimator rate
-                ORDER       => 1)                     -- How many I and C filters?
+                ORDER       => 1                )     -- How many I and C filters?
     PORT map(
         CLK         => CLK,
         reset_n     => RESET_N,
@@ -179,7 +145,7 @@ ciczera: cic_top
         SIGNAL_OUT  => t_cic_filter
     );
 
-sq_gen: square_gen
+sq_gen: square_gen                          --< Square wave generator
   PORT MAP(
       clk            => CLK,
       reset_n        => RESET_N,
@@ -187,7 +153,7 @@ sq_gen: square_gen
       square_wave_o  =>  t_square_wave
   );
 
-tuner_count: tuner_tone_by_count
+tuner_count: tuner_tone_by_count            --< Tuner brain
   PORT MAP(
       clk       => CLK,
       reset_n   => RESET_N,
@@ -196,7 +162,7 @@ tuner_count: tuner_tone_by_count
       delta_o   => t_delta
   );
 
-visual: tuner_visual
+visual: tuner_visual                        --< Tuner display
     PORT MAP(
         TONE_I  => t_note,
         DELTA_I => t_delta,
@@ -209,6 +175,10 @@ visual: tuner_visual
         LEDR_O  =>  t_ledr,
         LEDG_O  =>  t_ledg
     );
+
+------------------------------------------------
+--     OUTPUT ASSIGMENTS  ----------------------
+------------------------------------------------
 
 tuner_HEX0_O  <= t_hex(6 downto 0);
 tuner_HEX1_O  <= t_hex(13 downto 7);
